@@ -6,14 +6,14 @@ const Contact = () => {
     <div className="min-h-screen relative z-10 flex flex-col justify-center px-[5%] pt-24 pb-12">
       <h2 className="font-[family-name:--font-heading] text-4xl text-center mb-12 tracking-widest uppercase text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">Contact Us</h2>
       
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-[1000px] mx-auto bg-[rgba(15,20,45,0.6)] backdrop-blur-md border border-white/10 rounded-2xl p-8 shadow-[0_8px_32px_rgba(0,0,0,0.5)] w-full">
+      <div className="card-glow grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-[1000px] mx-auto bg-[rgba(10,10,10,0.85)] backdrop-blur-md border border-white/10 rounded-2xl p-8 shadow-[0_8px_32px_rgba(0,0,0,0.5)] w-full">
         <div>
-          <h3 className="font-[family-name:--font-heading] text-[#4a90e2] text-3xl mb-4">Get In Touch</h3>
-          <p className="text-[#a0a5b8] mb-2">Email: <a href="mailto:satellite@cumminscollege.in" className="text-white underline decoration-[#4a90e2] hover:text-[#4a90e2] transition-colors">satellite@cumminscollege.in</a></p>
-          <p className="text-[#a0a5b8] mb-6">LinkedIn: <a href="#" target="_blank" rel="noreferrer" className="text-white underline decoration-[#4a90e2] hover:text-[#4a90e2] transition-colors">Team Vinidra</a></p>
+          <h3 className="font-[family-name:--font-heading] bg-gradient-to-r from-[#00f2fe] to-[#4facfe] text-transparent bg-clip-text drop-shadow-[0_0_10px_rgba(0,242,254,0.5)] text-3xl mb-4">Get In Touch</h3>
+          <p className="text-[#a0a5b8] mb-2">Email: <a href="mailto:satellite@cumminscollege.in" className="text-white underline decoration-[#666666] hover:bg-gradient-to-r from-[#00f2fe] to-[#4facfe] text-transparent bg-clip-text drop-shadow-[0_0_10px_rgba(0,242,254,0.5)] transition-colors">satellite@cumminscollege.in</a></p>
+          <p className="text-[#a0a5b8] mb-6">LinkedIn: <a href="#" target="_blank" rel="noreferrer" className="text-white underline decoration-[#666666] hover:bg-gradient-to-r from-[#00f2fe] to-[#4facfe] text-transparent bg-clip-text drop-shadow-[0_0_10px_rgba(0,242,254,0.5)] transition-colors">Team Vinidra</a></p>
           
           <div className="my-6">
-            <h4 className="font-[family-name:--font-subheading] text-[#a0a5b8] text-lg mb-2 flex items-center gap-2"><MapPin className="w-5 h-5 text-[#4a90e2]" /> Location</h4>
+            <h4 className="font-[family-name:--font-subheading] text-[#a0a5b8] text-lg mb-2 flex items-center gap-2"><MapPin className="w-5 h-5 bg-gradient-to-r from-[#00f2fe] to-[#4facfe] text-transparent bg-clip-text drop-shadow-[0_0_10px_rgba(0,242,254,0.5)]" /> Location</h4>
             <p className="text-white">MKSSS’s Cummins College of Engineering for Women<br/>Karvenagar, Pune</p>
           </div>
           
@@ -34,17 +34,17 @@ const Contact = () => {
         <form className="flex flex-col gap-6" onSubmit={(e) => e.preventDefault()}>
           <div className="flex flex-col gap-2">
             <label htmlFor="name" className="font-[family-name:--font-subheading] text-[#a0a5b8]">Name</label>
-            <input type="text" id="name" placeholder="Your Name" required className="bg-black/30 border border-white/20 px-4 py-3 rounded-lg text-white font-[family-name:--font-body] outline-none transition-all duration-300 focus:border-[#4a90e2] focus:shadow-[0_0_10px_rgba(74,144,226,0.3)]" />
+            <input type="text" id="name" placeholder="Your Name" required className="bg-black/30 border border-white/20 px-4 py-3 rounded-lg text-white font-[family-name:--font-body] outline-none transition-all duration-300 focus:border-[#666666] focus:shadow-[0_0_10px_rgba(255,255,255,0.3)]" />
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="email" className="font-[family-name:--font-subheading] text-[#a0a5b8]">Email</label>
-            <input type="email" id="email" placeholder="Your Email" required className="bg-black/30 border border-white/20 px-4 py-3 rounded-lg text-white font-[family-name:--font-body] outline-none transition-all duration-300 focus:border-[#4a90e2] focus:shadow-[0_0_10px_rgba(74,144,226,0.3)]" />
+            <input type="email" id="email" placeholder="Your Email" required className="bg-black/30 border border-white/20 px-4 py-3 rounded-lg text-white font-[family-name:--font-body] outline-none transition-all duration-300 focus:border-[#666666] focus:shadow-[0_0_10px_rgba(255,255,255,0.3)]" />
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="message" className="font-[family-name:--font-subheading] text-[#a0a5b8]">Message</label>
-            <textarea id="message" rows="5" placeholder="Your Message" required className="bg-black/30 border border-white/20 px-4 py-3 rounded-lg text-white font-[family-name:--font-body] outline-none transition-all duration-300 focus:border-[#4a90e2] focus:shadow-[0_0_10px_rgba(74,144,226,0.3)]"></textarea>
+            <textarea id="message" rows="5" placeholder="Your Message" required className="bg-black/30 border border-white/20 px-4 py-3 rounded-lg text-white font-[family-name:--font-body] outline-none transition-all duration-300 focus:border-[#666666] focus:shadow-[0_0_10px_rgba(255,255,255,0.3)]"></textarea>
           </div>
-          <button type="submit" className="bg-[#4a90e2] text-white py-3 rounded-lg font-[family-name:--font-subheading] uppercase tracking-widest shadow-[0_0_15px_rgba(74,144,226,0.6)] transition-all duration-300 hover:bg-[#357abd] hover:shadow-[0_0_25px_rgba(74,144,226,0.8)] mt-2">
+          <button type="submit" className="bg-black border border-[#666666]/50 text-white py-3 rounded-lg font-[family-name:--font-subheading] uppercase tracking-widest shadow-[0_0_15px_rgba(255,255,255,0.4)] transition-all duration-300 hover:border-white/30 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] mt-2">
             Send Message
           </button>
         </form>

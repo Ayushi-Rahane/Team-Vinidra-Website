@@ -16,11 +16,11 @@ const Achievements = () => {
         {milestones.map((item, index) => (
           <div key={index} className="relative pl-[60px] mb-10 w-full">
             {/* Timeline Dot with Pulse Effect */}
-            <div className="absolute left-[14px] top-[10px] w-[14px] h-[14px] rounded-full bg-[#4a90e2] shadow-[0_0_15px_rgba(74,144,226,0.6)] z-[2] before:content-[''] before:absolute before:-top-1 before:-left-1 before:-right-1 before:-bottom-1 before:rounded-full before:border before:border-[#4a90e2] before:opacity-50 before:animate-[pulseSlow_2s_infinite]"></div>
+            <div className="absolute left-[14px] top-[10px] w-[14px] h-[14px] rounded-full bg-[#666666] shadow-[0_0_15px_rgba(255,255,255,0.6)] z-[2] before:content-[''] before:absolute before:-top-1 before:-left-1 before:-right-1 before:-bottom-1 before:rounded-full before:border before:border-[#666666] before:opacity-50 before:animate-[pulseSlow_2s_infinite]"></div>
             
             {/* Timeline Content */}
-            <div className="relative bg-[rgba(15,20,45,0.6)] backdrop-blur-md p-6 border border-white/10 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
-              <span className="inline-block bg-[#4a90e2]/20 text-[#4a90e2] border border-[#4a90e2]/30 px-3 py-1 rounded-full font-[family-name:--font-heading] text-sm mb-2">
+            <div className="card-glow relative bg-[rgba(10,10,10,0.85)] backdrop-blur-md p-6 border border-white/10 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+              <span className="inline-block bg-[#666666]/40 text-[#ffffff] border border-[#666666]/30 px-3 py-1 rounded-full font-[family-name:--font-heading] text-sm mb-2">
                 {item.year}
               </span>
               <h3 className="font-[family-name:--font-subheading] text-[1.4rem] mb-2 text-white">{item.title}</h3>

@@ -1,24 +1,65 @@
 import React from 'react';
+import SplitText from './SplitText';
 
 const Hero = () => {
   return (
-    <div className="min-h-screen relative z-10 flex flex-col justify-center items-center text-center px-[5%] pt-20">
-      <div className="max-w-[900px] animate-[fadeIn_2s_ease-out_forwards]">
-        <h1 className="font-[family-name:--font-heading] text-5xl md:text-7xl lg:text-8xl font-black tracking-widest mb-2 drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]">
-          <span className="text-[#4a90e2] drop-shadow-[0_0_15px_rgba(74,144,226,0.6)]">TEAM</span> VINIDRA
-        </h1>
-        <h2 className="font-[family-name:--font-subheading] text-2xl md:text-3xl font-medium text-[#e0e5ff] mb-6 tracking-widest">
-          Space Research and Engineering Group
-        </h2>
-        <p className="text-lg md:text-xl text-[#a0a5b8] italic mb-12 max-w-[700px] mx-auto">
-          “Women-driven, hands-on space engineering initiative shaping future space leaders.”
-        </p>
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
-          <a href="#team" className="bg-transparent text-white border border-white px-8 py-3 font-[family-name:--font-subheading] text-lg tracking-widest rounded-full uppercase transition-all duration-300 hover:bg-white hover:text-[#030514] hover:shadow-[0_0_20px_rgba(255,255,255,0.5)]">
-            Explore Team
+    <div className="min-h-screen flex items-end px-6 lg:px-16 pt-24 pb-40 lg:pb-52">
+      {/* Left-aligned content block — positioned in the lower-left like the template */}
+      <div className="max-w-4xl float-container">
+        <SplitText
+          tag="h1"
+          text="TEAM VINIDRA"
+          className="text-glowing-sparkle font-[family-name:--font-title] text-5xl md:text-6xl lg:text-7xl font-semibold tracking-[0.2em] uppercase leading-tight mb-4 whitespace-nowrap"
+          startDelay={0.5}
+          delay={120} // Slower character stagger
+          duration={2.5} // Slower character fade
+          ease="power3.out"
+          splitType="chars"
+          from={{ opacity: 0, y: 30 }}
+          to={{ opacity: 1, y: 0 }}
+          textAlign="left"
+        />
+        <SplitText
+          tag="h2"
+          text="Space Research and Engineering Group"
+          className="font-[family-name:--font-subheading] text-xl md:text-2xl font-medium text-slate-300 mb-6 leading-snug tracking-wide"
+          startDelay={2.5} // Wait for H1
+          delay={50} // Word stagger
+          duration={2.0}
+          ease="power3.out"
+          splitType="words"
+          from={{ opacity: 0, y: 20 }}
+          to={{ opacity: 1, y: 0 }}
+          textAlign="left"
+        />
+        <SplitText
+          tag="p"
+          text="Innovative, women-driven aerospace group developing CubeSats, CanSats, and Model Rockets. Contributing to India's space ecosystem."
+          className="text-[15px] md:text-base text-slate-400 mb-10 leading-relaxed max-w-md tracking-wide"
+          startDelay={4.0} // Wait for H2
+          delay={80} // Line/word stagger
+          duration={2.5}
+          ease="power3.out"
+          splitType="words"
+          from={{ opacity: 0, y: 20 }}
+          to={{ opacity: 1, y: 0 }}
+          textAlign="left"
+        />
+        <div 
+          className="flex items-center gap-6 opacity-0 animate-[fadeIn_1.5s_ease-out_forwards]"
+          style={{ animationDelay: '6.5s' }}
+        >
+          <a
+            href="#team"
+            className="btn-space-extra px-8 py-3.5 text-sm font-[family-name:--font-heading] font-bold tracking-[0.15em] uppercase text-white rounded-xl"
+          >
+            <span>Explore Team</span>
           </a>
-          <a href="#contact" className="bg-[#4a90e2] text-white px-8 py-3 font-[family-name:--font-subheading] text-lg tracking-widest rounded-full uppercase transition-all duration-300 shadow-[0_0_15px_rgba(74,144,226,0.6)] hover:bg-[#357abd] hover:shadow-[0_0_25px_rgba(74,144,226,0.8)]">
-            Join Uss
+          <a
+            href="#contact"
+            className="btn-space-extra px-8 py-3.5 text-sm font-[family-name:--font-heading] font-bold tracking-[0.15em] uppercase text-white rounded-xl"
+          >
+            <span>Join Us</span>
           </a>
         </div>
       </div>

@@ -14,7 +14,7 @@ const Gallery = () => {
       <h2 className="font-[family-name:--font-heading] text-4xl text-center mb-12 tracking-widest uppercase text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">Gallery</h2>
       <div className="max-w-[1200px] mx-auto columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
         {galleryItems.map(item => (
-          <div key={item.id} className="group relative overflow-hidden rounded-2xl cursor-pointer break-inside-avoid bg-[rgba(15,20,45,0.6)] backdrop-blur-md border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+          <div key={item.id} className="group relative overflow-hidden rounded-2xl cursor-pointer break-inside-avoid bg-[rgba(10,10,10,0.85)] backdrop-blur-md border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
             <img src={item.src} alt={item.category} className="w-full h-auto block transition-transform duration-500 group-hover:scale-110" />
             <div className="absolute inset-0 bg-[#030514]/70 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
               <span className="font-[family-name:--font-heading] text-white text-2xl uppercase tracking-widest translate-y-5 transition-transform duration-300 group-hover:translate-y-0">

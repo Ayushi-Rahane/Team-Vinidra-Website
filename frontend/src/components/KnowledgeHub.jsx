@@ -12,9 +12,9 @@ const KnowledgeHub = () => {
       <h2 className="font-[family-name:--font-heading] text-4xl text-center mb-12 tracking-widest uppercase text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">Knowledge Hub</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-[1200px] mx-auto w-full">
         {articles.map(article => (
-          <div key={article.id} className="flex flex-col bg-[rgba(15,20,45,0.6)] backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-transform duration-300 hover:-translate-y-2 hover:border-[#4a90e2]">
+          <div key={article.id} className="card-glow flex flex-col bg-[rgba(10,10,10,0.85)] backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-transform duration-300 hover:-translate-y-2 hover:border-[#666666]">
             <div className="flex justify-between items-center mb-4 font-[family-name:--font-subheading] text-sm">
-              <span className="text-[#4a90e2] bg-[#4a90e2]/10 px-3 py-1 rounded">{article.category}</span>
+              <span className="bg-gradient-to-r from-[#00f2fe] to-[#4facfe] text-transparent bg-clip-text drop-shadow-[0_0_10px_rgba(0,242,254,0.5)] bg-[#666666]/10 px-3 py-1 rounded">{article.category}</span>
               <span className="text-[#a0a5b8]">{article.date}</span>
             </div>
             <h3 className="font-[family-name:--font-heading] text-xl mb-4 text-white leading-tight">{article.title}</h3>
