@@ -11,6 +11,20 @@ import CanvasContainer from './components/CanvasContainer';
 
 import bg1 from './assets/background1.png';
 import bg2 from './assets/background2.png';
+import bgAlt from './assets/background.png';
+
+// Shared style factory for alternating background segments
+const bgSegment = (image, top, flip = false) => ({
+  backgroundImage: `url(${image})`,
+  backgroundSize: '100% auto',
+  backgroundPosition: flip ? 'bottom center' : 'top center',
+  backgroundRepeat: 'no-repeat',
+  top,
+  height: '120vh',
+  WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
+  maskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
+});
+
 
 function App() {
   return (
@@ -28,20 +42,11 @@ function App() {
         }}
       />
 
-      {/* Background 2 — continues below */}
-      <div
-        className="absolute left-0 w-full z-[0] pointer-events-none float-bg"
-        style={{
-          backgroundImage: `url(${bg2})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'top center',
-          top: '100vh',
-          height: '450vh',
-          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 95%, transparent 100%)',
-          maskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 95%, transparent 100%)',
-          animationDirection: 'alternate-reverse',
-        }}
-      />
+      {/* Alternating backgrounds below hero — bg2 → bgAlt → bg2 → bgAlt */}
+      <div className="absolute left-0 w-full z-[0] pointer-events-none float-bg" style={bgSegment(bg2,    '100vh')} />
+      <div className="absolute left-0 w-full z-[0] pointer-events-none float-bg" style={bgSegment(bgAlt, '230vh', true)} />
+      <div className="absolute left-0 w-full z-[0] pointer-events-none float-bg" style={bgSegment(bg2,   '360vh')} />
+      <div className="absolute left-0 w-full z-[0] pointer-events-none float-bg" style={bgSegment(bgAlt, '490vh', true)} />
 
       <CanvasContainer />
       <Navbar />

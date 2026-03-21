@@ -5,13 +5,13 @@ import { pointsInner, pointsOuter } from "./ParticleRingUtils";
 
 const PointCircle = () => {
   const ref = useRef(null);
-  
+
   useFrame(({ clock }) => {
     if (ref.current?.rotation) {
       const scrollY = window.scrollY || 0;
       // It rotates slowly over time, and scrolling accelerates the rotation
       ref.current.rotation.z = clock.getElapsedTime() * 0.05 + scrollY * 0.002;
-      ref.current.rotation.y = scrollY * 0.001; 
+      ref.current.rotation.y = scrollY * 0.001;
       ref.current.rotation.x = scrollY * 0.001;
     }
   });
@@ -37,7 +37,7 @@ const Point = ({ position, color }) => {
         roughness={0.1}
         color={color}
         transparent={true}
-        opacity={0.85}
+        opacity={1}
       />
     </Sphere>
   );
