@@ -1,43 +1,83 @@
-import React from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Team from './components/Team';
-import Achievements from './components/Achievements';
-import Gallery from './components/Gallery';
-import KnowledgeHub from './components/KnowledgeHub';
-import Contact from './components/Contact';
-import CanvasContainer from './components/CanvasContainer';
+// import React from 'react';
+// import Navbar from './components/Navbar';
+// import Hero from './components/Hero';
+// import About from './components/About';
+// import Team from './components/Team';
+// import Achievements from './components/Achievements';
+// import Gallery from './components/Gallery';
+// import KnowledgeHub from './components/KnowledgeHub';
+// import Contact from './components/Contact';
+// import CanvasContainer from './components/CanvasContainer';
+
+// function App() {
+//   return (
+//     <div className="relative">
+//       <CanvasContainer />
+//       <Navbar />
+//       <main>
+//         <section id="home">
+//           <Hero />
+//         </section>
+//         <section id="about">
+//           <About />
+//         </section>
+//         {/* <section id="team">
+//           <Team />
+//         </section>
+//         <section id="achievements">
+//           <Achievements />
+//         </section>
+//         <section id="gallery">
+//           <Gallery />
+//         </section>
+//         <section id="knowledge-hub">
+//           <KnowledgeHub />
+//         </section> */}
+//         <section id="contact">
+//           <Contact />
+//         </section>
+//       </main>
+//     </div>
+//   );
+// }
+
+// export default App;
+
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Contact from "./components/Contact";
+import Team from "./components/Team";
+import Achievements from "./components/Achievements";
+import Gallery from "./components/Gallery";
+import KnowledgeHub from "./components/KnowledgeHub";
 
 function App() {
   return (
-    <div className="relative">
-      <CanvasContainer />
+    <Router>
       <Navbar />
-      <main>
-        <section id="home">
-          <Hero />
-        </section>
-        <section id="about">
-          <About />
-        </section>
-        <section id="team">
-          <Team />
-        </section>
-        <section id="achievements">
-          <Achievements />
-        </section>
-        <section id="gallery">
-          <Gallery />
-        </section>
-        <section id="knowledge-hub">
-          <KnowledgeHub />
-        </section>
-        <section id="contact">
-          <Contact />
-        </section>
-      </main>
-    </div>
+      <Routes>
+        {/* Landing page */}
+        <Route
+          path="/"
+          element={
+            <>
+              <section id="home"><Hero /></section>
+              <section id="about"><About /></section>
+              <section id="contact"><Contact /></section>
+            </>
+          }
+        />
+
+        {/* Other pages */}
+        <Route path="/team" element={<Team />} />
+        <Route path="/achievements" element={<Achievements />} />
+        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/knowledge-hub" element={<KnowledgeHub />} />
+      </Routes>
+    </Router>
   );
 }
 

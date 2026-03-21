@@ -18,7 +18,7 @@ const Hero = () => {
             Explore Team
           </a>
           <a href="#contact" className="bg-[#4a90e2] text-white px-8 py-3 font-[family-name:--font-subheading] text-lg tracking-widest rounded-full uppercase transition-all duration-300 shadow-[0_0_15px_rgba(74,144,226,0.6)] hover:bg-[#357abd] hover:shadow-[0_0_25px_rgba(74,144,226,0.8)]">
-            Join Us
+            Join Uss
           </a>
         </div>
       </div>
