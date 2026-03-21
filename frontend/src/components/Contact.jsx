@@ -1,4 +1,5 @@
 import React from 'react';
+import { MapPin } from 'lucide-react';
 
 const Contact = () => {
   return (
@@ -12,7 +13,7 @@ const Contact = () => {
           <p className="text-[#a0a5b8] mb-6">LinkedIn: <a href="#" target="_blank" rel="noreferrer" className="text-white underline decoration-[#4a90e2] hover:text-[#4a90e2] transition-colors">Team Vinidra</a></p>
           
           <div className="my-6">
-            <h4 className="font-[family-name:--font-subheading] text-[#a0a5b8] text-lg mb-2">📍 Location</h4>
+            <h4 className="font-[family-name:--font-subheading] text-[#a0a5b8] text-lg mb-2 flex items-center gap-2"><MapPin className="w-5 h-5 text-[#4a90e2]" /> Location</h4>
             <p className="text-white">MKSSS’s Cummins College of Engineering for Women<br/>Karvenagar, Pune</p>
           </div>
           
