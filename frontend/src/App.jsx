@@ -9,9 +9,9 @@ import KnowledgeHub from './components/KnowledgeHub';
 import Contact from './components/Contact';
 import CanvasContainer from './components/CanvasContainer';
 
-import bg1 from './assets/background1.png';
-import bg2 from './assets/background2.png';
-import bgAlt from './assets/background.png';
+import bg1 from './assets/background1.webp';
+import bg2 from './assets/background2.webp';
+import bgAlt from './assets/background.webp';
 
 // Shared style factory for alternating background segments
 const bgSegment = (image, top, flip = false) => ({

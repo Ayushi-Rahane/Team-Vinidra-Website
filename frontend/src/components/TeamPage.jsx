@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Cpu, Radio, Zap, Satellite, Settings, Users, GitBranch, ChevronLeft } from 'lucide-react';
 import { projectManager, subteams } from '../data/teamData';
-import bg3 from '../assets/background3.png';
+import bg3 from '../assets/background3.webp';
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
 const avatarUrl = (name) =>
