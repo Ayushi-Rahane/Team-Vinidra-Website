@@ -31,17 +31,20 @@ export default function Landing() {
         }}
       />
 
-      {/* Global Moving Stars Background */}
-      <div className="fixed inset-0 z-[1] w-full h-full pointer-events-none opacity-50">
+      {/* Global Moving Stars Background — starts BELOW the hero section */}
+      <div
+        className="absolute left-0 w-full z-[1] pointer-events-none opacity-50"
+        style={{ top: '100vh', bottom: 0, minHeight: '100vh' }}
+      >
         <SparklesCore
           id="tsparticlesfullpage"
           background="transparent"
           minSize={0.4}
           maxSize={1.5}
-          particleDensity={250}
+          particleDensity={1000}
           className="w-full h-full"
-          particleColor="#A0A5B8"
-          speed={0.5}
+          particleColors={["#FFFFFF", "#FACC15", "#38BDF8"]}
+          speed={5}
           fullScreen={true}
         />
       </div>

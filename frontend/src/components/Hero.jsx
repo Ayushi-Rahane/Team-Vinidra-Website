@@ -50,7 +50,7 @@ const Hero = () => {
           maxSize={1.5}
           particleDensity={1200}
           className="absolute inset-x-0 top-0 w-full h-full z-0"
-          particleColor="#FFFFFF"
+          particleColors={["#FFFFFF", "#E2E8F0", "#CBD5E1"]}
         />
 
         {/* ── Tagline with heavy animations ── */}

@@ -11,6 +11,7 @@ export const SparklesCore = (props) => {
     maxSize,
     speed,
     particleColor,
+    particleColors,
     particleDensity,
     fullScreen = false,
   } = props;
@@ -66,6 +67,9 @@ export const SparklesCore = (props) => {
         speedY: (Math.random() - 0.5) * (speed || 0.2),
         opacity: Math.random() * 0.7 + 0.15,
         fadeSpeed: (Math.random() * 0.008 + 0.003) * (Math.random() > 0.5 ? 1 : -1),
+        color: particleColors
+          ? particleColors[Math.floor(Math.random() * particleColors.length)]
+          : particleColor || "#FFFFFF",
       };
     }
 
@@ -88,6 +92,9 @@ export const SparklesCore = (props) => {
       speedY: (Math.random() * 0.4 + 0.1) * (speed || 1), // downward drift
       opacity: Math.random() * 0.7 + 0.15,
       fadeSpeed: (Math.random() * 0.008 + 0.003) * (Math.random() > 0.5 ? 1 : -1),
+      color: particleColors
+        ? particleColors[Math.floor(Math.random() * particleColors.length)]
+        : particleColor || "#FFFFFF",
     };
   };
 
@@ -137,9 +144,17 @@ export const SparklesCore = (props) => {
 
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fillStyle = particleColor || "#FFFFFF";
+      ctx.fillStyle = p.color;
       ctx.globalAlpha = p.opacity * edgeFade;
+      
+      // Glow effect for a "shiny" look
+      ctx.shadowBlur = p.size * 4;
+      ctx.shadowColor = p.color;
+      
       ctx.fill();
+
+      // Reset shadow for performance if needed, though for circles it persists until next path
+      ctx.shadowBlur = 0;
 
       return p;
     });
