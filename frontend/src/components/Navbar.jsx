@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.webp";
+import { Facebook, Twitter, Instagram } from "lucide-react";
 
 const navLinks = [
   { name: "Home", id: "home" },
@@ -121,15 +122,15 @@ const Navbar = () => {
       </nav>
 
       {/* Social Icons (unchanged) */}
-      <div className="hidden lg:flex items-center gap-4 shrink-0">
-        <a href="#" className="text-white/60 hover:text-white transition-colors">
-          FB
+      <div className="hidden lg:flex items-center gap-6 shrink-0">
+        <a href="#" className="text-white/60 hover:text-white transition-all duration-300 hover:scale-110">
+          <Facebook size={20} strokeWidth={1.5} />
         </a>
-        <a href="#" className="text-white/60 hover:text-white transition-colors">
-          TW
+        <a href="#" className="text-white/60 hover:text-white transition-all duration-300 hover:scale-110">
+          <Twitter size={20} strokeWidth={1.5} />
         </a>
-        <a href="#" className="text-white/60 hover:text-white transition-colors">
-          IG
+        <a href="#" className="text-white/60 hover:text-white transition-all duration-300 hover:scale-110">
+          <Instagram size={20} strokeWidth={1.5} />
         </a>
       </div>
     </header>

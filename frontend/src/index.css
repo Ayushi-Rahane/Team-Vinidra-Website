@@ -1,11 +1,11 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;500;700&family=Exo+2:wght@300;500;700&display=swap');
 
 @theme {
-  --font-heading: 'Orbitron', sans-serif;
-  --font-subheading: 'Space Grotesk', sans-serif;
-  --font-body: 'Montserrat', sans-serif;
-  --font-title: 'Exo 2', sans-serif;
+  --font-heading: 'Iosevka Charon', monospace;
+  --font-subheading: 'Iosevka Charon', monospace;
+  --font-body: 'Nunito Sans', sans-serif;
+  --font-title: 'Iosevka Charon', monospace;
+
 
   --color-brand-bg: #030514;
   --color-brand-primary: #ffffff;
@@ -85,11 +85,10 @@ body {
   }
   100% {
     text-shadow: 
-      0 0 15px rgba(255, 255, 255, 1),
-      0 0 30px rgba(255, 255, 255, 0.9),
-      0 0 60px rgba(255, 255, 255, 0.7),
-      0 0 100px rgba(255, 255, 255, 0.5),
-      0 0 150px rgba(255, 255, 255, 0.3);
+      0 0 10px rgba(255, 255, 255, 0.9),
+      0 0 20px rgba(255, 255, 255, 0.7),
+      0 0 40px rgba(255, 255, 255, 0.5),
+      0 0 70px rgba(255, 255, 255, 0.3);
   }
 }
 
@@ -108,10 +107,11 @@ body {
   animation: floatBg 40s ease-in-out infinite alternate;
   transform-origin: center center;
   will-change: transform;
+  image-rendering: -webkit-optimize-contrast;
 }
 @keyframes floatBg {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.15); }
+  0% { transform: scale(1.02); }
+  100% { transform: scale(1.08); }
 }
 
 /* Scrollbar styling */

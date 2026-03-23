@@ -5,40 +5,25 @@ import Team from "../components/Team";
 import Gallery from "../components/Gallery";
 import KnowledgeHub from "../components/KnowledgeHub";
 import Contact from "../components/Contact";
-import CanvasContainer from "../components/CanvasContainer";
 import AchievementsPreview from "../components/AchievementsPreview";
 import Footer from "../components/Footer";
+import { SparklesCore } from "../components/ui/SparklesCore";
 
 
-import bg1 from "../assets/background1.webp";
-import bg2 from "../assets/background2.webp";
-import bgAlt from "../assets/background.webp";
-
-const bgSegment = (image, top, flip = false) => ({
-  backgroundImage: `url(${image})`,
-  backgroundSize: "100% auto",
-  backgroundPosition: flip ? "bottom center" : "top center",
-  backgroundRepeat: "no-repeat",
-  top,
-  height: "120vh",
-  WebkitMaskImage:
-    "linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)",
-  maskImage:
-    "linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)",
-});
+import bg1 from "../assets/image.png";
 
 export default function Landing() {
   return (
     <div className="relative w-full bg-[#030514] overflow-hidden">
-      
+
       {/* Backgrounds */}
       <div
-        className="absolute top-0 left-0 w-full z-[0] pointer-events-none float-bg"
+        className="absolute top-0 left-0 w-full z-[0] pointer-events-none animate-zoom-in-out"
         style={{
           backgroundImage: `url(${bg1})`,
           backgroundSize: "cover",
           backgroundPosition: "center 20%",
-          height: "130vh",
+          height: "110vh",
           WebkitMaskImage:
             "linear-gradient(to bottom, black 70%, transparent 100%)",
           maskImage:
@@ -46,24 +31,21 @@ export default function Landing() {
         }}
       />
 
-      <div
-        className="absolute left-0 w-full z-[0] pointer-events-none float-bg"
-        style={bgSegment(bg2, "100vh")}
-      />
-      <div
-        className="absolute left-0 w-full z-[0] pointer-events-none float-bg"
-        style={bgSegment(bgAlt, "230vh", true)}
-      />
-      <div
-        className="absolute left-0 w-full z-[0] pointer-events-none float-bg"
-        style={bgSegment(bg2, "360vh")}
-      />
-      <div
-        className="absolute left-0 w-full z-[0] pointer-events-none float-bg"
-        style={bgSegment(bgAlt, "490vh", true)}
-      />
+      {/* Global Moving Stars Background */}
+      <div className="fixed inset-0 z-[1] w-full h-full pointer-events-none opacity-50">
+        <SparklesCore
+          id="tsparticlesfullpage"
+          background="transparent"
+          minSize={0.4}
+          maxSize={1.5}
+          particleDensity={250}
+          className="w-full h-full"
+          particleColor="#A0A5B8"
+          speed={0.5}
+          fullScreen={true}
+        />
+      </div>
 
-      <CanvasContainer />
       <Navbar />
 
       <main className="relative z-[10]">
