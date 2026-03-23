@@ -1,49 +1,150 @@
-import React from 'react';
-import { BookOpen, Rocket, Star, Users } from 'lucide-react';
+import React from "react";
+import { motion } from "framer-motion";
+
+const reveal = (dir = 1) => ({
+  hidden: { opacity: 0, y: 60 * dir },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: "easeOut" },
+  },
+});
 
 const About = () => {
   return (
-    <div className="min-h-screen relative z-10 flex flex-col justify-center px-[5%] pt-24 pb-12">
-      <h2 className="font-[family-name:--font-heading] text-4xl text-center mb-12 tracking-widest uppercase text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">Mission & Vision</h2>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1200px] mx-auto">
-        <div className="card-glow bg-[rgba(10,10,10,0.85)] backdrop-blur-md border border-white/10 rounded-2xl p-8 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_40px_rgba(255,255,255,0.2)] hover:border-[#666666]/50">
-          <h3 className="font-[family-name:--font-subheading] bg-gradient-to-r from-[#00f2fe] to-[#4facfe] text-transparent bg-clip-text drop-shadow-[0_0_10px_rgba(0,242,254,0.5)] text-2xl mb-4 flex items-center gap-3"><BookOpen className="w-7 h-7" /> Team Story</h3>
-          <p className="text-[#a0a5b8] text-base">Founded in 2021 as a satellite team, Team Vinidra expanded in 2024–25 into a multi-project aerospace group focusing on cutting-edge space technology.</p>
-        </div>
+    <section className="relative py-28 md:py-32 px-[8%] text-white">
 
-        <div className="card-glow bg-[rgba(10,10,10,0.85)] backdrop-blur-md border border-white/10 rounded-2xl p-8 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_40px_rgba(255,255,255,0.2)] hover:border-[#666666]/50">
-          <h3 className="font-[family-name:--font-subheading] bg-gradient-to-r from-[#00f2fe] to-[#4facfe] text-transparent bg-clip-text drop-shadow-[0_0_10px_rgba(0,242,254,0.5)] text-2xl mb-4 flex items-center gap-3"><Rocket className="w-7 h-7" /> Mission</h3>
-          <ul className="text-[#a0a5b8] text-base space-y-2">
-            <li className="relative pl-5 before:content-['▸'] before:absolute before:left-0 before:bg-gradient-to-r from-[#00f2fe] to-[#4facfe] text-transparent bg-clip-text drop-shadow-[0_0_10px_rgba(0,242,254,0.5)]">Develop CubeSats, CanSats, and Model Rockets</li>
-            <li className="relative pl-5 before:content-['▸'] before:absolute before:left-0 before:bg-gradient-to-r from-[#00f2fe] to-[#4facfe] text-transparent bg-clip-text drop-shadow-[0_0_10px_rgba(0,242,254,0.5)]">Provide hands-on aerospace research opportunities</li>
-            <li className="relative pl-5 before:content-['▸'] before:absolute before:left-0 before:bg-gradient-to-r from-[#00f2fe] to-[#4facfe] text-transparent bg-clip-text drop-shadow-[0_0_10px_rgba(0,242,254,0.5)]">Build leadership & technical skills among women engineers</li>
-          </ul>
-        </div>
+      {/* TITLE */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: false, amount: 0.6 }}
+        className="text-center mb-20"
+      >
+        <h2 className="text-4xl md:text-5xl font-thin tracking-[0.32em]
+        bg-gradient-to-r from-white via-sky-300 to-white 
+        text-transparent bg-clip-text">
+          ABOUT US
+        </h2>
 
-        <div className="card-glow bg-[rgba(10,10,10,0.85)] backdrop-blur-md border border-white/10 rounded-2xl p-8 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_40px_rgba(255,255,255,0.2)] hover:border-[#666666]/50">
-          <h3 className="font-[family-name:--font-subheading] bg-gradient-to-r from-[#00f2fe] to-[#4facfe] text-transparent bg-clip-text drop-shadow-[0_0_10px_rgba(0,242,254,0.5)] text-2xl mb-4 flex items-center gap-3"><Star className="w-7 h-7" /> Flagship Project</h3>
-          <h4 className="font-[family-name:--font-heading] text-[1.8rem] my-2 text-white uppercase tracking-widest">Project KarveSat</h4>
-          <p className="text-[#a0a5b8] text-base">A student-built CubeSat named after Maharshi Karve, focusing on scientific and commercial contributions to space technology.</p>
-        </div>
+        <div className="w-28 h-[1px] bg-gradient-to-r from-transparent via-sky-300 to-transparent mx-auto mt-4" />
+      </motion.div>
 
-        <div className="card-glow bg-[rgba(10,10,10,0.85)] backdrop-blur-md border border-white/10 rounded-2xl p-8 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_40px_rgba(255,255,255,0.2)] hover:border-[#666666]/50">
-          <h3 className="font-[family-name:--font-subheading] bg-gradient-to-r from-[#00f2fe] to-[#4facfe] text-transparent bg-clip-text drop-shadow-[0_0_10px_rgba(0,242,254,0.5)] text-2xl mb-4 flex items-center gap-3"><Users className="w-7 h-7" /> Leadership</h3>
-          <div className="flex justify-between gap-4 mt-4">
-            <div>
-              <h4 className="text-white mb-2 font-[family-name:--font-subheading]">Faculty Coordinators</h4>
-              <p className="text-[#a0a5b8]">Dr. Dipti D. Patil</p>
-              <p className="text-[#a0a5b8]">Dr. Seema Rajput</p>
+      {/* TOP */}
+      <div className="grid md:grid-cols-2 gap-12 max-w-[1100px] mx-auto mb-16">
+
+        {/* WHO */}
+        <motion.div
+          variants={reveal(1)}   
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.35 }}
+          whileHover={{ y: -6 }}
+          className="will-change-transform"
+        >
+          <div className="group relative overflow-hidden rounded-3xl border border-white/15 
+          bg-gradient-to-br from-sky-400/15 via-white/5 to-transparent
+          hover:from-sky-400/30 hover:via-sky-400/10
+          transition-all duration-500 backdrop-blur-md p-8 shadow-lg">
+
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 
+            transition duration-700
+            bg-[radial-gradient(circle_at_30%_20%,rgba(56,189,248,0.25),transparent_60%)]" />
+
+            <div className="relative">
+              <div className="mb-5">
+                <div className="w-10 h-[1px] bg-sky-300 mb-3" />
+                <h3 className="tracking-[0.35em] text-lg text-white/90">
+                  WHO WE ARE
+                </h3>
+              </div>
+
+              <p className="text-white/80 leading-relaxed text-[15px]">
+                Team Vinidra is a student-driven aerospace innovation group
+                focused on CubeSat missions, rocket systems and applied space
+                research. Members gain real engineering exposure through
+                collaborative mission development.
+              </p>
             </div>
-            <div>
-              <h4 className="text-white mb-2 font-[family-name:--font-subheading]">Founders</h4>
-              <p className="text-[#a0a5b8]">Prerna Burande</p>
-              <p className="text-[#a0a5b8]">Kanchan Bhale</p>
-            </div>
+
           </div>
-        </div>
+        </motion.div>
+
+        {/* VISION */}
+        <motion.div
+          variants={reveal(1)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.35 }}
+          whileHover={{ y: -6 }}
+          className="will-change-transform"
+        >
+          <div className="group relative overflow-hidden rounded-3xl border border-white/15 
+          bg-gradient-to-bl from-sky-400/15 via-white/5 to-transparent
+          hover:from-sky-400/30 hover:via-sky-400/10
+          transition-all duration-500 backdrop-blur-md p-8 shadow-lg">
+
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 
+            transition duration-700
+            bg-[radial-gradient(circle_at_70%_30%,rgba(56,189,248,0.25),transparent_60%)]" />
+
+            <div className="relative">
+              <div className="mb-5">
+                <div className="w-10 h-[1px] bg-sky-300 mb-3" />
+                <h3 className="tracking-[0.35em] text-lg text-white/90">
+                  OUR VISION
+                </h3>
+              </div>
+
+              <p className="text-white/80 leading-relaxed text-[15px]">
+                We aim to build a strong ecosystem of aerospace innovation while
+                contributing to impactful student space missions and inspiring
+                more engineers to explore careers in space technology.
+              </p>
+            </div>
+
+          </div>
+        </motion.div>
+
       </div>
-    </div>
+
+      {/* CENTER */}
+      <motion.div
+        variants={reveal(1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: false, amount: 0.4 }}
+        whileHover={{ scale: 1.02 }}
+        className="max-w-[720px] mx-auto will-change-transform"
+      >
+        <div className="group relative overflow-hidden rounded-3xl border border-white/15 
+        bg-gradient-to-b from-sky-400/15 via-white/5 to-transparent
+        hover:from-sky-400/30 hover:via-sky-400/10
+        transition-all duration-500 backdrop-blur-md p-10 text-center shadow-lg">
+
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 
+          transition duration-700
+          bg-[radial-gradient(circle_at_50%_10%,rgba(56,189,248,0.25),transparent_60%)]" />
+
+          <div className="relative">
+            <div className="w-14 h-[1px] bg-sky-300 mx-auto mb-5" />
+
+            <h3 className="tracking-[0.4em] text-lg text-white/90 mb-4">
+              WHAT WE DO
+            </h3>
+
+            <p className="text-white/80 leading-relaxed text-[15px]">
+              The team actively works on satellite development, rocket engineering
+              projects, aerospace competitions and technical workshops that help
+              members build strong engineering and leadership capabilities.
+            </p>
+          </div>
+
+        </div>
+      </motion.div>
+
+    </section>
   );
 };
 
