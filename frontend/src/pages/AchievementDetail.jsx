@@ -12,7 +12,7 @@ export default function AchievementDetail() {
 
   if (!achievement)
     return (
-      <div className="text-white text-center mt-20">
+      <div className="font-sans text-white text-center mt-20">
         Achievement not found
       </div>
     );
@@ -45,7 +45,7 @@ export default function AchievementDetail() {
         {/* Back Button */}
         <button
           onClick={() => navigate("/achievements")}
-          className="flex items-center gap-2 text-white bg-gray-800/40 backdrop-blur-md hover:bg-gray-800/60 px-4 py-2 rounded-xl font-semibold transition-all duration-300"
+          className="flex items-center gap-2 text-white font-sans bg-gray-800/40 backdrop-blur-md hover:bg-gray-800/60 px-4 py-2 rounded-xl font-semibold transition-all duration-300"
         >
           ← Back
         </button>
@@ -83,10 +83,10 @@ export default function AchievementDetail() {
 
             <div className="relative flex flex-col gap-3">
               {/* Title */}
-              <h1 className="text-4xl md:text-4xl font-bold">{achievement.title}</h1>
+              <h1 className="font-sans text-4xl md:text-4xl font-bold">{achievement.title}</h1>
 
               {/* Category */}
-              <span className="w-fit px-4 py-1.5 text-sm rounded-full
+              <span className="font-sans w-fit px-4 py-1.5 text-sm rounded-full
                  bg-white/10 text-white/80 border border-white/10
                  tracking-wide capitalize
                  hover:bg-sky-300/50 hover:text-white transition-all duration-300">
@@ -94,13 +94,13 @@ export default function AchievementDetail() {
 </span>
 
               {/* Year / Time */}
-              <span className="text-sky-400 text-sm font-semibold px-1">
+              <span className="font-sans text-sky-400 text-sm font-semibold px-1">
   {achievement.year}
 </span>
 
               {/* Highlight */}
               {achievement.highlight && (
-                <p className="italic text-gray-300">{achievement.highlight}</p>
+                <p className="font-sans italic text-gray-300">{achievement.highlight}</p>
               )}
             </div>
           </motion.div>
@@ -128,14 +128,14 @@ export default function AchievementDetail() {
   {achievement.detailedDescription.map((para, index) => (
     <p
       key={index}
-      className="text-base md:text-lg leading-relaxed"
+      className="font-sans text-base md:text-lg leading-relaxed"
     >
       {para}
     </p>
   ))}
 
   {achievement.highlight && (
-    <p className="italic text-gray-300 border-l-2 border-sky-300 pl-4">
+    <p className="italic font-sans text-gray-300 border-l-2 border-sky-300 pl-4">
       {achievement.highlight}
     </p>
   )}

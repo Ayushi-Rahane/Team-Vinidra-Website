@@ -52,7 +52,7 @@ export default function AchievementsPage() {
   </div>
 
   {/* Title */}
-  <h1 className="relative text-4xl md:text-5xl font-light tracking-[0.14em]
+  <h1 className="relative font-sans  text-4xl md:text-5xl font-light tracking-[0.14em]
      bg-gradient-to-r from-white via-sky-300 to-white
      text-transparent bg-clip-text">
 
@@ -69,7 +69,7 @@ export default function AchievementsPage() {
   />
 
   {/* Subtitle */}
-  <p className="mt-4 text-gray-400 max-w-xl mx-auto text-base leading-relaxed">
+  <p className="mt-4 font-sans text-gray-400 max-w-xl mx-auto text-base leading-relaxed">
     A timeline of our milestones, competitions and recognitions in aerospace innovation.
   </p>
 

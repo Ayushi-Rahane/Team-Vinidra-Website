@@ -56,24 +56,19 @@ export default function AchievementCard({ achievement, index }) {
 
           {/* Content */}
           <div className="p-6 flex flex-col gap-3">
-            <h3 className="text-xl md:text-2xl font-bold text-white">
+            <h3 className="font-sans text-xl md:text-2xl font-bold text-white">
               {achievement.title}
             </h3>
 
-            <p className="text-gray-300 text-sm md:text-base leading-relaxed">
+            <p className="font-sans text-gray-300 text-sm md:text-base leading-relaxed">
               {achievement.shortDescription}
             </p>
-
-            {/* Category Badge */}
-            {/* <span className="inline-block mt-2 px-4 py-1.5 text-xs rounded-full bg-white/10 text-white/80 border border-white/10 tracking-wide capitalize">
-              {achievement.category}
-            </span> */}
 
             {/* See More Button */}
             <button
               onClick={() => navigate(`/achievements/${achievement.id}`)}
               className="mt-4 self-start bg-gradient-to-r from-sky-400 via-sky-500 to-blue-600
-             hover:scale-105 hover:shadow-lg
+             hover:scale-105 hover:shadow-lg font-sans
              text-white px-5 py-2.5 rounded-2xl font-semibold
              flex items-center gap-2 transition-all duration-300"
             >
