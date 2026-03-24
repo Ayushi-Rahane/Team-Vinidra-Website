@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import Footer from "../components/Footer";
 import { SparklesCore } from "../components/ui/SparklesCore"; // import sparkles
 
+
 export default function AchievementsPage() {
   useEffect(() => {
     window.scrollTo({ top: 0 });

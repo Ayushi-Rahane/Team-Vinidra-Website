@@ -23,7 +23,7 @@ export const achievements = [
 
     highlight: "Reached national finals competing against top engineering institutes.",
     category: "competition",
-    image: "cansat",
+    image: cansat,
   },
 
   {
@@ -40,7 +40,7 @@ export const achievements = [
     ],
     highlight: "Successfully passed vibration tests simulating launch conditions.",
     category: "project",
-    image: "karvesat",
+    image: karvesat,
   },
   {
     id: 3,
@@ -56,7 +56,7 @@ export const achievements = [
     ],
     highlight: "Established a functional ground station for satellite communication and data reception.",
     category: "project",
-    image: "groundstation",
+    image: groundstation,
   },
   {
     id: 4,
@@ -72,7 +72,7 @@ export const achievements = [
     ],
     highlight: "Established a functional ground station for satellite communication and data reception.",
     category: "media",
-    image: "aerospace",
+    image: aerospace,
   },
   {
     id: 5,
@@ -88,7 +88,7 @@ export const achievements = [
     ],
     highlight: "Established a functional ground station for satellite communication and data reception.",
     category: "competition",
-    image: "payload",
+    image: payload,
   },
   {
     id: 6,
@@ -104,6 +104,6 @@ export const achievements = [
     ],
     highlight: "Established a functional ground station for satellite communication and data reception.",
     category: "project",
-    image: "thermal",
+    image: thermal,
   },
 ];
