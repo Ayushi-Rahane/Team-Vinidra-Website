@@ -1,9 +1,9 @@
-import cansat from "../assets/achievement/cansat.jpg";
-import karvesat from "../assets/achievement/karvesat.jpg";
-import groundstation from "../assets/achievement/groundstation.jpg";
-import aerospace from "../assets/achievement/aerospace-magazine.jpg";
-import payload from "../assets/achievement/payload-award.jpg";
-import thermal from "../assets/achievement/thermal-vacuum.jpg";
+import cansat from "../../assets/achievement/cansat.jpg";
+import karvesat from "../../assets/achievement/karvesat.jpg";
+import groundstation from "../../assets/achievement/groundstation.jpg";
+import aerospace from "../../assets/achievement/aerospace-magazine.jpg";
+import payload from "../../assets/achievement/payload-award.jpg";
+import thermal from "../../assets/achievement/thermal-vacuum.jpg";
 
 
 
