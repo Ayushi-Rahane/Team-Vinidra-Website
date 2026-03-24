@@ -7,7 +7,7 @@
   --font-title: 'Iosevka Charon', monospace;
 
 
-  --color-brand-bg: #030514;
+  --color-brand-bg: #000000;
   --color-brand-primary: #ffffff;
   --color-brand-secondary: #a0a5b8;
   --color-brand-accent: #4a90e2;
@@ -45,7 +45,7 @@ html {
 
 body {
   background-color: #000000;
-  background-image: radial-gradient(ellipse at 50% -20%, #1c1c1c 0%, #000000 70%);
+  background-image: radial-gradient(ellipse at 50% -20%, #0a0a0a 0%, #000000 80%);
   color: var(--color-brand-primary);
   font-family: var(--font-body);
   overflow-x: hidden;

@@ -19,7 +19,7 @@ const KnowledgeHub = () => {
             </div>
             <h3 className="font-[family-name:--font-heading] text-xl mb-4 text-white leading-tight">{article.title}</h3>
             <p className="text-[#a0a5b8] flex-grow mb-6">{article.excerpt}</p>
-            <button className="self-start px-5 py-2 text-sm bg-transparent text-white border border-white rounded-full font-[family-name:--font-subheading] transition-all duration-300 hover:bg-white hover:text-[#030514]">
+            <button className="self-start px-5 py-2 text-sm bg-transparent text-white border border-white rounded-full font-[family-name:--font-subheading] transition-all duration-300 hover:bg-white hover:text-black">
               Read More
             </button>
           </div>

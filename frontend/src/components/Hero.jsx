@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import SplitText from './SplitText';
 import { SparklesCore } from './ui/SparklesCore';
@@ -6,19 +6,25 @@ import { Button } from './ui/moving-border';
 import { ContainerTextFlip } from './ui/container-text-flip';
 
 const Hero = () => {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <div className="relative min-h-screen w-full flex flex-col items-center justify-start pt-44 overflow-hidden">
 
       {/* Title */}
 
-      <div className="max-w-5xl float-container text-center relative z-20">
+      <div 
+        className="max-w-5xl float-container text-center relative z-20 transition-all duration-300 ease-out hover:scale-110 hover:drop-shadow-[0_0_30px_rgba(56,189,248,1)] cursor-pointer"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         <SplitText
           tag="h1"
           text="TEAM VINIDRA"
-          className="text-glowing-sparkle font-['Helvetica_Neue'] text-5xl md:text-6xl lg:text-7xl tracking-[0.2em] uppercase leading-tight mb-4 whitespace-nowrap"
-          startDelay={0.5}
-          delay={120}
-          duration={2.5}
+          className={`text-white font-['Helvetica_Neue'] text-5xl md:text-6xl lg:text-7xl tracking-[0.2em] uppercase leading-tight mb-4 whitespace-nowrap transition-all duration-300 ${isHovered ? 'text-glowing-sparkle' : ''}`}
+          startDelay={0}
+          delay={80}
+          duration={1.5}
           ease="power3.out"
           splitType="chars"
           from={{ opacity: 0, y: 30 }}
@@ -48,7 +54,7 @@ const Hero = () => {
           background="transparent"
           minSize={0.3}
           maxSize={1.5}
-          particleDensity={1200}
+          particleDensity={400}
           className="absolute inset-x-0 top-0 w-full h-full z-0"
           particleColors={["#FFFFFF", "#E2E8F0", "#CBD5E1"]}
         />
@@ -61,7 +67,7 @@ const Hero = () => {
             <motion.p
               initial={{ opacity: 0, y: 40, scale: 0.85 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ delay: 0.5, duration: 1.2, ease: 'easeOut' }}
+              transition={{ delay: 0.2, duration: 0.8, ease: 'easeOut' }}
               className="text-center font-['Iosevka_Charon'] text-lg md:text-2xl lg:text-3xl text-white tracking-[0.3em]"
               style={{
                 textShadow: '0 0 20px rgba(100, 160, 255, 0.9), 0 0 50px rgba(100, 160, 255, 0.5)',
@@ -76,7 +82,7 @@ const Hero = () => {
             <motion.div
               initial={{ opacity: 0, letterSpacing: '0.5em' }}
               animate={{ opacity: 0.9, letterSpacing: '0.25em' }}
-              transition={{ delay: 1.5, duration: 1.5, ease: 'easeOut' }}
+              transition={{ delay: 0.5, duration: 1.0, ease: 'easeOut' }}
               className="mt-2"
             >
               <Button

@@ -16,7 +16,7 @@ const Gallery = () => {
         {galleryItems.map(item => (
           <div key={item.id} className="group relative overflow-hidden rounded-2xl cursor-pointer break-inside-avoid bg-[rgba(10,10,10,0.85)] backdrop-blur-md border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
             <img src={item.src} alt={item.category} className="w-full h-auto block transition-transform duration-500 group-hover:scale-110" />
-            <div className="absolute inset-0 bg-[#030514]/70 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <div className="absolute inset-0 bg-black/70 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
               <span className="font-[family-name:--font-heading] text-white text-2xl uppercase tracking-widest translate-y-5 transition-transform duration-300 group-hover:translate-y-0">
                 {item.category}
               </span>
