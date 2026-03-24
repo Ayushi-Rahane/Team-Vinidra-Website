@@ -1,28 +1,3 @@
-// import { Trophy, Award, Newspaper } from "lucide-react";
-
-// export const categoryMap = {
-//   competition: {
-//     gradient: "from-yellow-900/30 to-orange-900/30 border-yellow-700/50",
-//     icon: Trophy,
-//     iconColor: "text-yellow-400",
-//   },
-//   project: {
-//     gradient: "from-blue-900/30 to-cyan-900/30 border-blue-700/50",
-//     icon: Award,
-//     iconColor: "text-blue-400",
-//   },
-//   media: {
-//     gradient: "from-purple-900/30 to-pink-900/30 border-purple-700/50",
-//     icon: Newspaper,
-//     iconColor: "text-purple-400",
-//   },
-//   milestone: {
-//     gradient: "from-green-900/30 to-emerald-900/30 border-green-700/50",
-//     icon: Award,
-//     iconColor: "text-green-400",
-//   },
-// };
-
 import { Trophy, Rocket, Newspaper } from "lucide-react";
 
 export const categoryMap = {
