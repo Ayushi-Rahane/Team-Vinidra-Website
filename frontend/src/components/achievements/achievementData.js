@@ -1,3 +1,11 @@
+import cansat from "../assets/achievement/cansat.jpg";
+import karvesat from "../assets/achievement/karvesat.jpg";
+import groundstation from "../assets/achievement/groundstation.jpg";
+import aerospace from "../assets/achievement/aerospace-magazine.jpg";
+import payload from "../assets/achievement/payload-award.jpg";
+import thermal from "../assets/achievement/thermal-vacuum.jpg";
+
+
 
 export const achievements = [
   {
@@ -15,7 +23,7 @@ export const achievements = [
 
     highlight: "Reached national finals competing against top engineering institutes.",
     category: "competition",
-    image: "/src/assets/achievement/cansat.jpg",
+    image: "cansat",
   },
 
   {
@@ -32,7 +40,7 @@ export const achievements = [
     ],
     highlight: "Successfully passed vibration tests simulating launch conditions.",
     category: "project",
-    image: "/src/assets/achievement/karvesat.jpg",
+    image: "karvesat",
   },
   {
     id: 3,
@@ -48,7 +56,7 @@ export const achievements = [
     ],
     highlight: "Established a functional ground station for satellite communication and data reception.",
     category: "project",
-    image: "/src/assets/achievement/groundstation.jpg",
+    image: "groundstation",
   },
   {
     id: 4,
@@ -64,7 +72,7 @@ export const achievements = [
     ],
     highlight: "Established a functional ground station for satellite communication and data reception.",
     category: "media",
-    image: "/src/assets/achievement/aerospace-magazine.jpg",
+    image: "aerospace",
   },
   {
     id: 5,
@@ -80,7 +88,7 @@ export const achievements = [
     ],
     highlight: "Established a functional ground station for satellite communication and data reception.",
     category: "competition",
-    image: "/src/assets/achievement/payload-award.jpg",
+    image: "payload",
   },
   {
     id: 6,
@@ -96,6 +104,6 @@ export const achievements = [
     ],
     highlight: "Established a functional ground station for satellite communication and data reception.",
     category: "project",
-    image: "/src/assets/achievement/thermal-vacuum.jpg",
+    image: "thermal",
   },
 ];
