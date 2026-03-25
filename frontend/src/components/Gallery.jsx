@@ -181,7 +181,7 @@ const Gallery = () => {
                   }}
                 />
 
-                <div className="flex h-full">
+                <div className="flex h-full animate-card-float-breath">
                   {/* Image side */}
                   <div className="relative w-3/5 h-full overflow-hidden flex-shrink-0">
                     <img
@@ -270,6 +270,15 @@ const Gallery = () => {
       </div>
 
       <style>{`
+        .animate-card-float-breath {
+          animation: floatBreath 4s ease-in-out infinite;
+        }
+
+        @keyframes floatBreath {
+          0%, 100% { transform: translateY(0) scale(1); }
+          50% { transform: translateY(-6px) scale(1.015); }
+        }
+
         @keyframes scrollDot {
           0%   { transform: translateY(-100%); opacity: 0; }
           20%  { opacity: 1; }
