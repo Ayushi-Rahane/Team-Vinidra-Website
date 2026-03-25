@@ -65,7 +65,7 @@ export default function AchievementsPage() {
   />
 
   {/* Subtitle */}
-  <p className="mt-4 text-gray-400 max-w-xl mx-auto text-base leading-relaxed">
+  <p className="mt-4 font-sans text-gray-400 max-w-xl mx-auto text-base leading-relaxed">
     A timeline of our milestones, competitions and recognitions in aerospace innovation.
   </p>
 
