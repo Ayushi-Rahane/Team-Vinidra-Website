@@ -51,6 +51,16 @@ const Navbar = () => {
     return () => sections.forEach((sec) => observer.unobserve(sec));
   }, [location.pathname]);
 
+  // Sync active state with route (for standalone pages like /gallery)
+  useEffect(() => {
+    if (location.pathname === "/gallery") {
+      setActiveSection("gallery");
+    } else if (location.pathname === "/") {
+      // Intersection observer handles this, but let's default to home if at top
+      if (window.scrollY < 100) setActiveSection("home");
+    }
+  }, [location.pathname]);
+
   // ⭐ MAIN NAVIGATION LOGIC
   const handleNavClick = (id) => {
     if (location.pathname !== "/") {

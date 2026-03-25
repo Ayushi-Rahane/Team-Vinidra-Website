@@ -16,7 +16,7 @@ import bg1 from "../assets/image.png";
 
 export default function Landing() {
   return (
-    <div className="relative w-full bg-black overflow-hidden">
+    <div className="relative w-full bg-black overflow-clip">
 
       {/* Backgrounds */}
       <div
