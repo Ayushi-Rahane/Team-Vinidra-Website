@@ -30,10 +30,10 @@ const Contact = () => {
               <Mail className="w-5 h-5 text-sky-300" /> Email
             </label>
             <a
-              href="mailto:mlsc.ccew@cumminscollege.in"
+              href="mailto:satellite@cumminscollege.in"
               className="text-white hover:text-sky-100 transition-colors ml-7 mt-1"
             >
-              vinidra.ccew@cumminscollege.in
+              satellite@cumminscollege.in
             </a>
           </div>
 
@@ -42,8 +42,8 @@ const Contact = () => {
             <label className="text-[#a0a5b8] font-medium flex items-center gap-2">
               <Phone className="w-5 h-5 text-sky-300" /> Phone
             </label>
-            <span className="ml-7 mt-1 text-white/90">Arshia Singh : +91 1234567890</span>
-            <span className="ml-7 text-white/90">Nandini Pathak : +91 9876543210</span>
+            <span className="ml-7 mt-1 text-white/90">Arshia Singh : +91 9594656463</span>
+            <span className="ml-7 text-white/90">Nandini Pathak : +91 7875743020</span>
           </div>
 
           {/* LOCATION */}
@@ -74,13 +74,15 @@ const Contact = () => {
           <h3 className="text-2xl font-semibold mb-4 tracking-wider text-white">Follow Us</h3>
           <div className="flex gap-4">
             <a
-              href="#"
+              href="https://www.linkedin.com/in/vinidra-ccew?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+              target="_blank" rel="noopener noreferrer"
               className="bg-gradient-to-tr from-cyan-400 to-sky-300 p-3 rounded-full hover:scale-110 hover:animate-pulse transition-all duration-300 shadow-lg hover:shadow-[0_0_15px_rgba(0,242,254,0.5)]"
             >
               <Linkedin className="w-5 h-5 text-white" />
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/teamvinidra?igsh=MXN4b2NvNWQ5NmtuZQ=="
+              target="_blank" rel="noopener noreferrer"
               className="bg-gradient-to-tr from-pink-400 to-purple-400 p-3 rounded-full hover:scale-110 hover:animate-pulse transition-all duration-300 shadow-lg hover:shadow-[0_0_15px_rgba(255,0,255,0.4)]"
             >
               <Instagram className="w-5 h-5 text-white" />

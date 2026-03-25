@@ -11,7 +11,7 @@ const galleryItems = [
 const Gallery = () => {
   return (
     <div className="min-h-screen relative z-10 flex flex-col justify-center px-[5%] pt-24 pb-12">
-      <h2 className="font-[family-name:--font-heading] text-4xl text-center mb-12 tracking-widest uppercase text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">Gallery</h2>
+      <h2 className="text-4xl md:text-5xl font-thin tracking-[0.32em] bg-gradient-to-r from-white via-sky-300 to-white text-transparent bg-clip-text text-center mb-12 uppercase drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">Gallery</h2>
       <div className="max-w-[1200px] mx-auto columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
         {galleryItems.map(item => (
           <div key={item.id} className="group relative overflow-hidden rounded-2xl cursor-pointer break-inside-avoid bg-[rgba(10,10,10,0.85)] backdrop-blur-md border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">

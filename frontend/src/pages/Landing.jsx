@@ -2,7 +2,6 @@ import { lazy, Suspense } from 'react';
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import { SparklesCore } from "../components/ui/SparklesCore";
-import LiquidEther from "../components/ui/LiquidEther";
 
 // Lazy load below-fold components for faster initial page load
 const About = lazy(() => import("../components/About"));
@@ -49,30 +48,6 @@ export default function Landing() {
           particleColors={["#FFFFFF", "#FACC15", "#38BDF8"]}
           speed={1}
           fullScreen={true}
-        />
-      </div>
-
-      {/* Liquid Ether Effect — starts BELOW the hero section */}
-      <div
-        className="absolute left-0 w-full z-[1] opacity-60"
-        style={{ top: '100vh', height: '100%', minHeight: '500vh', pointerEvents: 'auto' }}
-      >
-        <LiquidEther
-          colors={['#1ea2ef', '#0d5dfc', '#18b5ea']}
-          mouseForce={45}
-          cursorSize={50}
-          isViscous
-          viscous={15}
-          iterationsViscous={4}
-          iterationsPoisson={8}
-          resolution={0.2}
-          isBounce={false}
-          autoDemo
-          autoSpeed={0.7}
-          autoIntensity={2.8}
-          takeoverDuration={0.08}
-          autoResumeDelay={1000}
-          autoRampDuration={0.3}
         />
       </div>
 

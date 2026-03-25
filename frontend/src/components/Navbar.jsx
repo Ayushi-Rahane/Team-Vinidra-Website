@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.webp";
-import { Facebook, Twitter, Instagram } from "lucide-react";
+import { Linkedin, Mail, Instagram } from "lucide-react";
 
 const navLinks = [
   { name: "Home", id: "home" },
@@ -33,23 +33,13 @@ const Navbar = () => {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        let maxRatioEntry = null;
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            if (
-              !maxRatioEntry ||
-              entry.intersectionRatio > maxRatioEntry.intersectionRatio
-            ) {
-              maxRatioEntry = entry;
-            }
+          if (entry.isIntersecting && entry.intersectionRatio > 0.4) {
+            setActiveSection(entry.target.id);
           }
         });
-
-        if (maxRatioEntry) {
-          setActiveSection(maxRatioEntry.target.id);
-        }
       },
-      { rootMargin: "-20% 0px -60% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] }
+      { rootMargin: "-30% 0px -70% 0px", threshold: [0, 0.4, 0.6, 0.8, 1] }
     );
 
     const sections = navLinks
@@ -68,10 +58,12 @@ const Navbar = () => {
       setTimeout(() => {
         const el = document.getElementById(id);
         if (el) el.scrollIntoView({ behavior: "smooth" });
+        setActiveSection(id);
       }, 100);
     } else {
       const el = document.getElementById(id);
       if (el) el.scrollIntoView({ behavior: "smooth" });
+      setActiveSection(id);
     }
   };
 
@@ -123,14 +115,14 @@ const Navbar = () => {
 
       {/* Social Icons (unchanged) */}
       <div className="hidden lg:flex items-center gap-6 shrink-0">
-        <a href="#" className="text-white/60 hover:text-white transition-all duration-300 hover:scale-110">
-          <Facebook size={20} strokeWidth={1.5} />
+        <a href="https://www.linkedin.com/in/vinidra-ccew?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-all duration-300 hover:scale-110">
+          <Linkedin size={20} strokeWidth={1.5} />
         </a>
-        <a href="#" className="text-white/60 hover:text-white transition-all duration-300 hover:scale-110">
-          <Twitter size={20} strokeWidth={1.5} />
-        </a>
-        <a href="#" className="text-white/60 hover:text-white transition-all duration-300 hover:scale-110">
+        <a href="https://www.instagram.com/teamvinidra?igsh=MXN4b2NvNWQ5NmtuZQ==" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-all duration-300 hover:scale-110">
           <Instagram size={20} strokeWidth={1.5} />
+        </a>
+        <a href="mailto:satellite@cumminscollege.in" className="text-white/60 hover:text-white transition-all duration-300 hover:scale-110">
+          <Mail size={20} strokeWidth={1.5} />
         </a>
       </div>
     </header>

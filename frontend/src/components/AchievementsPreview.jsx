@@ -7,7 +7,7 @@ export default function AchievementsPreview() {
 
   return (
     <div className="py-24 text-center">
-      <h2 className="text-4xl font-bold text-white mb-12">
+      <h2 className="text-4xl md:text-5xl font-thin tracking-[0.32em] bg-gradient-to-r from-white via-sky-300 to-white text-transparent bg-clip-text text-center mb-12 uppercase drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">
         Achievements
       </h2>
 

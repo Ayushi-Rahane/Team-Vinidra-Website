@@ -173,7 +173,7 @@ const SubteamPanel = ({ subteam, onClose }) => {
         </button>
         <div className="h-px flex-1 bg-gradient-to-r from-[rgba(100,180,255,0.3)] to-transparent" />
       </div>
-      <h2 className="font-[family-name:--font-heading] text-3xl md:text-4xl text-white tracking-wider mb-1">{subteam.label}</h2>
+      <h2 className="text-4xl md:text-5xl font-thin tracking-[0.32em] bg-gradient-to-r from-white via-sky-300 to-white text-transparent bg-clip-text uppercase mb-1">{subteam.label}</h2>
       <p className="text-[#60c0ff] text-sm mb-1">{subteam.fullName}</p>
       <p className="text-white/40 text-sm leading-relaxed mb-10 max-w-2xl">{subteam.description}</p>
       <p className="text-white/30 text-[9px] tracking-[0.35em] uppercase font-[family-name:--font-heading] mb-4">Leadership</p>
@@ -215,7 +215,7 @@ const TeamPage = () => {
   };
 
   return (
-    <div className="relative text-white overflow-x-hidden" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+    <div className="relative text-white overflow-x-hidden">
       {/* ── Single masked background wrapper — fades top & bottom together ── */}
       <div
         className="absolute inset-0 z-0 pointer-events-none"
@@ -235,7 +235,7 @@ const TeamPage = () => {
         {/* OVERVIEW — Orbital */}
         {!showPanel && (
           <div className="flex flex-col items-center justify-center min-h-screen px-4 py-16">
-            <h2 className="font-[family-name:--font-heading] text-2xl md:text-3xl text-white/80 tracking-[0.4em] uppercase mb-1 text-center">Team Structure</h2>
+            <h2 className="text-4xl md:text-5xl font-thin tracking-[0.32em] bg-gradient-to-r from-white via-sky-300 to-white text-transparent bg-clip-text text-center uppercase mb-1 drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">Team Structure</h2>
             <p className="text-[#60c0ff]/50 text-xs tracking-widest mb-8 text-center font-[family-name:--font-subheading]">
               {selectedId ? `${selectedSubteam?.label} selected — click again or use button below` : 'Select a sub-system to explore'}
             </p>

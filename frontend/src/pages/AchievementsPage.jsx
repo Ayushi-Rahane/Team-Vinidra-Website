@@ -52,12 +52,8 @@ export default function AchievementsPage() {
   </div>
 
   {/* Title */}
-  <h1 className="relative text-4xl md:text-5xl font-light tracking-[0.14em]
-     bg-gradient-to-r from-white via-sky-300 to-white
-     text-transparent bg-clip-text">
-
+  <h1 className="relative text-4xl md:text-5xl font-thin tracking-[0.32em] bg-gradient-to-r from-white via-sky-300 to-white text-transparent bg-clip-text uppercase mb-4">
     ACHIEVEMENTS
-
   </h1>
 
   {/* Animated Line */}

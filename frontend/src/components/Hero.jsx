@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Rocket } from 'lucide-react';
 import SplitText from './SplitText';
 import { SparklesCore } from './ui/SparklesCore';
 import { Button } from './ui/moving-border';
@@ -13,7 +14,7 @@ const Hero = () => {
 
       {/* Title */}
 
-      <div 
+      <div
         className="max-w-5xl float-container text-center relative z-20 transition-all duration-300 ease-out hover:scale-110 hover:drop-shadow-[0_0_30px_rgba(56,189,248,1)] cursor-pointer"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -21,7 +22,7 @@ const Hero = () => {
         <SplitText
           tag="h1"
           text="TEAM VINIDRA"
-          className={`text-white font-['Helvetica_Neue'] text-5xl md:text-6xl lg:text-7xl tracking-[0.2em] uppercase leading-tight mb-4 whitespace-nowrap transition-all duration-300 ${isHovered ? 'text-glowing-sparkle' : ''}`}
+          className={`font-thin tracking-[0.32em] text-white text-5xl md:text-6xl lg:text-7xl uppercase leading-tight mb-4 whitespace-nowrap transition-all duration-300 ${isHovered ? 'text-glowing-sparkle' : ''}`}
           startDelay={0}
           delay={80}
           duration={1.5}
@@ -68,12 +69,12 @@ const Hero = () => {
               initial={{ opacity: 0, y: 40, scale: 0.85 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ delay: 0.2, duration: 0.8, ease: 'easeOut' }}
-              className="text-center font-['Iosevka_Charon'] text-lg md:text-2xl lg:text-3xl text-white tracking-[0.3em]"
+              className="text-center font-thin tracking-[0.35em] text-lg md:text-2xl lg:text-3xl text-white/90"
               style={{
                 textShadow: '0 0 20px rgba(100, 160, 255, 0.9), 0 0 50px rgba(100, 160, 255, 0.5)',
               }}
             >
-              From CubeSats to Cosmos
+              Scripting the Unknown
             </motion.p>
           </div>
 
@@ -87,31 +88,33 @@ const Hero = () => {
             >
               <Button
                 borderRadius="2rem"
-                className="bg-black/20 text-sky-200 border-slate-800/40 backdrop-blur-sm px-8 py-3 font-['Iosevka_Charon'] tracking-widest text-sm md:text-base font-semibold"
+                className="bg-black/20 border-slate-800/40 backdrop-blur-sm px-8 py-3 font-thin tracking-[0.35em] text-white/80 text-[15px] md:text-base leading-relaxed"
                 containerClassName="h-auto w-auto"
               >
                 <ContainerTextFlip
                   words={["CubeSats", "CanSats", "Model Rockets"]}
-                  className="w-[180px] text-center"
+                  className="w-[180px] text-center font-semibold"
                 />
               </Button>
             </motion.div>
           </div>
 
-          {/* Animated pulse ring */}
+          {/* Animated Rocket Icon */}
           <motion.div
-            className="w-2 h-2 rounded-full bg-sky-400 mt-2"
+            className="text-sky-400 mt--2"
             animate={{
-              scale: [1, 2.5, 1],
-              opacity: [0.8, 0.2, 0.8],
-              boxShadow: [
-                '0 0 0px rgba(56, 189, 248, 0.6)',
-                '0 0 30px rgba(56, 189, 248, 0.8)',
-                '0 0 0px rgba(56, 189, 248, 0.6)',
+              scale: [1, 1, 1],
+              opacity: [0.8, 0.4, 0.8],
+              filter: [
+                'drop-shadow(0 0 2px rgba(56, 189, 248, 0.4))',
+                'drop-shadow(0 0 20px rgba(56, 189, 248, 0.9))',
+                'drop-shadow(0 0 2px rgba(56, 189, 248, 0.4))',
               ],
             }}
             transition={{ delay: 2.0, duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-          />
+          >
+            <Rocket size={32} strokeWidth={1.5} />
+          </motion.div>
         </div>
       </div>
     </div>

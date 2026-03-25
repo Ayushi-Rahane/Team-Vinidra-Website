@@ -19,7 +19,7 @@ const Team = () => {
 
   return (
     <div className="min-h-screen relative z-10 flex flex-col justify-center px-[5%] pt-24 pb-12">
-      <h2 className="font-[family-name:--font-heading] text-4xl text-center mb-12 tracking-widest uppercase text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">Meet The Team</h2>
+      <h2 className="text-4xl md:text-5xl font-thin tracking-[0.32em] bg-gradient-to-r from-white via-sky-300 to-white text-transparent bg-clip-text text-center mb-12 uppercase drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">Meet The Team</h2>
 
       <div className="max-w-[1200px] mx-auto w-full">
         <div className="mb-12">

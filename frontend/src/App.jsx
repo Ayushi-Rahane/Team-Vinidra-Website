@@ -4,10 +4,12 @@ import Landing from "./pages/Landing";
 import AchievementsPage from "./pages/AchievementsPage";
 import AchievementDetail from "./pages/AchievementDetail";
 import ScrollToTop from "./utils/ScrollToTop";
+import StarCursorEffect from "./components/ui/StarCursorEffect";
 
 function App() {
   return (
     <>
+      <StarCursorEffect />
       <ScrollToTop />
 
       <Routes>

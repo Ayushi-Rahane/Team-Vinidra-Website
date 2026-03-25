@@ -83,7 +83,7 @@ export default function AchievementDetail() {
 
             <div className="relative flex flex-col gap-3">
               {/* Title */}
-              <h1 className="text-4xl md:text-4xl font-bold">{achievement.title}</h1>
+              <h1 className="text-4xl md:text-5xl font-thin tracking-[0.32em] bg-gradient-to-r from-white via-sky-300 to-white text-transparent bg-clip-text uppercase mb-2">{achievement.title}</h1>
 
               {/* Category */}
               <span className="w-fit px-4 py-1.5 text-sm rounded-full

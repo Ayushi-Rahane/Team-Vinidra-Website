@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  --font-heading: 'Iosevka Charon', monospace;
-  --font-subheading: 'Iosevka Charon', monospace;
+  --font-heading: 'Nunito Sans', sans-serif;
+  --font-subheading: 'Nunito Sans', sans-serif;
   --font-body: 'Nunito Sans', sans-serif;
-  --font-title: 'Iosevka Charon', monospace;
+  --font-title: 'Nunito Sans', sans-serif;
 
 
   --color-brand-bg: #000000;
