@@ -1,269 +1,428 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Cpu, Radio, Zap, Satellite, Settings, Users, GitBranch, ChevronLeft } from 'lucide-react';
-import { projectManager, subteams } from '../data/teamData';
-import bg3 from '../assets/background3.webp';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  ChevronLeft,
+  Cpu,
+  Monitor,
+  Zap,
+  Settings,
+  Database,
+  Satellite,
+  Rocket,
+  Wrench,
+  Wifi,
+  Users,
+  PenTool,
+  FileText,
+  DollarSign,
+  Megaphone,
+  Code,
+  Calendar,
+  Layers,
+  Activity,
+  User,
+  Star
+} from 'lucide-react';
+import Navbar from './Navbar';
+import Footer from './Footer';
+import { SparklesCore } from './ui/SparklesCore';
 
-// ── Helpers ────────────────────────────────────────────────────────────────────
-const avatarUrl = (name) =>
-  `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(name)}&backgroundColor=050a15&textColor=a0c4ff&fontSize=36&radius=50`;
-
-const Avatar = ({ name, image, size = 64, className = '' }) => (
-  <img
-    src={image || avatarUrl(name)}
-    alt={name}
-    width={size}
-    height={size}
-    className={`rounded-full object-cover ${className}`}
-    style={{ width: size, height: size, minWidth: size }}
-  />
-);
-
-const subteamIcons = {
-  adcs: Satellite,
-  st: GitBranch,
-  admin: Settings,
-  payload: Cpu,
-  obc: Radio,
-  ttc: Radio,
-  power: Zap,
+// --- DATA STRUCTURE ---
+const pmData = {
+  name: "Aditi Sant",
+  role: "Project Manager / Systems Engineer",
+  designation: "Lead"
 };
 
-// Radial positions for nodes (degrees)
-const NODE_ANGLES = [-90, -38, 25, 81, 141, 198, 257];
-
-function polarToPercent(angle, rx, ry) {
-  const rad = (angle * Math.PI) / 180;
-  return { x: 50 + rx * Math.cos(rad), y: 50 + ry * Math.sin(rad) };
-}
-
-// ── Animated star canvas ───────────────────────────────────────────────────────
-const StarCanvas = () => {
-  const ref = useRef(null);
-  useEffect(() => {
-    const canvas = ref.current;
-    if (!canvas) return;
-    const w = canvas.parentElement.offsetWidth || window.innerWidth;
-    const h = canvas.parentElement.offsetHeight || window.innerHeight;
-    canvas.width = w;
-    canvas.height = h;
-    const ctx = canvas.getContext('2d');
-    const stars = Array.from({ length: 300 }, () => ({
-      x: Math.random() * w, y: Math.random() * h,
-      r: Math.random() * 1.3 + 0.2, o: Math.random() * 0.7 + 0.2,
-      speed: Math.random() * 0.4 + 0.1, phase: Math.random() * Math.PI * 2,
-    }));
-    let frame, t = 0;
-    const draw = () => {
-      ctx.clearRect(0, 0, w, h);
-      t += 0.01;
-      stars.forEach((s) => {
-        const opacity = s.o * (0.5 + 0.5 * Math.sin(t * s.speed + s.phase));
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(180,210,255,${opacity})`;
-        ctx.fill();
-      });
-      frame = requestAnimationFrame(draw);
-    };
-    draw();
-    return () => cancelAnimationFrame(frame);
-  }, []);
-  return <canvas ref={ref} className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }} />;
+const teamStructure = {
+  id: "root",
+  title: "Mission Command",
+  children: [
+    {
+      id: "tech",
+      title: "Technical Team",
+      icon: "cpu",
+      children: [
+        {
+          id: "karvesat",
+          title: "Tech Team - KarveSat",
+          icon: "satellite",
+          children: [
+            { id: "karvesat-avionics", title: "Avionics", icon: "activity", members: [{ name: "Tarini More", role: "Lead Engineer" }] },
+            { id: "karvesat-electrical", title: "Electrical", icon: "zap", members: [{ name: "Janhavi Laturkar", role: "Lead Engineer" }, { name: "Rashmi Apte", role: "Deputy Engineer" }] },
+            { id: "karvesat-mechanical", title: "Mechanical", icon: "settings", members: [{ name: "Shreya Dhumal", role: "Lead Engineer" }, { name: "Gargi Rajput", role: "Deputy Engineer" }] },
+            { id: "karvesat-payload", title: "Payload", icon: "database", members: [{ name: "Ketaki Patil", role: "Lead Engineer" }] },
+            { id: "karvesat-software", title: "Software", icon: "monitor", members: [{ name: "Dnyanda Patil", role: "Lead Engineer" }] }
+          ]
+        },
+        {
+          id: "cansat",
+          title: "Tech Team - CanSat",
+          icon: "layers",
+          head: { name: "Sphurti Thombare", role: "Head" },
+          children: [
+            { id: "cansat-obc", title: "OBC", icon: "cpu", members: [{ name: "Sphurti Thombare" }, { name: "Isha Darade" }] },
+            { id: "cansat-payload", title: "Payload", icon: "database", members: [{ name: "Shruti Sinkar" }] },
+            { id: "cansat-adcs", title: "ADCS", icon: "activity", members: [{ name: "Dhanashree Deshmukh" }] },
+            { id: "cansat-power", title: "Power", icon: "zap", members: [{ name: "Harshada Sonje" }] },
+            { id: "cansat-st", title: "S&T", icon: "wrench", members: [{ name: "Sharay Chintal" }, { name: "Aditi Chitode" }] }
+          ]
+        },
+        {
+          id: "rocketry",
+          title: "Tech Team - Rocketry",
+          icon: "rocket",
+          head: { name: "Gargi Joshi", role: "Head" },
+          children: [
+            { id: "rocketry-design", title: "Rocket Design", icon: "pen-tool", members: [{ name: "Vaibhavi Bandgar" }, { name: "Rutuja Deshmukh" }, { name: "Raavi Barve" }] },
+            { id: "rocketry-avionics", title: "Avionics", icon: "wifi", members: [{ name: "Hrushita Mulaokar" }, { name: "Siddhali Burande" }, { name: "Maitreyi Joshi" }] },
+            { id: "rocketry-software", title: "Flight Software", icon: "code", members: [{ name: "Shreeya Malu" }] }
+          ]
+        }
+      ]
+    },
+    {
+      id: "nontech",
+      title: "Non-Technical Team",
+      icon: "users",
+      children: [
+        { id: "nontech-graphics", title: "Graphic Design", icon: "pen-tool", members: [{ name: "Shubhangi Kokate" }, { name: "Soniya Rathod" }, { name: "Sejal Badugu" }, { name: "Srushti Desai" }] },
+        { id: "nontech-content", title: "Content & Editing", icon: "file-text", members: [{ name: "Karishma Chidgopkar" }, { name: "Minal Chaudhari" }] },
+        { id: "nontech-finance", title: "Finance", icon: "dollar-sign", members: [{ name: "Swarali Rake" }, { name: "Anushka Bora" }, { name: "Sweta Jagtap" }] },
+        { id: "nontech-pr", title: "Public Relations", icon: "megaphone", members: [{ name: "Aditi Shivapurkar" }, { name: "Bhumika Chaudhari" }] },
+        { id: "nontech-web", title: "Web Development", icon: "code", members: [{ name: "Sanskruti Patil" }, { name: "Vedika Kayangude" }, { name: "Ayushi Rahane" }] },
+        { id: "nontech-events", title: "Events & Outreach", icon: "calendar", members: [{ name: "Preeti Tarle" }, { name: "Kanchan Jadhav" }] }
+      ]
+    }
+  ]
 };
 
-// ── Orbit ring SVG ─────────────────────────────────────────────────────────────
-const OrbitRings = () => (
-  <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet" style={{ zIndex: 2 }}>
-    <ellipse cx="500" cy="500" rx="360" ry="295" fill="none" stroke="rgba(100,180,255,0.12)" strokeWidth="1" strokeDasharray="6 10" />
-    <ellipse cx="500" cy="500" rx="200" ry="160" fill="none" stroke="rgba(100,180,255,0.07)" strokeWidth="1.5" strokeDasharray="3 8" />
-    <line x1="488" y1="478" x2="512" y2="478" stroke="rgba(100,180,255,0.25)" strokeWidth="1" />
-    <line x1="488" y1="522" x2="512" y2="522" stroke="rgba(100,180,255,0.25)" strokeWidth="1" />
-    <line x1="478" y1="488" x2="478" y2="512" stroke="rgba(100,180,255,0.25)" strokeWidth="1" />
-    <line x1="522" y1="488" x2="522" y2="512" stroke="rgba(100,180,255,0.25)" strokeWidth="1" />
-    {[0, 51.4, 102.8, 154.3, 205.7, 257.1, 308.6].map((angle, i) => {
-      const rad = (angle * Math.PI) / 180;
-      return <circle key={i} cx={500 + 360 * Math.cos(rad)} cy={500 + 295 * Math.sin(rad)} r="3.5" fill="rgba(100,180,255,0.45)" />;
-    })}
-  </svg>
-);
+// --- HELPERS ---
+const IconMap = {
+  "cpu": Cpu,
+  "monitor": Monitor,
+  "zap": Zap,
+  "settings": Settings,
+  "database": Database,
+  "satellite": Satellite,
+  "rocket": Rocket,
+  "wrench": Wrench,
+  "wifi": Wifi,
+  "users": Users,
+  "pen-tool": PenTool,
+  "file-text": FileText,
+  "dollar-sign": DollarSign,
+  "megaphone": Megaphone,
+  "code": Code,
+  "calendar": Calendar,
+  "layers": Layers,
+  "activity": Activity
+};
 
-// ── Sub-team orbit node ────────────────────────────────────────────────────────
-const SubteamNode = ({ subteam, index, isSelected, onClick }) => {
-  const Icon = subteamIcons[subteam.id] || Users;
-  const totalMembers = subteam.members.length + 1 + (subteam.deputy ? 1 : 0);
-  const { x, y } = polarToPercent(NODE_ANGLES[index], 38, 30);
+const getIcon = (name) => {
+  const IconComponent = IconMap[name] || Users;
+  return <IconComponent className="w-8 h-8 md:w-10 md:h-10 text-sky-300/80 group-hover:text-sky-300 group-hover:opacity-100 transition-all duration-300" />;
+};
+
+// Find node in tree
+const findNode = (id, tree) => {
+  if (tree.id === id) return tree;
+  if (tree.children) {
+    for (let child of tree.children) {
+      let res = findNode(id, child);
+      if (res) return res;
+    }
+  }
+  return null;
+};
+
+// --- COMPONENTS ---
+
+// Animated Particles Background (CSS based for performance)
+const ParticlesBackground = () => {
   return (
-    <button onClick={onClick} className="absolute transform -translate-x-1/2 -translate-y-1/2 group" style={{ left: `${x}%`, top: `${y}%`, zIndex: 10 }}>
-      <div className={`relative w-36 md:w-44 rounded-2xl p-4 text-left backdrop-blur-md transition-all duration-500 cursor-pointer border ${isSelected ? 'bg-[rgba(10,40,90,0.88)] border-[rgba(100,180,255,0.8)] shadow-[0_0_30px_rgba(100,180,255,0.45),0_0_70px_rgba(50,100,200,0.2)] scale-110' : 'bg-[rgba(5,15,35,0.75)] border-[rgba(100,180,255,0.2)] hover:border-[rgba(100,180,255,0.55)] hover:shadow-[0_0_22px_rgba(100,180,255,0.3)] hover:scale-105'}`}>
-        <span className="absolute top-1.5 left-1.5 w-2.5 h-2.5 border-t border-l border-[rgba(100,180,255,0.5)]" />
-        <span className="absolute top-1.5 right-1.5 w-2.5 h-2.5 border-t border-r border-[rgba(100,180,255,0.5)]" />
-        <span className="absolute bottom-1.5 left-1.5 w-2.5 h-2.5 border-b border-l border-[rgba(100,180,255,0.5)]" />
-        <span className="absolute bottom-1.5 right-1.5 w-2.5 h-2.5 border-b border-r border-[rgba(100,180,255,0.5)]" />
-        <Icon className={`w-5 h-5 mb-2 transition-colors ${isSelected ? 'text-[#60c0ff]' : 'text-[#4a90e2]/70 group-hover:text-[#60c0ff]'}`} />
-        <p className={`font-[family-name:--font-heading] text-sm font-bold tracking-wider ${isSelected ? 'text-white' : 'text-white/80'}`}>{subteam.label}</p>
-        <p className={`text-[9px] mt-0.5 leading-tight ${isSelected ? 'text-[#60c0ff]' : 'text-[#4a90e2]/55'}`}>{subteam.fullName}</p>
-        <p className="text-white/30 text-[9px] mt-1.5">{totalMembers} Members</p>
-        {isSelected && <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[#60c0ff] shadow-[0_0_8px_rgba(100,200,255,0.9)]" />}
-      </div>
-    </button>
-  );
-};
-
-// ── Central PM node ────────────────────────────────────────────────────────────
-const PMNode = ({ dimmed }) => (
-  <div className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 transition-all duration-500 ${dimmed ? 'scale-90 opacity-50' : 'scale-100 opacity-100'}`}>
-    <div className="absolute inset-0 rounded-full border border-[rgba(100,180,255,0.18)] animate-ping" style={{ animationDuration: '3s' }} />
-    <div className="absolute -inset-3 rounded-full border border-[rgba(100,180,255,0.08)]" style={{ animation: 'spin 20s linear infinite' }} />
-    <div className="relative w-52 md:w-64 rounded-2xl p-5 bg-[rgba(3,12,40,0.92)] backdrop-blur-xl border border-[rgba(100,180,255,0.3)] shadow-[0_0_50px_rgba(50,100,200,0.35),0_0_100px_rgba(30,60,150,0.15)] text-center">
-      {['top-2 left-2 border-t border-l', 'top-2 right-2 border-t border-r', 'bottom-2 left-2 border-b border-l', 'bottom-2 right-2 border-b border-r'].map((cls, i) => (
-        <span key={i} className={`absolute w-3 h-3 ${cls} border-[rgba(100,180,255,0.5)]`} />
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {[...Array(30)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute rounded-full bg-blue-300/30"
+          style={{
+            width: Math.random() * 3 + 1 + 'px',
+            height: Math.random() * 3 + 1 + 'px',
+            top: Math.random() * 100 + '%',
+            left: Math.random() * 100 + '%',
+            animation: `float-particle ${Math.random() * 10 + 10}s linear infinite`,
+            opacity: Math.random() * 0.5 + 0.2
+          }}
+        />
       ))}
-      <div className="relative mx-auto mb-3" style={{ width: 84, height: 84 }}>
-        <div className="absolute inset-0 rounded-full border border-[rgba(100,180,255,0.3)] animate-spin" style={{ animationDuration: '9s' }} />
-        <Avatar name={projectManager.name} image={projectManager.image} size={84} className="border-2 border-[rgba(100,180,255,0.45)] shadow-[0_0_22px_rgba(100,180,255,0.3)]" />
-      </div>
-      <h2 className="font-[family-name:--font-heading] text-lg text-white font-bold tracking-wider">{projectManager.name}</h2>
-      <p className="text-[#60c0ff] text-[10px] tracking-widest uppercase mt-1">{projectManager.role}</p>
-      <div className="h-px bg-gradient-to-r from-transparent via-[rgba(100,180,255,0.35)] to-transparent my-2" />
-      <p className="text-white/40 text-[10px]">Lead · · {projectManager.classYear}</p>
-    </div>
-  </div>
-);
-
-// ── Member card ────────────────────────────────────────────────────────────────
-const MemberCard = ({ member, index, isLead = false }) => (
-  <div
-    className="card-glow bg-[rgba(3,12,35,0.88)] backdrop-blur-md rounded-xl p-4 flex flex-col items-center text-center gap-2 card-float"
-    style={{ animationDelay: `${(index % 6) * 0.5}s` }}
-  >
-    <Avatar name={member.name} image={member.image} size={isLead ? 84 : 62}
-      className={`border-2 ${isLead ? 'border-[rgba(100,180,255,0.55)] shadow-[0_0_16px_rgba(100,180,255,0.3)]' : 'border-white/15'}`} />
-    {isLead && <span className="text-[#60c0ff] text-[9px] tracking-[0.25em] uppercase font-[family-name:--font-heading]">{member.role}</span>}
-    <p className="text-white text-sm font-semibold leading-tight">{member.name}</p>
-    {!isLead && <p className="text-[#60c0ff] text-[10px]">{member.role}</p>}
-    <p className="text-white/35 text-[10px]">{member.classYear}</p>
-  </div>
-);
-
-// ── Admin sub-groups ───────────────────────────────────────────────────────────
-const AdminGroup = ({ title, members }) => (
-  <div className="mb-8">
-    <div className="flex items-center gap-3 mb-4">
-      <div className="h-px flex-1 bg-gradient-to-r from-transparent to-[rgba(100,180,255,0.3)]" />
-      <span className="text-[#60c0ff] text-[9px] tracking-[0.35em] uppercase font-[family-name:--font-heading]">{title}</span>
-      <div className="h-px flex-1 bg-gradient-to-l from-transparent to-[rgba(100,180,255,0.3)]" />
-    </div>
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-      {members.map((m, i) => <MemberCard key={m.name} member={m} index={i} />)}
-    </div>
-  </div>
-);
-
-// ── Sub-team detail panel ──────────────────────────────────────────────────────
-const SubteamPanel = ({ subteam, onClose }) => {
-  const isAdmin = subteam.id === 'admin';
-  const groups = {};
-  if (isAdmin) subteam.members.forEach(m => { if (!groups[m.role]) groups[m.role] = []; groups[m.role].push(m); });
-
-  return (
-    <div className="w-full animate-[fadeIn_0.4s_ease-out_forwards]">
-      <div className="flex items-center gap-4 mb-8">
-        <button onClick={onClose} className="flex items-center gap-2 text-[#60c0ff]/60 hover:text-[#60c0ff] text-xs font-[family-name:--font-heading] tracking-widest uppercase transition-colors border border-[rgba(100,180,255,0.2)] hover:border-[rgba(100,180,255,0.55)] rounded-full px-4 py-2">
-          <ChevronLeft className="w-3 h-3" /> Back to Overview
-        </button>
-        <div className="h-px flex-1 bg-gradient-to-r from-[rgba(100,180,255,0.3)] to-transparent" />
-      </div>
-      <h2 className="text-4xl md:text-5xl font-thin tracking-[0.32em] bg-gradient-to-r from-white via-sky-300 to-white text-transparent bg-clip-text uppercase mb-1">{subteam.label}</h2>
-      <p className="text-[#60c0ff] text-sm mb-1">{subteam.fullName}</p>
-      <p className="text-white/40 text-sm leading-relaxed mb-10 max-w-2xl">{subteam.description}</p>
-      <p className="text-white/30 text-[9px] tracking-[0.35em] uppercase font-[family-name:--font-heading] mb-4">Leadership</p>
-      <div className="flex flex-wrap gap-5 mb-12">
-        <MemberCard member={subteam.coordinator} index={0} isLead />
-        {subteam.deputy && <MemberCard member={subteam.deputy} index={1} isLead />}
-      </div>
-      {isAdmin ? (
-        <>
-          <p className="text-white/30 text-[9px] tracking-[0.35em] uppercase font-[family-name:--font-heading] mb-5">Departments</p>
-          {Object.entries(groups).map(([title, mems]) => <AdminGroup key={title} title={title} members={mems} />)}
-        </>
-      ) : (
-        <>
-          <p className="text-white/30 text-[9px] tracking-[0.35em] uppercase font-[family-name:--font-heading] mb-4">Members</p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-            {subteam.members.map((m, i) => <MemberCard key={m.name} member={m} index={i} />)}
-          </div>
-        </>
-      )}
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes float-particle {
+          0% { transform: translateY(0) translateX(0); opacity: 0; }
+          10% { opacity: 1; }
+          90% { opacity: 1; }
+          100% { transform: translateY(-100px) translateX(20px); opacity: 0; }
+        }
+      `}} />
     </div>
   );
 };
 
-// ── Main TeamPage ──────────────────────────────────────────────────────────────
-const TeamPage = () => {
-  const [selectedId, setSelectedId] = useState(null);
-  const [showPanel, setShowPanel] = useState(false);
-  const selectedSubteam = subteams.find(s => s.id === selectedId);
+export default function TeamPage() {
+  const [path, setPath] = useState(['root']);
+  const [direction, setDirection] = useState(1); // 1 = forward, -1 = backward
 
-  const handleNodeClick = (id) => {
-    if (selectedId === id && !showPanel) { setShowPanel(true); }
-    else { setSelectedId(id); setShowPanel(false); }
+  const currentId = path[path.length - 1];
+  const currentNode = findNode(currentId, teamStructure);
+  
+  // Handlers
+  const handleNavigate = (id) => {
+    setDirection(1);
+    setPath([...path, id]);
   };
 
   const handleBack = () => {
-    setShowPanel(false);
-    setTimeout(() => setSelectedId(null), 300);
+    if (path.length > 1) {
+      setDirection(-1);
+      setPath(path.slice(0, -1));
+    }
   };
 
-  return (
-    <div className="relative text-white overflow-x-hidden">
-      {/* ── Single masked background wrapper — fades top & bottom together ── */}
-      <div
-        className="absolute inset-0 z-0 pointer-events-none"
-        style={{
-          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%)',
-          maskImage:        'linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%)',
-        }}
-      >
-        <div className="absolute inset-0" style={{ backgroundImage: `url(${bg3})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }} />
-        <div className="absolute inset-0 bg-[rgba(1,4,18,0.65)]" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[radial-gradient(ellipse,rgba(30,60,150,0.22)_0%,transparent_70%)]" />
-        <div className="absolute bottom-0 right-0 w-[600px] h-[400px] bg-[radial-gradient(ellipse,rgba(80,0,120,0.15)_0%,transparent_70%)]" />
-      </div>
+  // Animation variants
+  const variants = {
+    enter: (direction) => ({
+      scale: direction > 0 ? 0.9 : 1.1,
+      opacity: 0,
+      y: direction > 0 ? 20 : -20
+    }),
+    center: {
+      scale: 1,
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.4,
+        ease: "easeOut"
+      }
+    },
+    exit: (direction) => ({
+      scale: direction < 0 ? 0.9 : 1.1,
+      opacity: 0,
+      y: direction < 0 ? 20 : -20,
+      transition: {
+        duration: 0.3,
+        ease: "easeIn"
+      }
+    })
+  };
 
-      {/* content */}
-      <div className="relative z-10">
-        {/* OVERVIEW — Orbital */}
-        {!showPanel && (
-          <div className="flex flex-col items-center justify-center min-h-screen px-4 py-16">
-            <h2 className="text-4xl md:text-5xl font-thin tracking-[0.32em] bg-gradient-to-r from-white via-sky-300 to-white text-transparent bg-clip-text text-center uppercase mb-1 drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">Team Structure</h2>
-            <p className="text-[#60c0ff]/50 text-xs tracking-widest mb-8 text-center font-[family-name:--font-subheading]">
-              {selectedId ? `${selectedSubteam?.label} selected — click again or use button below` : 'Select a sub-system to explore'}
-            </p>
-            <div className="relative w-full max-w-4xl" style={{ paddingBottom: '84%' }}>
-              <StarCanvas />
-              <OrbitRings />
-              {subteams.map((st, i) => (
-                <SubteamNode key={st.id} subteam={st} index={i} isSelected={selectedId === st.id} onClick={() => handleNodeClick(st.id)} />
-              ))}
-              <PMNode dimmed={!!selectedId} />
-            </div>
-            {selectedId && (
-              <button onClick={() => setShowPanel(true)} className="mt-6 btn-space-extra px-10 py-3 text-sm font-[family-name:--font-heading] font-bold tracking-[0.2em] uppercase text-white rounded-xl">
-                <span>Explore {selectedSubteam?.label} →</span>
-              </button>
-            )}
+  // Render Functions
+  const renderPM = () => (
+    <div className="flex justify-center mb-16 relative">
+      <div className="absolute inset-0 bg-sky-400/10 blur-[60px] rounded-full w-64 h-64 mx-auto" />
+      <div className="relative w-full max-w-sm">
+        <div className="group relative overflow-hidden rounded-3xl border border-white/15
+          bg-gradient-to-bl from-sky-400/15 via-white/5 to-transparent
+          backdrop-blur-md p-8 shadow-lg flex flex-col items-center justify-center text-center">
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100
+            transition duration-700
+            bg-[radial-gradient(circle_at_50%_30%,rgba(56,189,248,0.25),transparent_60%)]" />
+          <div className="relative w-20 h-20 mb-4 rounded-full border-2 border-sky-300/50 flex items-center justify-center bg-sky-900/20 text-sky-300">
+            <User className="w-10 h-10" />
+            <div className="absolute inset-0 rounded-full border border-sky-300/20 animate-ping opacity-50" style={{ animationDuration: '3s' }} />
           </div>
-        )}
-
-        {/* DETAIL — Sub-team panel */}
-        {showPanel && selectedSubteam && (
-          <div className="px-6 lg:px-[6%] py-16 max-w-[1400px] mx-auto">
-            <SubteamPanel subteam={selectedSubteam} onClose={handleBack} />
+          <h2 className="relative text-2xl font-thin tracking-[0.32em] bg-gradient-to-r from-white via-sky-300 to-white text-transparent bg-clip-text uppercase">{pmData.name}</h2>
+          <p className="relative text-sky-300/80 text-xs mt-2 tracking-[0.25em] uppercase">{pmData.role}</p>
+          <div className="relative mt-4 inline-block px-3 py-1 border border-white/15 rounded-full text-sky-200/80 text-[10px] tracking-widest uppercase">
+            {pmData.designation}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
-};
 
-export default TeamPage;
+  const renderCards = (nodes) => (
+    <div className="flex flex-wrap justify-center gap-6 w-full max-w-5xl mx-auto">
+      {nodes.map((node, i) => (
+        <motion.button
+          key={node.id}
+          className="group relative text-left outline-none w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] max-w-[320px]"
+          whileHover={{ y: -6 }}
+          whileTap={{ scale: 0.98 }}
+          onClick={() => handleNavigate(node.id)}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: i * 0.1, duration: 0.3 }}
+        >
+          <div className="relative h-full overflow-hidden rounded-3xl border border-white/15
+            bg-gradient-to-bl from-sky-400/15 via-white/5 to-transparent
+            hover:from-sky-400/30 hover:via-sky-400/10
+            transition-all duration-500 backdrop-blur-md p-8 shadow-lg">
+
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100
+              transition duration-700
+              bg-[radial-gradient(circle_at_50%_30%,rgba(56,189,248,0.25),transparent_60%)]" />
+
+            <div className="relative flex flex-col items-center text-center justify-center h-full gap-4 py-4">
+              <div className="p-4 rounded-full bg-sky-400/10 border border-white/10 group-hover:bg-sky-400/20 group-hover:shadow-[0_0_15px_rgba(56,189,248,0.25)] transition-all duration-300">
+                {getIcon(node.icon || "users")}
+              </div>
+              <div>
+                <h3 className="text-lg tracking-[0.25em] text-white/90 group-hover:text-white uppercase mb-1">
+                  {node.title}
+                </h3>
+                <p className="text-sky-300/50 text-xs tracking-[0.2em] group-hover:text-sky-300/70 uppercase">
+                  Explore
+                </p>
+              </div>
+            </div>
+          </div>
+        </motion.button>
+      ))}
+    </div>
+  );
+
+  const renderMembers = (members, head = null) => (
+    <div className="w-full max-w-5xl mx-auto">
+      {head && (
+        <div className="mb-12">
+          <div className="flex items-center gap-3 justify-center mb-4">
+            <div className="h-px w-10 bg-gradient-to-r from-transparent to-sky-300/50" />
+            <span className="text-sky-300/60 text-xs tracking-[0.3em] uppercase">Division Head</span>
+            <div className="h-px w-10 bg-gradient-to-l from-transparent to-sky-300/50" />
+          </div>
+          <div className="flex justify-center">
+             <div className="group relative overflow-hidden rounded-3xl border border-white/15
+               bg-gradient-to-bl from-sky-400/15 via-white/5 to-transparent
+               backdrop-blur-md p-6 flex flex-col items-center w-64 shadow-lg">
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100
+                  transition duration-700
+                  bg-[radial-gradient(circle_at_50%_30%,rgba(56,189,248,0.25),transparent_60%)]" />
+                <Star className="relative w-6 h-6 text-sky-300 mb-2" />
+                <h4 className="relative text-lg tracking-[0.2em] text-white/90 uppercase text-center">{head.name}</h4>
+                <p className="relative text-sky-300/70 text-[10px] tracking-widest uppercase mt-1">Head</p>
+             </div>
+          </div>
+        </div>
+      )}
+
+      <div className="flex items-center gap-3 justify-center mb-6">
+        <div className="h-px w-10 bg-gradient-to-r from-transparent to-sky-300/50" />
+        <span className="text-sky-300/60 text-xs tracking-[0.3em] uppercase">Members</span>
+        <div className="h-px w-10 bg-gradient-to-l from-transparent to-sky-300/50" />
+      </div>
+
+      <div className="flex flex-wrap justify-center gap-5 w-full">
+        {members.map((member, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: i * 0.05 }}
+            whileHover={{ y: -4 }}
+            className="w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-1rem)] max-w-[280px]
+              group relative overflow-hidden rounded-3xl border border-white/15
+              bg-gradient-to-bl from-sky-400/15 via-white/5 to-transparent
+              hover:from-sky-400/30 hover:via-sky-400/10
+              transition-all duration-500 backdrop-blur-md p-6 shadow-lg
+              flex flex-col items-center text-center"
+          >
+             <div className="absolute inset-0 opacity-0 group-hover:opacity-100
+               transition duration-700
+               bg-[radial-gradient(circle_at_50%_30%,rgba(56,189,248,0.25),transparent_60%)]" />
+             <User className="relative w-8 h-8 text-sky-300/50 mb-3 group-hover:text-sky-300 transition-colors" />
+             <h4 className="relative text-sm tracking-[0.15em] text-white/90">
+               {member.name}
+             </h4>
+             {(member.role || "Engineer") && (
+               <p className="relative text-sky-300/60 text-[10px] tracking-widest uppercase mt-2">
+                 {member.role || "Engineer"}
+               </p>
+             )}
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="relative min-h-screen text-white overflow-x-hidden selection:bg-blue-500/30 font-[family-name:--font-body] bg-black">
+      {/* Navbar */}
+      <Navbar />
+
+      {/* Star Particles Background */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <SparklesCore
+          id="team-page-sparkles"
+          background="transparent"
+          minSize={0.4}
+          maxSize={1.2}
+          particleDensity={250}
+          className="w-full h-full"
+          particleColors={["#FFFFFF", "#FACC15", "#38BDF8"]}
+          speed={0.8}
+        />
+        {/* Subtle glowing orbs */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[radial-gradient(ellipse,rgba(30,80,180,0.10)_0%,transparent_70%)]" />
+        <div className="absolute bottom-0 right-0 w-[600px] h-[400px] bg-[radial-gradient(ellipse,rgba(40,120,200,0.07)_0%,transparent_70%)]" />
+      </div>
+
+      <div className="relative z-10 pt-32 pb-24 px-4 min-h-screen flex flex-col">
+        {/* Navigation Breadcrumb & Back */}
+        <div className="w-full max-w-6xl mx-auto mb-8 h-10 flex items-center">
+          <AnimatePresence>
+            {path.length > 1 && (
+              <motion.button
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                onClick={handleBack}
+                className="group flex items-center gap-2 text-sky-300/60 hover:text-sky-300 transition-colors uppercase text-xs tracking-[0.2em] border border-white/15 hover:border-sky-300/50 backdrop-blur-md px-4 py-2 rounded-full"
+              >
+                <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                Return to {findNode(path[path.length - 2], teamStructure).title || "Base"}
+              </motion.button>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Content Area with Framer Motion AnimatePresence */}
+        <div className="flex-1 flex flex-col items-center">
+          <AnimatePresence mode="wait" custom={direction}>
+            <motion.div
+              key={currentId}
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              className="w-full flex flex-col items-center"
+            >
+              <div className="text-center mb-10 w-full max-w-4xl px-4">
+                <div className="inline-block px-3 py-1 mb-4 border border-white/15 rounded-full text-sky-300/70 text-[10px] tracking-[0.3em] uppercase">
+                  System Level {path.length}
+                </div>
+                <h1 className="text-4xl md:text-5xl font-thin tracking-[0.32em] bg-gradient-to-r from-white via-sky-300 to-white text-transparent bg-clip-text uppercase mb-4">
+                  {currentNode.title}
+                </h1>
+                <div className="w-28 h-[1px] bg-gradient-to-r from-transparent via-sky-300 to-transparent mx-auto mt-4" />
+              </div>
+
+              {currentId === 'root' && renderPM()}
+
+              {currentNode.children ? (
+                renderCards(currentNode.children)
+              ) : (
+                renderMembers(currentNode.members, currentNode.head)
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div className="relative z-10">
+        <Footer />
+      </div>
+    </div>
+  );
+}
