@@ -1,13 +1,54 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Rocket } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Rocket, X, Send, UserPlus } from 'lucide-react';
 import SplitText from './SplitText';
 import { SparklesCore } from './ui/SparklesCore';
 import { Button } from './ui/moving-border';
-import { ContainerTextFlip } from './ui/container-text-flip';
+
+const subsystems = [
+  'Structures',
+  'Avionics',
+  'Propulsion',
+  'Payload',
+  'Recovery',
+  'Ground Station',
+  'Software',
+  'Media & Outreach',
+];
+
+const inputClasses =
+  'w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 outline-none transition-all duration-300 focus:border-sky-400/60 focus:bg-white/[0.08] focus:shadow-[0_0_20px_rgba(56,189,248,0.15)] text-sm tracking-wide';
+
+const labelClasses =
+  'block text-[11px] font-medium tracking-[0.25em] uppercase text-sky-300/70 mb-1.5';
 
 const Hero = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    unc: '',
+    branch: '',
+    email: '',
+    subsystem: '',
+    questions: '',
+  });
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Recruitment form submitted:', formData);
+    setSubmitted(true);
+    setTimeout(() => {
+      setShowForm(false);
+      setSubmitted(false);
+      setFormData({ name: '', unc: '', branch: '', email: '', subsystem: '', questions: '' });
+    }, 2200);
+  };
 
   return (
     <div className="relative min-h-screen w-full flex flex-col items-center justify-start pt-44 overflow-hidden">
@@ -78,7 +119,7 @@ const Hero = () => {
             </motion.p>
           </div>
 
-          {/* Sub tagline - Moving Border & Text Flip */}
+          {/* Recruitment Button — replaces ContainerTextFlip */}
           <div className="float-container pointer-events-auto" style={{ animationDelay: '1s' }}>
             <motion.div
               initial={{ opacity: 0, letterSpacing: '0.5em' }}
@@ -88,13 +129,14 @@ const Hero = () => {
             >
               <Button
                 borderRadius="2rem"
-                className="bg-black/20 border-slate-800/40 backdrop-blur-sm px-8 py-3 font-thin tracking-[0.35em] text-white/80 text-[15px] md:text-base leading-relaxed"
+                className="bg-black/20 border-slate-800/40 backdrop-blur-sm px-8 py-3 font-thin tracking-[0.35em] text-white/80 text-[15px] md:text-base leading-relaxed cursor-pointer"
                 containerClassName="h-auto w-auto"
+                onClick={() => setShowForm(true)}
               >
-                <ContainerTextFlip
-                  words={["CubeSats", "CanSats", "Model Rockets"]}
-                  className="w-[180px] text-center font-semibold"
-                />
+                <span className="flex items-center gap-2 font-semibold">
+                  <UserPlus size={18} strokeWidth={1.5} />
+                  Join the Mission
+                </span>
               </Button>
             </motion.div>
           </div>
@@ -117,6 +159,218 @@ const Hero = () => {
           </motion.div>
         </div>
       </div>
+
+      {/* ── Recruitment Form Modal ── */}
+      <AnimatePresence>
+        {showForm && (
+          <motion.div
+            className="fixed inset-0 z-[9999] flex items-center justify-center px-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {/* Backdrop */}
+            <motion.div
+              className="absolute inset-0 bg-black/70 backdrop-blur-md"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowForm(false)}
+            />
+
+            {/* Modal */}
+            <motion.div
+              className="relative w-full max-w-lg rounded-3xl overflow-hidden"
+              initial={{ scale: 0.8, opacity: 0, y: 60 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.85, opacity: 0, y: 40 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              style={{
+                background: 'linear-gradient(145deg, rgba(15,23,42,0.95), rgba(10,15,30,0.98))',
+                border: '1px solid rgba(56, 189, 248, 0.15)',
+                boxShadow:
+                  '0 0 60px rgba(56, 189, 248, 0.12), 0 0 120px rgba(99, 102, 241, 0.08), inset 0 1px 0 rgba(255,255,255,0.05)',
+              }}
+            >
+              {/* Glow accent bar */}
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-sky-400 to-transparent" />
+
+              {/* Close button */}
+              <button
+                onClick={() => setShowForm(false)}
+                className="absolute top-4 right-4 p-2 rounded-full bg-white/5 hover:bg-white/10 text-white/50 hover:text-white transition-all duration-200 z-10 cursor-pointer"
+              >
+                <X size={18} />
+              </button>
+
+              <div className="p-8 pt-7">
+                {/* Header */}
+                <div className="text-center mb-7">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: 'spring', delay: 0.1 }}
+                    className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-sky-500/10 border border-sky-500/20 mb-3"
+                  >
+                    <Rocket size={22} className="text-sky-400" />
+                  </motion.div>
+                  <h2
+                    className="text-2xl font-thin tracking-[0.25em] text-white uppercase"
+                    style={{ textShadow: '0 0 30px rgba(56,189,248,0.4)' }}
+                  >
+                    Recruitment
+                  </h2>
+                  <p className="text-white/30 text-xs tracking-[0.2em] mt-1 uppercase">
+                    Apply to Team Vinidra
+                  </p>
+                </div>
+
+                {!submitted ? (
+                  <motion.form
+                    onSubmit={handleSubmit}
+                    className="space-y-4"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.15 }}
+                  >
+                    {/* Row: Name + UNC */}
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className={labelClasses}>Name</label>
+                        <input
+                          type="text"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          placeholder="Your full name"
+                          required
+                          className={inputClasses}
+                        />
+                      </div>
+                      <div>
+                        <label className={labelClasses}>UNC (Roll No.)</label>
+                        <input
+                          type="text"
+                          name="unc"
+                          value={formData.unc}
+                          onChange={handleChange}
+                          placeholder="e.g. 23BCE1234"
+                          required
+                          className={inputClasses}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Row: Branch + Email */}
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className={labelClasses}>Branch</label>
+                        <input
+                          type="text"
+                          name="branch"
+                          value={formData.branch}
+                          onChange={handleChange}
+                          placeholder="e.g. CSE, ECE"
+                          required
+                          className={inputClasses}
+                        />
+                      </div>
+                      <div>
+                        <label className={labelClasses}>Email</label>
+                        <input
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          placeholder="you@example.com"
+                          required
+                          className={inputClasses}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Subsystem select */}
+                    <div>
+                      <label className={labelClasses}>Subsystem</label>
+                      <select
+                        name="subsystem"
+                        value={formData.subsystem}
+                        onChange={handleChange}
+                        required
+                        className={`${inputClasses} appearance-none cursor-pointer`}
+                        style={{
+                          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%2338bdf8' stroke-width='1.5' fill='none'/%3E%3C/svg%3E")`,
+                          backgroundRepeat: 'no-repeat',
+                          backgroundPosition: 'right 16px center',
+                        }}
+                      >
+                        <option value="" disabled className="bg-slate-900 text-white/40">
+                          Select a subsystem
+                        </option>
+                        {subsystems.map((s) => (
+                          <option key={s} value={s} className="bg-slate-900 text-white">
+                            {s}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* Questions */}
+                    <div>
+                      <label className={labelClasses}>Any Questions?</label>
+                      <textarea
+                        name="questions"
+                        value={formData.questions}
+                        onChange={handleChange}
+                        placeholder="Ask us anything..."
+                        rows={3}
+                        className={`${inputClasses} resize-none`}
+                      />
+                    </div>
+
+                    {/* Submit */}
+                    <motion.button
+                      type="submit"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.97 }}
+                      className="w-full mt-2 py-3.5 rounded-xl font-medium tracking-[0.2em] uppercase text-sm text-white cursor-pointer flex items-center justify-center gap-2 transition-all duration-300"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(56,189,248,0.25), rgba(99,102,241,0.25))',
+                        border: '1px solid rgba(56,189,248,0.3)',
+                        boxShadow: '0 0 30px rgba(56,189,248,0.15)',
+                      }}
+                    >
+                      <Send size={16} strokeWidth={1.5} />
+                      Submit Application
+                    </motion.button>
+                  </motion.form>
+                ) : (
+                  <motion.div
+                    className="flex flex-col items-center justify-center py-12 gap-4"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ type: 'spring', damping: 20 }}
+                  >
+                    <motion.div
+                      className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: 'spring', delay: 0.1 }}
+                    >
+                      <svg className="w-8 h-8 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                    </motion.div>
+                    <p className="text-white/80 text-lg tracking-[0.15em] font-thin">Application Sent!</p>
+                    <p className="text-white/30 text-xs tracking-wider">We'll reach out to you soon ✨</p>
+                  </motion.div>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
