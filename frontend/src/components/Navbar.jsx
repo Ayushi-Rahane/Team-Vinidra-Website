@@ -31,49 +31,80 @@ const Navbar = () => {
   useEffect(() => {
     if (location.pathname !== "/") return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio > 0.4) {
-            setActiveSection(entry.target.id);
+    const handleScrollSpy = () => {
+      const scrollY = window.scrollY + 120; // offset for navbar height
+      let current = "home";
+
+      for (const link of navLinks) {
+        const el = document.getElementById(link.id);
+        if (el) {
+          const top = el.offsetTop;
+          const bottom = top + el.offsetHeight;
+          if (scrollY >= top && scrollY < bottom) {
+            current = link.id;
           }
-        });
-      },
-      { rootMargin: "-30% 0px -70% 0px", threshold: [0, 0.4, 0.6, 0.8, 1] }
-    );
+        }
+      }
 
-    const sections = navLinks
-      .map((link) => document.getElementById(link.id))
-      .filter(Boolean);
+      setActiveSection(current);
+    };
 
-    sections.forEach((sec) => observer.observe(sec));
+    window.addEventListener("scroll", handleScrollSpy, { passive: true });
+    handleScrollSpy(); // run once on mount
 
-    return () => sections.forEach((sec) => observer.unobserve(sec));
+    return () => window.removeEventListener("scroll", handleScrollSpy);
   }, [location.pathname]);
 
-  // Sync active state with route (for standalone pages like /gallery)
+  // Sync active state with route (for standalone pages)
   useEffect(() => {
-    if (location.pathname === "/gallery") {
+    const path = location.pathname;
+    if (path.startsWith("/gallery")) {
       setActiveSection("gallery");
-    } else if (location.pathname === "/") {
-      // Intersection observer handles this, but let's default to home if at top
+    } else if (path.startsWith("/team")) {
+      setActiveSection("team");
+    } else if (path.startsWith("/achievements")) {
+      setActiveSection("achievements");
+    } else if (path.startsWith("/knowledge-hub")) {
+      setActiveSection("knowledge-hub");
+    } else if (path === "/") {
       if (window.scrollY < 100) setActiveSection("home");
     }
   }, [location.pathname]);
 
-  // ⭐ MAIN NAVIGATION LOGIC
+  // Map of nav ids to dedicated page routes
+  const dedicatedPages = {
+    team: "/team",
+    achievements: "/achievements",
+    gallery: "/gallery",
+    "knowledge-hub": "/knowledge-hub",
+  };
+
+  // MAIN NAVIGATION LOGIC
   const handleNavClick = (id) => {
-    if (location.pathname !== "/") {
-      navigate("/#" + id);
-      setTimeout(() => {
-        const el = document.getElementById(id);
-        if (el) el.scrollIntoView({ behavior: "smooth" });
-        setActiveSection(id);
-      }, 100);
-    } else {
+    if (location.pathname === "/") {
+      // On landing page: scroll to section, let scroll spy handle active state
       const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: "smooth" });
-      setActiveSection(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+        setActiveSection(id);
+      } else if (dedicatedPages[id]) {
+        // Section doesn't exist on landing page, navigate to dedicated page
+        navigate(dedicatedPages[id]);
+        setActiveSection(id);
+      }
+    } else {
+      // On any other page: navigate to dedicated page or back to landing
+      if (dedicatedPages[id]) {
+        navigate(dedicatedPages[id]);
+        setActiveSection(id);
+      } else {
+        navigate("/#" + id);
+        setTimeout(() => {
+          const el = document.getElementById(id);
+          if (el) el.scrollIntoView({ behavior: "smooth" });
+          setActiveSection(id);
+        }, 100);
+      }
     }
   };
 
