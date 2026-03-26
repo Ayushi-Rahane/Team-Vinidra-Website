@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { ArrowRight, Cpu, Satellite, Rocket, Users, ChevronRight } from 'lucide-react';
 
 // Animated orbit rings canvas
@@ -116,23 +117,43 @@ export default function Team() {
       </div>
 
       {/* Section label */}
-      <div className="mb-6 flex items-center gap-3">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: 'easeOut' }}
+        viewport={{ once: false, amount: 0.6 }}
+        className="mb-6 flex items-center gap-3"
+      >
         <div className="h-px w-10 bg-gradient-to-r from-transparent to-sky-300/50" />
         <span className="text-sky-300/60 text-[10px] tracking-[0.35em] uppercase">Mission Personnel</span>
         <div className="h-px w-10 bg-gradient-to-l from-transparent to-sky-300/50" />
-      </div>
+      </motion.div>
 
       {/* Heading */}
-      <h2 className="text-4xl md:text-5xl font-thin tracking-[0.32em] bg-gradient-to-r from-white via-sky-300 to-white text-transparent bg-clip-text text-center uppercase mb-4">
-        Meet The Team
-      </h2>
-      <div className="w-28 h-[1px] bg-gradient-to-r from-transparent via-sky-300 to-transparent mx-auto mb-4" />
-      <p className="text-white/50 text-sm text-center max-w-xl mb-16 tracking-wide leading-relaxed">
-        A collective of engineers, designers, and innovators — united under one mission. Explore the full hierarchy of Team Vinidra.
-      </p>
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        viewport={{ once: false, amount: 0.6 }}
+        className="text-center mb-16"
+      >
+        <h2 className="text-4xl md:text-5xl font-thin tracking-[0.32em] bg-gradient-to-r from-white via-sky-300 to-white text-transparent bg-clip-text uppercase mb-4">
+          Meet The Team
+        </h2>
+        <div className="w-28 h-[1px] bg-gradient-to-r from-transparent via-sky-300 to-transparent mx-auto mb-4" />
+        <p className="text-white/50 text-sm max-w-xl mx-auto tracking-wide leading-relaxed">
+          A collective of engineers, designers, and innovators — united under one mission. Explore the full hierarchy of Team Vinidra.
+        </p>
+      </motion.div>
 
       {/* Center orbit visualization + PM card */}
-      <div className="relative w-[260px] h-[260px] mb-20 flex-shrink-0">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.15 }}
+        viewport={{ once: false, amount: 0.4 }}
+        className="relative w-[260px] h-[260px] mb-20 flex-shrink-0"
+      >
         <OrbitCanvas />
         {/* Central PM card */}
         <div className="absolute inset-0 flex items-center justify-center">
@@ -146,20 +167,25 @@ export default function Team() {
             <p className="text-sky-300/70 text-[8px] tracking-wider mt-1 uppercase">Project Manager</p>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Division preview grid */}
       <div className="flex flex-wrap justify-center gap-4 w-full max-w-4xl mb-16">
         {divisions.map((div, i) => {
           const Icon = div.icon;
           return (
-            <div
+            <motion.div
               key={i}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: 'easeOut', delay: i * 0.12 }}
+              viewport={{ once: false, amount: 0.3 }}
+              whileHover={{ y: -6 }}
               className="group relative w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(25%-0.75rem)] overflow-hidden rounded-3xl border border-white/15
                 bg-gradient-to-bl from-sky-400/15 via-white/5 to-transparent
                 hover:from-sky-400/30 hover:via-sky-400/10
                 transition-all duration-500 backdrop-blur-md p-5 text-center shadow-lg
-                hover:-translate-y-1 cursor-pointer"
+                cursor-pointer"
               onClick={() => navigate('/team')}
             >
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100
@@ -169,13 +195,19 @@ export default function Team() {
               <p className="relative text-white/90 text-xs tracking-[0.2em] uppercase mb-1">{div.label}</p>
               <p className="relative text-white/35 text-[9px] tracking-wide leading-relaxed mb-2">{div.desc}</p>
               <span className="relative inline-block px-2 py-0.5 border border-white/10 rounded-full text-sky-300/60 text-[8px] tracking-widest uppercase">{div.count}</span>
-            </div>
+            </motion.div>
           );
         })}
       </div>
 
       {/* CTA Button */}
-      <button
+      <motion.button
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 }}
+        viewport={{ once: false, amount: 0.5 }}
+        whileHover={{ scale: 1.03 }}
+        whileTap={{ scale: 0.97 }}
         onClick={() => navigate('/team')}
         className="group relative flex items-center gap-3 px-10 py-4 overflow-hidden rounded-full border border-white/15
           bg-gradient-to-r from-sky-400/10 via-white/5 to-sky-400/10
@@ -188,14 +220,20 @@ export default function Team() {
           bg-[radial-gradient(circle_at_50%_50%,rgba(56,189,248,0.2),transparent_70%)]" />
         <span className="relative">Explore Full Team</span>
         <ArrowRight className="relative w-4 h-4 group-hover:translate-x-1 transition-transform" />
-      </button>
+      </motion.button>
 
       {/* Hint text */}
-      <div className="mt-6 flex items-center gap-2 text-white/20 text-[10px] tracking-widest uppercase">
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+        viewport={{ once: false, amount: 0.5 }}
+        className="mt-6 flex items-center gap-2 text-white/20 text-[10px] tracking-widest uppercase"
+      >
         <ChevronRight className="w-3 h-3" />
         <span>Step-by-step hierarchy explorer</span>
         <ChevronRight className="w-3 h-3" />
-      </div>
+      </motion.div>
     </section>
   );
 }
