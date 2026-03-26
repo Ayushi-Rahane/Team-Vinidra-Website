@@ -7,9 +7,10 @@ import { SparklesCore } from "../components/ui/SparklesCore";
 const About = lazy(() => import("../components/About"));
 const Team = lazy(() => import("../components/Team"));
 const Gallery = lazy(() => import("../components/Gallery"));
-const KnowledgeHub = lazy(() => import("../components/KnowledgeHub"));
+// const KnowledgeHub = lazy(() => import("../components/KnowledgeHub"));
 const Contact = lazy(() => import("../components/Contact"));
 const AchievementsPreview = lazy(() => import("../components/AchievementsPreview"));
+const KnowledgePreview = lazy(() => import("../components/KnowledgePreview"));
 const Footer = lazy(() => import("../components/Footer"));
 
 import bg1 from "../assets/image.png";
@@ -67,7 +68,12 @@ export default function Landing() {
           </section>
 
           <section id="gallery"><Gallery /></section>
-          <section id="knowledge-hub"><KnowledgeHub /></section>
+          {/* ⭐ ONLY PREVIEW HERE */}
+          <section id="knowledge-hub">
+            <KnowledgePreview />
+          </section>
+
+          {/* <section id="knowledge-hub"><KnowledgeHub /></section> */}
           <section id="contact"><Contact /></section>
         </Suspense>
       </main>

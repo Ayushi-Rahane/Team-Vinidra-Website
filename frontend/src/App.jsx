@@ -4,24 +4,30 @@ import Landing from "./pages/Landing";
 import AchievementsPage from "./pages/AchievementsPage";
 import AchievementDetail from "./pages/AchievementDetail";
 import GalleryPage from "./pages/GalleryPage";
+import KnowledgeHub from "./pages/KnowledgeHub";
+import BlogDetail from "./pages/BlogDetail";
+
 import ScrollToTop from "./utils/ScrollToTop";
 import StarCursorEffect from "./components/ui/StarCursorEffect";
 
 function App() {
-  return (
-    <>
-      <StarCursorEffect />
-      <ScrollToTop />
+return (
+<> <StarCursorEffect /> <ScrollToTop />
 
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/gallery" element={<GalleryPage />} />
-        <Route path="/achievements" element={<AchievementsPage />} />
-        {/* Dynamic achievement detail page */}
-        <Route path="/achievements/:id" element={<AchievementDetail />} />
-      </Routes>
-    </>
-  );
+  <Routes>
+    <Route path="/" element={<Landing />} />
+    <Route path="/gallery" element={<GalleryPage />} />
+    <Route path="/achievements" element={<AchievementsPage />} />
+    <Route path="/achievements/:id" element={<AchievementDetail />} />
+
+    {/* Knowledge Hub Routes */}
+    <Route path="/knowledge-hub" element={<KnowledgeHub />} />
+    <Route path="/knowledge-hub/:type" element={<KnowledgeHub />} />
+    <Route path="/knowledge-hub/blog/:id" element={<BlogDetail />} />
+  </Routes>
+</>
+
+);
 }
 
 export default App;
