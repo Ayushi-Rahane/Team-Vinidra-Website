@@ -16,6 +16,10 @@ const subsystems = [
   'Media & Outreach',
 ];
 
+// ── Google Apps Script Web App URL ──
+// Replace this with your deployed Apps Script URL (see setup instructions)
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyBW-gRW7OZkPbkp_GOG-BiQLZgVMtD8cvUHaPIHKvJbAW3zQ3igrWCxLDj01QgthEHeA/exec';
+
 const inputClasses =
   'w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 outline-none transition-all duration-300 focus:border-sky-400/60 focus:bg-white/[0.08] focus:shadow-[0_0_20px_rgba(56,189,248,0.15)] text-sm tracking-wide';
 
@@ -26,6 +30,8 @@ const Hero = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     unc: '',
@@ -39,15 +45,32 @@ const Hero = () => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Recruitment form submitted:', formData);
-    setSubmitted(true);
-    setTimeout(() => {
-      setShowForm(false);
-      setSubmitted(false);
-      setFormData({ name: '', unc: '', branch: '', email: '', subsystem: '', questions: '' });
-    }, 2200);
+    setIsSubmitting(true);
+    setSubmitError('');
+
+    try {
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      // no-cors returns opaque response, so we treat it as success
+      setSubmitted(true);
+      setTimeout(() => {
+        setShowForm(false);
+        setSubmitted(false);
+        setFormData({ name: '', unc: '', branch: '', email: '', subsystem: '', questions: '' });
+      }, 2200);
+    } catch (error) {
+      console.error('Submission error:', error);
+      setSubmitError('Failed to submit. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -329,20 +352,45 @@ const Hero = () => {
                       />
                     </div>
 
+                    {/* Error message */}
+                    {submitError && (
+                      <motion.p
+                        initial={{ opacity: 0, y: -5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-red-400/90 text-xs tracking-wider text-center"
+                      >
+                        {submitError}
+                      </motion.p>
+                    )}
+
                     {/* Submit */}
                     <motion.button
                       type="submit"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.97 }}
-                      className="w-full mt-2 py-3.5 rounded-xl font-medium tracking-[0.2em] uppercase text-sm text-white cursor-pointer flex items-center justify-center gap-2 transition-all duration-300"
+                      disabled={isSubmitting}
+                      whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                      whileTap={{ scale: isSubmitting ? 1 : 0.97 }}
+                      className={`w-full mt-2 py-3.5 rounded-xl font-medium tracking-[0.2em] uppercase text-sm text-white flex items-center justify-center gap-2 transition-all duration-300 ${isSubmitting ? 'opacity-60 cursor-wait' : 'cursor-pointer'}`}
                       style={{
                         background: 'linear-gradient(135deg, rgba(56,189,248,0.25), rgba(99,102,241,0.25))',
                         border: '1px solid rgba(56,189,248,0.3)',
                         boxShadow: '0 0 30px rgba(56,189,248,0.15)',
                       }}
                     >
-                      <Send size={16} strokeWidth={1.5} />
-                      Submit Application
+                      {isSubmitting ? (
+                        <>
+                          <motion.div
+                            className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 0.8, repeat: Infinity, ease: 'linear' }}
+                          />
+                          Submitting...
+                        </>
+                      ) : (
+                        <>
+                          <Send size={16} strokeWidth={1.5} />
+                          Submit Application
+                        </>
+                      )}
                     </motion.button>
                   </motion.form>
                 ) : (
