@@ -90,7 +90,7 @@ const teamStructure = {
         { id: "nontech-content", title: "Content & Editing", icon: "file-text", members: [{ name: "Karishma Chidgopkar" }, { name: "Minal Chaudhari" }] },
         { id: "nontech-finance", title: "Finance", icon: "dollar-sign", members: [{ name: "Swarali Rake" }, { name: "Anushka Bora" }, { name: "Sweta Jagtap" }] },
         { id: "nontech-pr", title: "Public Relations", icon: "megaphone", members: [{ name: "Aditi Shivapurkar" }, { name: "Bhumika Chaudhari" }] },
-        { id: "nontech-web", title: "Web Development", icon: "code", members: [{ name: "Sanskruti Patil" }, { name: "Vedika Kayangude" }, { name: "Ayushi Rahane" }] },
+        { id: "nontech-web", title: "Web Development", icon: "code", members: [{ name: "Sanskruti Patil" }, { name: "Ayushi Rahane" }] },
         { id: "nontech-events", title: "Events & Outreach", icon: "calendar", members: [{ name: "Preeti Tarle" }, { name: "Kanchan Jadhav" }] }
       ]
     }

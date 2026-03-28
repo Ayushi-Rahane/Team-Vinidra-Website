@@ -60,7 +60,7 @@ export const subteams = [
       { name: "Aditi Shivapurkar", role: "Public Relations", classYear: "TY-COMP", image: null },
       { name: "Bhumika Chaudhari", role: "Public Relations", classYear: "SY-ENTC", image: null },
       { name: "Sanskruti Patil", role: "Web Development", classYear: "SY-COMP", image: null },
-      { name: "Vedika Kayangude", role: "Web Development", classYear: "SY-COMP", image: null },
+      // { name: "Vedika Kayangude", role: "Web Development", classYear: "SY-COMP", image: null },
       { name: "Ayushi Rahane", role: "Web Development", classYear: "SY-COMP", image: null },
       { name: "Preeti Tarle", role: "Events & Outreach", classYear: "SY-IT", image: null },
       { name: "Kanchan Jadhav", role: "Events & Outreach", classYear: "SY-ENTC", image: null },
