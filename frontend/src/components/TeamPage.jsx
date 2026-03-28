@@ -234,7 +234,7 @@ export default function TeamPage() {
               <h2 className="relative text-2xl font-thin tracking-[0.32em] bg-gradient-to-r from-white via-sky-300 to-white text-transparent bg-clip-text uppercase">{pm.name}</h2>
               <p className="relative text-sky-300/80 text-xs mt-2 tracking-[0.25em] uppercase">{pm.role}</p>
               <div>
-                <div className="relative mt-4 inline-block px-3 py-1 border border-white/15 rounded-full text-sky-200/80 text-[10px] tracking-widest uppercase">
+                <div className="relative mt-4 inline-block px-3 py-1 border border-white/15 rounded-full text-sky-200/80 text-[10px] tracking-[0.3em] uppercase">
                   {pm.designation}
                 </div>
               </div>
@@ -272,10 +272,10 @@ export default function TeamPage() {
                 {getIcon(node.icon || "users")}
               </div>
               <div>
-                <h3 className="text-lg tracking-[0.25em] text-white/90 group-hover:text-white uppercase mb-1">
+                <h3 className="text-xl font-thin tracking-[0.35em] text-white/90 group-hover:text-white uppercase mb-1">
                   {node.title}
                 </h3>
-                <p className="text-sky-300/50 text-xs tracking-[0.2em] group-hover:text-sky-300/70 uppercase">
+                <p className="text-sky-300/50 text-xs tracking-[0.25em] group-hover:text-sky-300/70 uppercase">
                   Explore
                 </p>
               </div>
@@ -292,7 +292,7 @@ export default function TeamPage() {
         <div className="mb-12">
           <div className="flex items-center gap-3 justify-center mb-4">
             <div className="h-px w-10 bg-gradient-to-r from-transparent to-sky-300/50" />
-            <span className="text-sky-300/60 text-xs tracking-[0.3em] uppercase">Division Head</span>
+            <span className="text-sky-300/60 text-xs tracking-[0.35em] uppercase">Division Head</span>
             <div className="h-px w-10 bg-gradient-to-l from-transparent to-sky-300/50" />
           </div>
           <div className="flex justify-center">
@@ -303,8 +303,8 @@ export default function TeamPage() {
                   transition duration-700
                   bg-[radial-gradient(circle_at_50%_30%,rgba(56,189,248,0.25),transparent_60%)]" />
                 <Star className="relative w-6 h-6 text-sky-300 mb-2" />
-                <h4 className="relative text-lg tracking-[0.2em] text-white/90 uppercase text-center">{head.name}</h4>
-                <p className="relative text-sky-300/70 text-[10px] tracking-widest uppercase mt-1">Head</p>
+                <h4 className="relative text-xl font-thin tracking-[0.35em] text-white/90 uppercase text-center">{head.name}</h4>
+                <p className="relative text-sky-300/70 text-[10px] tracking-[0.25em] uppercase mt-1">Head</p>
              </div>
           </div>
         </div>
@@ -312,7 +312,7 @@ export default function TeamPage() {
 
       <div className="flex items-center gap-3 justify-center mb-6">
         <div className="h-px w-10 bg-gradient-to-r from-transparent to-sky-300/50" />
-        <span className="text-sky-300/60 text-xs tracking-[0.3em] uppercase">Members</span>
+        <span className="text-sky-300/60 text-xs tracking-[0.35em] uppercase">Members</span>
         <div className="h-px w-10 bg-gradient-to-l from-transparent to-sky-300/50" />
       </div>
 
@@ -335,11 +335,11 @@ export default function TeamPage() {
                transition duration-700
                bg-[radial-gradient(circle_at_50%_30%,rgba(56,189,248,0.25),transparent_60%)]" />
              <User className="relative w-8 h-8 text-sky-300/50 mb-3 group-hover:text-sky-300 transition-colors" />
-             <h4 className="relative text-sm tracking-[0.15em] text-white/90">
+             <h4 className="relative text-sm font-thin tracking-[0.25em] text-white/90 uppercase">
                {member.name}
              </h4>
              {(member.role || "Engineer") && (
-               <p className="relative text-sky-300/60 text-[10px] tracking-widest uppercase mt-2">
+               <p className="relative text-sky-300/60 text-[10px] tracking-[0.25em] uppercase mt-2">
                  {member.role || "Engineer"}
                </p>
              )}
@@ -381,7 +381,7 @@ export default function TeamPage() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
                 onClick={handleBack}
-                className="group flex items-center gap-2 text-sky-300/60 hover:text-sky-300 transition-colors uppercase text-xs tracking-[0.2em] border border-white/15 hover:border-sky-300/50 backdrop-blur-md px-4 py-2 rounded-full"
+                className="group flex items-center gap-2 text-sky-300/60 hover:text-sky-300 transition-colors uppercase text-xs tracking-[0.3em] border border-white/15 hover:border-sky-300/50 backdrop-blur-md px-4 py-2 rounded-full"
               >
                 <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                 Return to {findNode(path[path.length - 2], teamStructure).title || "Base"}
@@ -403,7 +403,7 @@ export default function TeamPage() {
               className="w-full flex flex-col items-center"
             >
               <div className="text-center mb-10 w-full max-w-4xl px-4">
-                <div className="inline-block px-3 py-1 mb-4 border border-white/15 rounded-full text-sky-300/70 text-[10px] tracking-[0.3em] uppercase">
+                <div className="inline-block px-3 py-1 mb-4 border border-white/15 rounded-full text-sky-300/70 text-[10px] tracking-[0.35em] uppercase">
                   System Level {path.length}
                 </div>
                 <h1 className="text-4xl md:text-5xl font-thin tracking-[0.32em] bg-gradient-to-r from-white via-sky-300 to-white text-transparent bg-clip-text uppercase mb-4">
