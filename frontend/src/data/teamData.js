@@ -1,12 +1,21 @@
 // Master team data sourced from the official team structure image
 
-export const projectManager = {
-  name: "Arshia Singh & Nandini Pathak",
-  role: "Project Managers / Systems Engineers",
-  designation: "Leads",
-  classYear: "SY-ENTC & SY-ENTC",
-  image: null, // replace with actual image path
-};
+export const projectManagers = [
+  {
+    name: "Arshia Singh",
+    role: "Project Manager / Systems Engineer",
+    designation: "Lead",
+    classYear: "SY-ENTC",
+    image: null,
+  },
+  {
+    name: "Nandini Pathak",
+    role: "Project Manager / Systems Engineer",
+    designation: "Lead",
+    classYear: "SY-ENTC",
+    image: null,
+  }
+];
 
 export const subteams = [
   {

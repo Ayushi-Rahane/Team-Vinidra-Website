@@ -6,14 +6,11 @@ import { SparklesCore } from './ui/SparklesCore';
 import { Button } from './ui/moving-border';
 
 const subsystems = [
-  'Structures',
   'Avionics',
-  'Propulsion',
-  'Payload',
-  'Recovery',
-  'Ground Station',
+  'Mechanical',
   'Software',
-  'Media & Outreach',
+  'Payload',
+  'Electrical',
 ];
 
 // ── Google Apps Script Web App URL ──
@@ -278,7 +275,7 @@ const Hero = () => {
                           name="unc"
                           value={formData.unc}
                           onChange={handleChange}
-                          placeholder="e.g. 23BCE1234"
+                          placeholder="e.g. UCE2024123"
                           required
                           className={inputClasses}
                         />
