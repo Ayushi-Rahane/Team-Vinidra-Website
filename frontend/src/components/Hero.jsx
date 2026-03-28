@@ -86,7 +86,7 @@ const Hero = () => {
         <SplitText
           tag="h1"
           text="TEAM VINIDRA"
-          className={`font-thin tracking-[0.32em] text-white text-5xl md:text-6xl lg:text-7xl uppercase leading-tight mb-4 whitespace-nowrap transition-all duration-300 ${isHovered ? 'text-glowing-sparkle' : ''}`}
+          className={`font-thin tracking-[0.32em] text-white text-3xl sm:text-4xl md:text-6xl lg:text-7xl uppercase leading-tight mb-4 whitespace-nowrap transition-all duration-300 ${isHovered ? 'text-glowing-sparkle' : ''}`}
           startDelay={0}
           delay={80}
           duration={1.5}
