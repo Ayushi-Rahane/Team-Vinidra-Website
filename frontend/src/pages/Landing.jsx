@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import { SparklesCore } from "../components/ui/SparklesCore";
+import useIsMobile from "../utils/useMobile";
 
 // Lazy load below-fold components for faster initial page load
 const About = lazy(() => import("../components/About"));
@@ -16,12 +17,14 @@ const Footer = lazy(() => import("../components/Footer"));
 import bg1 from "../assets/image.png";
 
 export default function Landing() {
+  const isMobile = useIsMobile();
+
   return (
     <div className="relative w-full bg-black overflow-clip">
 
       {/* Backgrounds */}
       <div
-        className="absolute top-0 left-0 w-full z-[0] pointer-events-none animate-zoom-in-out"
+        className={`absolute top-0 left-0 w-full z-[0] pointer-events-none ${isMobile ? '' : 'animate-zoom-in-out'}`}
         style={{
           backgroundImage: `url(${bg1})`,
           backgroundSize: "cover",
@@ -35,22 +38,26 @@ export default function Landing() {
       />
 
       {/* Global Moving Stars Background — starts BELOW the hero section */}
-      <div
-        className="absolute left-0 w-full z-[1] pointer-events-none opacity-50"
-        style={{ top: '100vh', bottom: 0, minHeight: '100vh' }}
-      >
-        <SparklesCore
-          id="tsparticlesfullpage"
-          background="transparent"
-          minSize={0.4}
-          maxSize={1.0}
-          particleDensity={300}
-          className="w-full h-full"
-          particleColors={["#FFFFFF", "#FACC15", "#38BDF8"]}
-          speed={1}
-          fullScreen={true}
-        />
-      </div>
+      {/* On mobile: skip this entirely — the hero already has sparkles, 
+          and a second full-page instance with 300 particles is wasteful */}
+      {!isMobile && (
+        <div
+          className="absolute left-0 w-full z-[1] pointer-events-none opacity-50"
+          style={{ top: '100vh', bottom: 0, minHeight: '100vh' }}
+        >
+          <SparklesCore
+            id="tsparticlesfullpage"
+            background="transparent"
+            minSize={0.4}
+            maxSize={1.0}
+            particleDensity={300}
+            className="w-full h-full"
+            particleColors={["#FFFFFF", "#FACC15", "#38BDF8"]}
+            speed={1}
+            fullScreen={true}
+          />
+        </div>
+      )}
 
       <Navbar />
 

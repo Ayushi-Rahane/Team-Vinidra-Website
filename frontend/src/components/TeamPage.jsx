@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import useIsMobile from '../utils/useMobile';
 import {
   ChevronLeft,
   Cpu,
@@ -170,6 +171,7 @@ const ParticlesBackground = () => {
 export default function TeamPage() {
   const [path, setPath] = useState(['root']);
   const [direction, setDirection] = useState(1); // 1 = forward, -1 = backward
+  const isMobile = useIsMobile();
 
   const currentId = path[path.length - 1];
   const currentNode = findNode(currentId, teamStructure);
@@ -361,7 +363,7 @@ export default function TeamPage() {
           background="transparent"
           minSize={0.4}
           maxSize={1.2}
-          particleDensity={250}
+          particleDensity={isMobile ? 50 : 250}
           className="w-full h-full"
           particleColors={["#FFFFFF", "#FACC15", "#38BDF8"]}
           speed={0.8}

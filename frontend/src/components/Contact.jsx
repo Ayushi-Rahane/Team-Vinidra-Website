@@ -7,8 +7,11 @@ import {
   Instagram,
   Phone,
 } from "lucide-react";
+import useIsMobile from "../utils/useMobile";
 
 const Contact = () => {
+  const isMobile = useIsMobile();
+
   return (
     <section className="relative py-28 md:py-32 px-[8%] text-white">
       {/* TITLE */}
@@ -22,10 +25,10 @@ const Contact = () => {
       <div className="grid md:grid-cols-2 gap-12 max-w-[1100px] mx-auto">
         {/* GET IN TOUCH */}
         <div
-          className="relative h-full rounded-3xl border border-white/20 p-8
+          className={`relative h-full rounded-3xl border border-white/20 p-8
           bg-gradient-to-br from-white/5 via-sky-300/10 to-white/5
           backdrop-blur-md shadow-[0_8px_30px_rgba(0,242,254,0.2)]
-          animate-float hover:scale-102 transition-transform duration-300 hover:shadow-[0_0_25px_rgba(0,242,254,0.3)]"
+          ${isMobile ? '' : 'animate-float'} hover:scale-102 transition-transform duration-300 hover:shadow-[0_0_25px_rgba(0,242,254,0.3)]`}
         >
           <h3 className="font-sans text-2xl font-semibold mb-6 tracking-wider text-white">
             Get In Touch
@@ -119,10 +122,10 @@ const Contact = () => {
 
         {/* CONTACT FORM */}
         <div
-          className="relative h-full rounded-3xl border border-white/20 p-8
+          className={`relative h-full rounded-3xl border border-white/20 p-8
           bg-gradient-to-br from-white/5 via-sky-300/10 to-white/5
           backdrop-blur-md shadow-[0_8px_30px_rgba(0,242,254,0.2)]
-          animate-float hover:scale-102 transition-transform duration-300 hover:shadow-[0_0_40px_rgba(0,242,254,0.4)]"
+          ${isMobile ? '' : 'animate-float'} hover:scale-102 transition-transform duration-300 hover:shadow-[0_0_40px_rgba(0,242,254,0.4)]`}
         >
           <h3 className="font-sans text-2xl font-semibold mb-6 tracking-wider text-white">
             Send a Message

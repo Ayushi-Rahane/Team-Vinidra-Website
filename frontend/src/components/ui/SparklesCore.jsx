@@ -1,6 +1,7 @@
 "use client";
 import React, { useId, useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
+import useIsMobile from "../../utils/useMobile";
 
 // Pre-render a glowing star sprite — cached per hex color
 // Creates a bright core with soft halo, like real stars in space
@@ -65,10 +66,12 @@ export const SparklesCore = (props) => {
     fullScreen = false,
   } = props;
 
+  const isMobile = useIsMobile();
   const [start, setStart] = useState(false);
   const canvasRef = useRef(null);
   const particlesRef = useRef([]);
   const animationFrameId = useRef(null);
+  const lastFrameTime = useRef(0);
   const generatedId = useId();
 
   useEffect(() => {
@@ -79,7 +82,7 @@ export const SparklesCore = (props) => {
       window.removeEventListener("resize", handleResize);
       if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
     };
-  }, []);
+  }, [isMobile]);
 
   const initCanvas = () => {
     const canvas = canvasRef.current;
@@ -88,13 +91,16 @@ export const SparklesCore = (props) => {
     if (!ctx) return;
 
     const rect = canvas.getBoundingClientRect();
-    const scale = window.devicePixelRatio || 1;
+    // On mobile: skip devicePixelRatio scaling — render at 1x for performance
+    const scale = isMobile ? 1 : (window.devicePixelRatio || 1);
     canvas.width = rect.width * scale;
     canvas.height = rect.height * scale;
     ctx.scale(scale, scale);
 
     particlesRef.current = [];
-    const density = particleDensity || 900;
+    const baseDensity = particleDensity || 900;
+    // On mobile: reduce particle count to 25% for much less GPU load
+    const density = isMobile ? Math.max(20, Math.round(baseDensity * 0.25)) : baseDensity;
     for (let i = 0; i < density; i++) {
       particlesRef.current.push(spawnParticle(rect.width, rect.height, true));
     }
@@ -102,6 +108,7 @@ export const SparklesCore = (props) => {
     setStart(true);
     if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
     animationFrameId.current = null;
+    lastFrameTime.current = 0;
     animate();
   };
 
@@ -142,14 +149,26 @@ export const SparklesCore = (props) => {
     };
   };
 
-  const animate = () => {
+  const animate = (timestamp) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+
+    // On mobile: throttle to ~30fps (skip frames if <33ms elapsed)
+    if (isMobile && lastFrameTime.current) {
+      const delta = timestamp - lastFrameTime.current;
+      if (delta < 33) {
+        animationFrameId.current = requestAnimationFrame(animate);
+        return;
+      }
+    }
+    lastFrameTime.current = timestamp;
+
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const w = canvas.width / (window.devicePixelRatio || 1);
-    const h = canvas.height / (window.devicePixelRatio || 1);
+    const scale = isMobile ? 1 : (window.devicePixelRatio || 1);
+    const w = canvas.width / scale;
+    const h = canvas.height / scale;
     ctx.clearRect(0, 0, w, h);
 
     const radius = w / 2;
@@ -219,4 +238,3 @@ export const SparklesCore = (props) => {
     </motion.div>
   );
 };
-

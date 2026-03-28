@@ -1,9 +1,13 @@
 import React, { useEffect, useRef } from "react";
+import useIsMobile from "../../utils/useMobile";
 
 const StarCursorEffect = () => {
+  const isMobile = useIsMobile();
   const canvasRef = useRef(null);
 
   useEffect(() => {
+    // On mobile/touch devices there's no cursor — skip entirely
+    if (isMobile) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -87,7 +91,10 @@ const StarCursorEffect = () => {
       window.removeEventListener("mousemove", unscaledHandleMouseMove);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [isMobile]);
+
+  // Don't render the canvas at all on mobile — no cursor to track
+  if (isMobile) return null;
 
   return (
     <canvas

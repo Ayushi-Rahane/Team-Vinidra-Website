@@ -7,6 +7,7 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
+import useIsMobile from "../../utils/useMobile";
 
 export function Button({
   borderRadius = "1.75rem",
@@ -18,6 +19,8 @@ export function Button({
   className,
   ...otherProps
 }) {
+  const isMobile = useIsMobile();
+
   return (
     <Component
       className={`bg-transparent relative text-xl h-16 w-40 p-[1px] overflow-hidden ${containerClassName || ""}`}
@@ -30,11 +33,19 @@ export function Button({
         className="absolute inset-0"
         style={{ borderRadius: `calc(${borderRadius} * 0.96)` }}
       >
-        <MovingBorder duration={duration} rx="30%" ry="30%">
+        {isMobile ? (
+          /* On mobile: static glow border instead of animated moving border */
           <div
-            className={`h-20 w-20 opacity-[0.8] bg-[radial-gradient(#0ea5e9_40%,transparent_60%)] ${borderClassName || ""}`}
+            className={`absolute inset-0 opacity-[0.5] bg-[radial-gradient(#0ea5e9_40%,transparent_60%)] ${borderClassName || ""}`}
+            style={{ borderRadius: `calc(${borderRadius} * 0.96)` }}
           />
-        </MovingBorder>
+        ) : (
+          <MovingBorder duration={duration} rx="30%" ry="30%">
+            <div
+              className={`h-20 w-20 opacity-[0.8] bg-[radial-gradient(#0ea5e9_40%,transparent_60%)] ${borderClassName || ""}`}
+            />
+          </MovingBorder>
+        )}
       </div>
 
       <div

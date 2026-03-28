@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Cpu, Satellite, Rocket, Users, ChevronRight } from 'lucide-react';
+import useIsMobile from '../utils/useMobile';
 
 // Animated orbit rings canvas
 const OrbitCanvas = () => {
@@ -77,6 +78,22 @@ const OrbitCanvas = () => {
   return <canvas ref={ref} className="absolute inset-0 w-full h-full pointer-events-none" />;
 };
 
+// Static CSS orbit rings for mobile — no canvas, no rAF loop
+const StaticOrbitRings = () => (
+  <div className="absolute inset-0 w-full h-full pointer-events-none flex items-center justify-center">
+    {/* Outer ring */}
+    <div className="absolute w-[220px] h-[220px] rounded-full border border-sky-400/12" />
+    {/* Inner ring */}
+    <div className="absolute w-[136px] h-[136px] rounded-full border border-sky-400/8" />
+    {/* Center pulse */}
+    <div className="absolute w-14 h-14 rounded-full bg-sky-400/15" />
+    {/* Static node dots */}
+    <div className="absolute w-2 h-2 rounded-full bg-sky-300/70" style={{ top: '50%', left: 'calc(50% + 110px)', transform: 'translate(-50%, -50%)' }} />
+    <div className="absolute w-1.5 h-1.5 rounded-full bg-sky-300/50" style={{ top: 'calc(50% - 95px)', left: 'calc(50% + 55px)', transform: 'translate(-50%, -50%)' }} />
+    <div className="absolute w-1.5 h-1.5 rounded-full bg-sky-300/45" style={{ top: 'calc(50% + 60px)', left: 'calc(50% - 25px)', transform: 'translate(-50%, -50%)' }} />
+  </div>
+);
+
 // Division preview cards data
 const divisions = [
   {
@@ -107,6 +124,7 @@ const divisions = [
 
 export default function Team() {
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-4 py-24 overflow-hidden">
@@ -154,7 +172,7 @@ export default function Team() {
         viewport={{ once: false, amount: 0.4 }}
         className="relative w-[260px] h-[260px] mb-20 flex-shrink-0"
       >
-        <OrbitCanvas />
+        {isMobile ? <StaticOrbitRings /> : <OrbitCanvas />}
         {/* Central PM cards */}
         <div className="absolute inset-0 flex items-center justify-center gap-[10px]">
           <div className="w-[95px] text-center overflow-hidden rounded-2xl border border-white/15

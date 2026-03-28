@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
+import useIsMobile from "../../utils/useMobile";
 
 const ShootingStars = ({ starCount = 10, starColor = "#38BDF8", trailColor = "rgba(2, 132, 199, 0.4)" }) => {
   const [stars, setStars] = useState([]);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
+    // Reduce animated elements on mobile for better performance
+    const count = isMobile ? Math.min(starCount, 5) : starCount;
     // Generate static parameters for stars
-    const newStars = Array.from({ length: starCount }).map((_, i) => {
+    const newStars = Array.from({ length: count }).map((_, i) => {
       const angle = 25 + Math.random() * 20; // 25 to 45 degrees
       return {
         id: i,
@@ -18,7 +22,7 @@ const ShootingStars = ({ starCount = 10, starColor = "#38BDF8", trailColor = "rg
       };
     });
     setStars(newStars);
-  }, [starCount]);
+  }, [starCount, isMobile]);
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-[0] opacity-70">

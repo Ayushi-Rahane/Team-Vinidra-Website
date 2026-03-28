@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { SparklesCore } from '../components/ui/SparklesCore';
+import useIsMobile from '../utils/useMobile';
 
 // Dynamically import all images from the gallary folder using Vite's glob import
 const imageModules = import.meta.glob('../assets/gallary/*.{png,jpg,jpeg,webp}', { eager: true });
@@ -10,6 +11,7 @@ const images = Object.values(imageModules).map((module) => module.default);
 
 const GalleryPage = () => {
   const [selectedIdx, setSelectedIdx] = useState(null);
+  const isMobile = useIsMobile();
 
   // Ensure we start at the top when navigating to this new page
   useEffect(() => {
@@ -34,7 +36,7 @@ const GalleryPage = () => {
           background="transparent"
           minSize={0.4}
           maxSize={1.2}
-          particleDensity={120}
+          particleDensity={isMobile ? 30 : 120}
           className="w-full h-full"
           particleColors={["#FFFFFF", "#38BDF8", "#FACC15"]}
           speed={0.4}
@@ -53,7 +55,7 @@ const GalleryPage = () => {
       <main className="relative z-10 flex-grow pt-36 pb-32 px-6 md:px-12 xl:px-20 max-w-[1600px] mx-auto w-full">
         
         {/* Header Section — Floating */}
-        <div className="text-center mb-24 gallery-float" style={{ animationDelay: '0s' }}>
+        <div className={`text-center mb-24 ${isMobile ? '' : 'gallery-float'}`} style={{ animationDelay: '0s' }}>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-thin tracking-[0.35em] bg-gradient-to-r from-white via-sky-200 to-white text-transparent bg-clip-text uppercase drop-shadow-[0_0_15px_rgba(255,255,255,0.15)] mb-6">
             Gallery Orbit
           </h1>
@@ -68,7 +70,7 @@ const GalleryPage = () => {
           {images.map((img, idx) => (
             <div 
               key={idx} 
-              className="break-inside-avoid mb-6 md:mb-8 gallery-card-enter gallery-float group cursor-pointer"
+              className={`break-inside-avoid mb-6 md:mb-8 gallery-card-enter ${isMobile ? '' : 'gallery-float'} group cursor-pointer`}
               style={{ 
                 animationDelay: `${(idx % 4) * 0.15}s`,
                 // Each card gets a unique float delay for organic movement

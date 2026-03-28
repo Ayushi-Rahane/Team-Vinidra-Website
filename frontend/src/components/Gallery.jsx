@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useIsMobile from '../utils/useMobile';
 
 import img1 from '../assets/gallary/img1.png';
 import img2 from '../assets/gallary/img2.png';
@@ -56,6 +57,10 @@ const Gallery = () => {
   const counterRef = useRef(null);
   const buttonRef = useRef(null);
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
+
+  // On mobile: shorter scroll per card for snappier interaction
+  const SCROLL_AMOUNT = isMobile ? 250 : SCROLL_PER_CARD;
 
   useEffect(() => {
     const container = containerRef.current;
@@ -69,8 +74,8 @@ const Gallery = () => {
       // rect.top drops from 0 toward -(totalHeight - viewportHeight) as the user scrolls
       const scrolled = -rect.top;
 
-      const clamped = Math.max(0, Math.min(scrolled, n * SCROLL_PER_CARD));
-      const continuousIdx = clamped / SCROLL_PER_CARD;
+      const clamped = Math.max(0, Math.min(scrolled, n * SCROLL_AMOUNT));
+      const continuousIdx = clamped / SCROLL_AMOUNT;
 
       // Update counter strictly to nearest active center
       const activeIdx = Math.min(n - 1, Math.floor(continuousIdx + 0.5));
@@ -125,10 +130,10 @@ const Gallery = () => {
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll(); // run on mount
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  }, [isMobile]);
 
   const n = galleryItems.length;
-  const totalScrollHeight = n * SCROLL_PER_CARD + TAIL_SCROLL;
+  const totalScrollHeight = n * SCROLL_AMOUNT + TAIL_SCROLL;
   // Use 100vh = window.innerHeight equivalent via CSS, container height in px
   const containerHeight = totalScrollHeight + (typeof window !== 'undefined' ? window.innerHeight : 900);
 
@@ -181,13 +186,14 @@ const Gallery = () => {
                   }}
                 />
 
-                <div className="flex flex-col md:flex-row h-full animate-card-float-breath overflow-hidden">
+                <div className={`flex flex-col md:flex-row h-full ${isMobile ? '' : 'animate-card-float-breath'} overflow-hidden`}>
                   {/* Image side */}
                   <div className="relative w-full md:w-3/5 h-[45%] md:h-full overflow-hidden flex-shrink-0">
                     <img
                       src={item.image}
                       alt={item.category}
                       className="absolute inset-0 w-full h-full object-cover"
+                      loading="lazy"
                     />
                     {/* Gradient fade to bottom/right depending on md breakpoint */}
                     <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#060c1a] via-transparent to-transparent" />

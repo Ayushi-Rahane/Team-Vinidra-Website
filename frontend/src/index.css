@@ -309,3 +309,55 @@ body {
   background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%);
   animation: sweepShine 3s infinite;
 }
+
+/* ── Mobile Performance Overrides ──────────────────────────────────────────── */
+/* Defense-in-depth: disable heavy CSS animations on small screens */
+@media (max-width: 768px) {
+  /* Kill all floating CSS animations */
+  .float-container,
+  .card-float,
+  .float-bg {
+    animation: none !important;
+  }
+
+  /* Disable infinite card breath animation */
+  .animate-card-float-breath {
+    animation: none !important;
+  }
+
+  /* Disable sweepShine on buttons */
+  .btn-space-extra::before {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+
+  .btn-space-extra::after {
+    display: none !important;
+  }
+
+  /* Disable card sparkle pseudo-elements */
+  .card-glow::after {
+    display: none !important;
+  }
+
+  /* Reduce backdrop-blur on stacked elements to save GPU compositing */
+  .subteam-selector-item {
+    backdrop-filter: none;
+  }
+}
+
+/* ── Accessibility: Respect reduced motion preference ──────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .float-container,
+  .card-float,
+  .float-bg,
+  .animate-card-float-breath,
+  .animate-float {
+    animation: none !important;
+  }
+
+  .btn-space-extra::before,
+  .btn-space-extra::after {
+    animation: none !important;
+  }
+}
