@@ -38,7 +38,7 @@ export default function AchievementCard({ achievement, index }) {
 
       {/* Card Wrapper */}
       <div
-        className={`w-full md:w-5/12 ml-20 md:ml-0 ${
+        className={`w-[calc(100%-5rem)] md:w-5/12 ml-20 md:ml-0 ${
           index % 2 === 0 ? "md:mr-auto md:pr-14" : "md:ml-auto md:pl-14"
         }`}
       >
