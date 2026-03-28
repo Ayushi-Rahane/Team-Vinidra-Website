@@ -21,7 +21,8 @@ const Contact = () => {
 
       <div className="grid md:grid-cols-2 gap-12 max-w-[1100px] mx-auto">
         {/* GET IN TOUCH */}
-        <div className="relative h-full rounded-3xl border border-white/20 p-8
+        <div
+          className="relative h-full rounded-3xl border border-white/20 p-8
           bg-gradient-to-br from-white/5 via-sky-300/10 to-white/5
           backdrop-blur-md shadow-[0_8px_30px_rgba(0,242,254,0.2)]
           animate-float hover:scale-102 transition-transform duration-300 hover:shadow-[0_0_25px_rgba(0,242,254,0.3)]"
@@ -48,8 +49,12 @@ const Contact = () => {
             <label className="font-sans text-[#a0a5b8] font-medium flex items-center gap-2">
               <Phone className="w-5 h-5 text-sky-300" /> Phone
             </label>
-            <span className="ml-7 mt-1 text-white/90">Arshia Singh : +91 9594656463</span>
-            <span className="ml-7 text-white/90">Nandini Pathak : +91 7875743020</span>
+            <span className="ml-7 mt-1 text-white/90">
+              Arshia Singh : +91 9594656463
+            </span>
+            <span className="ml-7 text-white/90">
+              Nandini Pathak : +91 7875743020
+            </span>
           </div>
 
           {/* LOCATION */}
@@ -79,8 +84,9 @@ const Contact = () => {
           <div className="flex gap-4">
             {/* EMAIL */}
             <a
-              href="https://www.linkedin.com/in/vinidra-ccew?utm_source=share_via&utm_content=profile&utm_medium=member_android"
-              target="_blank" rel="noopener noreferrer"
+              href="mailto:satellite@cumminscollege.in"
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-gradient-to-tr from-cyan-400 to-sky-300 p-3 rounded-full hover:scale-110 hover:animate-pulse transition-all duration-300 shadow-lg hover:shadow-[0_0_15px_rgba(0,242,254,0.5)]"
               title="Email"
             >
@@ -101,7 +107,8 @@ const Contact = () => {
             {/* INSTAGRAM */}
             <a
               href="https://www.instagram.com/teamvinidra?igsh=MXN4b2NvNWQ5NmtuZQ=="
-              target="_blank" rel="noopener noreferrer"
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-gradient-to-tr from-pink-400 to-purple-400 p-3 rounded-full hover:scale-110 hover:animate-pulse transition-all duration-300 shadow-lg hover:shadow-[0_0_15px_rgba(255,0,255,0.4)]"
               title="Instagram"
             >
@@ -111,7 +118,8 @@ const Contact = () => {
         </div>
 
         {/* CONTACT FORM */}
-        <div className="relative h-full rounded-3xl border border-white/20 p-8
+        <div
+          className="relative h-full rounded-3xl border border-white/20 p-8
           bg-gradient-to-br from-white/5 via-sky-300/10 to-white/5
           backdrop-blur-md shadow-[0_8px_30px_rgba(0,242,254,0.2)]
           animate-float hover:scale-102 transition-transform duration-300 hover:shadow-[0_0_40px_rgba(0,242,254,0.4)]"
@@ -119,9 +127,15 @@ const Contact = () => {
           <h3 className="font-sans text-2xl font-semibold mb-6 tracking-wider text-white">
             Send a Message
           </h3>
-          <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
+          <form
+            className="flex flex-col gap-4"
+            onSubmit={(e) => e.preventDefault()}
+          >
             <div className="flex flex-col gap-2">
-              <label htmlFor="name" className="font-sans text-[#a0a5b8] font-medium">
+              <label
+                htmlFor="name"
+                className="font-sans text-[#a0a5b8] font-medium"
+              >
                 Name
               </label>
               <input
@@ -134,7 +148,10 @@ const Contact = () => {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label htmlFor="email" className="font-sans text-[#a0a5b8] font-medium">
+              <label
+                htmlFor="email"
+                className="font-sans text-[#a0a5b8] font-medium"
+              >
                 Email
               </label>
               <input
@@ -147,7 +164,10 @@ const Contact = () => {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label htmlFor="message" className="font-sans text-[#a0a5b8] font-medium">
+              <label
+                htmlFor="message"
+                className="font-sans text-[#a0a5b8] font-medium"
+              >
                 Message
               </label>
               <textarea
