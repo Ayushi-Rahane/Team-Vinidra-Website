@@ -41,7 +41,7 @@ export default function AchievementStats() {
   ];
 
   return (
-    <div className="mt-32 grid grid-cols-2 md:grid-cols-4 gap-8">
+    <div className="mt-32 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
       {stats.map((stat, i) => {
         const Icon = stat.icon;
 
@@ -60,7 +60,7 @@ export default function AchievementStats() {
             <div className={`absolute inset-0 bg-gradient-to-br ${stat.glow} opacity-0 group-hover:opacity-100 transition duration-500`} />
 
             {/* Card */}
-            <div className="relative bg-white/5 border border-white/10 backdrop-blur-xl rounded-3xl p-8 text-center transition-all duration-500 group-hover:border-white/20 group-hover:shadow-[0_0_50px_rgba(255,255,255,0.12)]">
+            <div className="relative bg-white/5 border border-white/10 backdrop-blur-xl rounded-3xl p-6 md:p-8 text-center transition-all duration-500 group-hover:border-white/20 group-hover:shadow-[0_0_50px_rgba(255,255,255,0.12)]">
 
               {/* Floating Icon */}
               <motion.div
@@ -76,7 +76,7 @@ export default function AchievementStats() {
                 initial={{ scale: 0.5, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="text-4xl md:text-5xl font-extrabold text-white mb-2 tracking-tight"
+                className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-2 tracking-tight"
               >
                 {stat.value}
               </motion.div>
