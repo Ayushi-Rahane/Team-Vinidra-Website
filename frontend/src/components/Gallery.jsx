@@ -146,8 +146,8 @@ const Gallery = () => {
           style={{ height: '100vh', paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}
         >
           {/* Section Title — Inside sticky so it scrolls as ONE group with cards */}
-          <div className="flex flex-col items-center mb-4 md:mb-8 w-full px-4" style={{ marginTop: '-4vh' }}>
-            <h2 className="text-3xl md:text-5xl font-thin tracking-[0.32em] bg-gradient-to-r from-white via-sky-300 to-white text-transparent bg-clip-text text-center mb-3 md:mb-4 uppercase drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">
+          <div className="flex flex-col items-center mb-4 md:mb-8 w-full px-4">
+            <h2 className="text-3xl md:text-5xl font-thin tracking-[0.32em] bg-gradient-to-r from-white via-sky-300 to-white text-transparent bg-clip-text text-center mb-3 md:mb-4 uppercase pb-1 md:pb-2">
               Gallery
             </h2>
             <div className="w-28 h-[1px] bg-gradient-to-r from-transparent via-sky-300 to-transparent mx-auto mb-4" />
