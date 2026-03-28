@@ -204,7 +204,7 @@ const Hero = () => {
 
             {/* Modal */}
             <motion.div
-              className="relative w-full max-w-lg rounded-3xl overflow-hidden"
+              className="relative w-full max-w-lg rounded-3xl overflow-hidden max-h-[90vh] overflow-y-auto"
               initial={{ scale: 0.8, opacity: 0, y: 60 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.85, opacity: 0, y: 40 }}
@@ -227,7 +227,7 @@ const Hero = () => {
                 <X size={18} />
               </button>
 
-              <div className="p-8 pt-7">
+              <div className="p-6 md:p-8 pt-7">
                 {/* Header */}
                 <div className="text-center mb-7">
                   <motion.div
@@ -258,7 +258,7 @@ const Hero = () => {
                     transition={{ delay: 0.15 }}
                   >
                     {/* Row: Name + UNC */}
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                       <div>
                         <label className={labelClasses}>Name</label>
                         <input
@@ -286,7 +286,7 @@ const Hero = () => {
                     </div>
 
                     {/* Row: Branch + Email */}
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                       <div>
                         <label className={labelClasses}>Branch</label>
                         <input

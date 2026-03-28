@@ -146,8 +146,8 @@ const Gallery = () => {
           style={{ height: '100vh', paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}
         >
           {/* Section Title — Inside sticky so it scrolls as ONE group with cards */}
-          <div className="flex flex-col items-center mb-8 w-full px-4" style={{ marginTop: '-4vh' }}>
-            <h2 className="text-4xl md:text-5xl font-thin tracking-[0.32em] bg-gradient-to-r from-white via-sky-300 to-white text-transparent bg-clip-text text-center mb-4 uppercase drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">
+          <div className="flex flex-col items-center mb-4 md:mb-8 w-full px-4" style={{ marginTop: '-4vh' }}>
+            <h2 className="text-3xl md:text-5xl font-thin tracking-[0.32em] bg-gradient-to-r from-white via-sky-300 to-white text-transparent bg-clip-text text-center mb-3 md:mb-4 uppercase drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">
               Gallery
             </h2>
             <div className="w-28 h-[1px] bg-gradient-to-r from-transparent via-sky-300 to-transparent mx-auto mb-4" />
@@ -157,7 +157,7 @@ const Gallery = () => {
           </div>
 
           {/* Card Stack */}
-          <div className="relative w-full max-w-[1024px] px-[6%] sm:px-10 flex-shrink-0" style={{ height: '420px' }}>
+          <div className="relative w-full max-w-[1024px] px-[6%] sm:px-10 flex-shrink-0" style={{ height: '520px' }}>
             {galleryItems.map((item, i) => (
               <div
                 key={item.id}
@@ -181,22 +181,22 @@ const Gallery = () => {
                   }}
                 />
 
-                <div className="flex h-full animate-card-float-breath">
+                <div className="flex flex-col md:flex-row h-full animate-card-float-breath overflow-hidden">
                   {/* Image side */}
-                  <div className="relative w-3/5 h-full overflow-hidden flex-shrink-0">
+                  <div className="relative w-full md:w-3/5 h-[45%] md:h-full overflow-hidden flex-shrink-0">
                     <img
                       src={item.image}
                       alt={item.category}
                       className="absolute inset-0 w-full h-full object-cover"
                     />
-                    {/* Gradient fade to right */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#060c1a]" />
+                    {/* Gradient fade to bottom/right depending on md breakpoint */}
+                    <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#060c1a] via-transparent to-transparent" />
                     {/* Subtle top gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-transparent" />
                   </div>
 
                   {/* Content side */}
-                  <div className="flex flex-col justify-center px-10 py-8 flex-1 min-w-0">
+                  <div className="flex flex-col justify-center px-6 py-6 md:px-10 md:py-8 flex-1 min-w-0">
                     {/* Card number */}
                     <span
                       className="text-xs font-mono mb-5 tracking-widest"
@@ -211,17 +211,17 @@ const Gallery = () => {
                       {item.tag}
                     </span>
 
-                    <h3 className="text-2xl lg:text-3xl font-thin tracking-wider text-white mb-4 leading-tight">
+                    <h3 className="text-xl md:text-2xl lg:text-3xl font-thin tracking-wider text-white mb-2 md:mb-4 leading-tight truncate">
                       {item.category}
                     </h3>
 
-                    <p className="text-white/55 text-sm leading-relaxed">
+                    <p className="text-white/55 text-xs md:text-sm leading-relaxed line-clamp-3 md:line-clamp-none">
                       {item.description}
                     </p>
 
                     {/* Decorative line */}
                     <div
-                      className="mt-8 h-[1px] w-16 rounded-full"
+                      className="mt-4 md:mt-8 h-[1px] w-12 md:w-16 rounded-full"
                       style={{ background: `linear-gradient(90deg, ${item.accent}88, transparent)` }}
                     />
                   </div>
