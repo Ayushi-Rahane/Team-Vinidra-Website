@@ -275,7 +275,7 @@ const Hero = () => {
                           name="unc"
                           value={formData.unc}
                           onChange={handleChange}
-                          placeholder="e.g. 23BCE1234"
+                          placeholder="e.g. UCE2024123"
                           required
                           className={inputClasses}
                         />
