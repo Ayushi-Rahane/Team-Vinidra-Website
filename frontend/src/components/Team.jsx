@@ -155,16 +155,25 @@ export default function Team() {
         className="relative w-[260px] h-[260px] mb-20 flex-shrink-0"
       >
         <OrbitCanvas />
-        {/* Central PM card */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-[120px] text-center overflow-hidden rounded-2xl border border-white/15
+        {/* Central PM cards */}
+        <div className="absolute inset-0 flex items-center justify-center gap-[10px]">
+          <div className="w-[95px] text-center overflow-hidden rounded-2xl border border-white/15
             bg-gradient-to-bl from-sky-400/15 via-white/5 to-transparent
-            backdrop-blur-md p-4 shadow-lg">
-            <div className="w-10 h-10 rounded-full border border-sky-300/50 bg-sky-900/20 flex items-center justify-center mx-auto mb-2">
-              <Users className="w-5 h-5 text-sky-300" />
+            backdrop-blur-md px-2 py-3 shadow-lg flex flex-col items-center">
+            <div className="w-8 h-8 rounded-full border border-sky-300/50 bg-sky-900/20 flex items-center justify-center flex-shrink-0 mb-[6px]">
+              <Users className="w-3.5 h-3.5 text-sky-300" />
             </div>
-            <p className="text-white text-[10px] tracking-[0.15em] uppercase leading-tight">Arshia Singh <br/> & Nandini Pathak</p>
-            <p className="text-sky-300/70 text-[8px] tracking-wider mt-1 uppercase">Project Managers</p>
+            <p className="text-white text-[8px] tracking-[0.15em] uppercase leading-tight mt-1 mb-1">Arshia<br/>Singh</p>
+            <p className="text-sky-300/70 text-[6.5px] tracking-wider uppercase">Project Manager</p>
+          </div>
+          <div className="w-[95px] text-center overflow-hidden rounded-2xl border border-white/15
+            bg-gradient-to-bl from-sky-400/15 via-white/5 to-transparent
+            backdrop-blur-md px-2 py-3 shadow-lg flex flex-col items-center">
+            <div className="w-8 h-8 rounded-full border border-sky-300/50 bg-sky-900/20 flex items-center justify-center flex-shrink-0 mb-[6px]">
+              <Users className="w-3.5 h-3.5 text-sky-300" />
+            </div>
+            <p className="text-white text-[8px] tracking-[0.15em] uppercase leading-tight mt-1 mb-1">Nandini<br/>Pathak</p>
+            <p className="text-sky-300/70 text-[6.5px] tracking-wider uppercase">Project Manager</p>
           </div>
         </div>
       </motion.div>

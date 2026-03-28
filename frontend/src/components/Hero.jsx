@@ -6,14 +6,11 @@ import { SparklesCore } from './ui/SparklesCore';
 import { Button } from './ui/moving-border';
 
 const subsystems = [
-  'Structures',
   'Avionics',
-  'Propulsion',
-  'Payload',
-  'Recovery',
-  'Ground Station',
+  'Mechanical',
   'Software',
-  'Media & Outreach',
+  'Payload',
+  'Electrical',
 ];
 
 // ── Google Apps Script Web App URL ──

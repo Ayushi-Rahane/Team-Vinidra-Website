@@ -28,11 +28,10 @@ import Footer from './Footer';
 import { SparklesCore } from './ui/SparklesCore';
 
 // --- DATA STRUCTURE ---
-const pmData = {
-  name: "Arshia Singh & Nandini Pathak",
-  role: "Project Managers / Systems Engineers",
-  designation: "Leads"
-};
+const pmDataList = [
+  { name: "Arshia Singh", role: "Project Manager / Systems Engineer", designation: "Lead" },
+  { name: "Nandini Pathak", role: "Project Manager / Systems Engineer", designation: "Lead" }
+];
 
 const teamStructure = {
   id: "root",
@@ -217,26 +216,32 @@ export default function TeamPage() {
 
   // Render Functions
   const renderPM = () => (
-    <div className="flex justify-center mb-16 relative">
-      <div className="absolute inset-0 bg-sky-400/10 blur-[60px] rounded-full w-64 h-64 mx-auto" />
-      <div className="relative w-full max-w-sm">
-        <div className="group relative overflow-hidden rounded-3xl border border-white/15
-          bg-gradient-to-bl from-sky-400/15 via-white/5 to-transparent
-          backdrop-blur-md p-8 shadow-lg flex flex-col items-center justify-center text-center">
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-100
-            transition duration-700
-            bg-[radial-gradient(circle_at_50%_30%,rgba(56,189,248,0.25),transparent_60%)]" />
-          <div className="relative w-20 h-20 mb-4 rounded-full border-2 border-sky-300/50 flex items-center justify-center bg-sky-900/20 text-sky-300">
-            <User className="w-10 h-10" />
-            <div className="absolute inset-0 rounded-full border border-sky-300/20 animate-ping opacity-50" style={{ animationDuration: '3s' }} />
-          </div>
-          <h2 className="relative text-2xl font-thin tracking-[0.32em] bg-gradient-to-r from-white via-sky-300 to-white text-transparent bg-clip-text uppercase">{pmData.name}</h2>
-          <p className="relative text-sky-300/80 text-xs mt-2 tracking-[0.25em] uppercase">{pmData.role}</p>
-          <div className="relative mt-4 inline-block px-3 py-1 border border-white/15 rounded-full text-sky-200/80 text-[10px] tracking-widest uppercase">
-            {pmData.designation}
+    <div className="flex flex-wrap justify-center gap-8 mb-16 relative w-full items-stretch">
+      <div className="absolute inset-0 bg-sky-400/10 blur-[60px] rounded-full w-full max-w-2xl h-64 mx-auto pointer-events-none" />
+      {pmDataList.map((pm, i) => (
+        <div key={i} className="relative w-full sm:w-[calc(50%-1rem)] max-w-[320px]">
+          <div className="group relative h-full overflow-hidden rounded-3xl border border-white/15
+            bg-gradient-to-bl from-sky-400/15 via-white/5 to-transparent
+            backdrop-blur-md p-8 shadow-lg flex flex-col items-center justify-center text-center">
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100
+              transition duration-700
+              bg-[radial-gradient(circle_at_50%_30%,rgba(56,189,248,0.25),transparent_60%)]" />
+            <div className="relative w-20 h-20 mb-4 rounded-full border-2 border-sky-300/50 flex items-center justify-center bg-sky-900/20 text-sky-300 flex-shrink-0">
+              <User className="w-10 h-10" />
+              <div className="absolute inset-0 rounded-full border border-sky-300/20 animate-ping opacity-50" style={{ animationDuration: '3s' }} />
+            </div>
+            <div className="flex-1 flex flex-col justify-center w-full">
+              <h2 className="relative text-2xl font-thin tracking-[0.32em] bg-gradient-to-r from-white via-sky-300 to-white text-transparent bg-clip-text uppercase">{pm.name}</h2>
+              <p className="relative text-sky-300/80 text-xs mt-2 tracking-[0.25em] uppercase">{pm.role}</p>
+              <div>
+                <div className="relative mt-4 inline-block px-3 py-1 border border-white/15 rounded-full text-sky-200/80 text-[10px] tracking-widest uppercase">
+                  {pm.designation}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      ))}
     </div>
   );
 
