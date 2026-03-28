@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.webp";
-import { Linkedin, Mail, Instagram } from "lucide-react";
+import { Linkedin, Mail, Instagram, Menu, X } from "lucide-react";
 
 const navLinks = [
   { name: "Home", id: "home" },
@@ -16,6 +16,7 @@ const navLinks = [
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -81,6 +82,7 @@ const Navbar = () => {
 
   // MAIN NAVIGATION LOGIC
   const handleNavClick = (id) => {
+    setMobileMenuOpen(false);
     if (location.pathname === "/") {
       // On landing page: scroll to section, let scroll spy handle active state
       const el = document.getElementById(id);
@@ -119,7 +121,7 @@ const Navbar = () => {
       {/* Logo */}
       <button
         onClick={() => handleNavClick("home")}
-        className="flex items-center gap-3 shrink-0"
+        className="flex items-center gap-3 shrink-0 relative z-[60]"
       >
         <img
           src={logo}
@@ -165,6 +167,43 @@ const Navbar = () => {
         <a href="mailto:satellite@cumminscollege.in" className="text-white/60 hover:text-white transition-all duration-300 hover:scale-110">
           <Mail size={20} strokeWidth={1.5} />
         </a>
+      </div>
+
+      {/* Mobile Menu Toggle Button */}
+      <button 
+        className="lg:hidden text-white/80 hover:text-white p-2 relative z-[60]"
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+      >
+        {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+      </button>
+
+      {/* Mobile Full-Screen Overlay Nav */}
+      <div 
+        className={`fixed inset-0 z-[55] bg-black/95 backdrop-blur-xl lg:hidden transition-all duration-500 flex flex-col items-center justify-center gap-8 ${
+          mobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full pointer-events-none"
+        }`}
+      >
+        <nav className="flex flex-col items-center gap-6 mt-16">
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.id;
+            return (
+              <button
+                key={link.name}
+                onClick={() => handleNavClick(link.id)}
+                className={`text-2xl font-thin tracking-widest uppercase transition-colors duration-300 ${
+                  isActive ? "text-sky-400 drop-shadow-[0_0_10px_rgba(56,189,248,0.8)]" : "text-white/60 hover:text-white"
+                }`}
+              >
+                {link.name}
+              </button>
+            );
+          })}
+        </nav>
+        <div className="flex items-center gap-8 mt-10">
+          <a href="https://www.linkedin.com/in/vinidra-ccew?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white hover:scale-110 transition-all"><Linkedin size={28} strokeWidth={1.5} /></a>
+          <a href="https://www.instagram.com/teamvinidra?igsh=MXN4b2NvNWQ5NmtuZQ==" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white hover:scale-110 transition-all"><Instagram size={28} strokeWidth={1.5} /></a>
+          <a href="mailto:satellite@cumminscollege.in" className="text-white/60 hover:text-white hover:scale-110 transition-all"><Mail size={28} strokeWidth={1.5} /></a>
+        </div>
       </div>
     </header>
   );

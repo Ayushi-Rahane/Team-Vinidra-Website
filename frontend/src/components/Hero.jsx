@@ -16,6 +16,10 @@ const subsystems = [
   'Media & Outreach',
 ];
 
+// ── Google Apps Script Web App URL ──
+// Replace this with your deployed Apps Script URL (see setup instructions)
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyBW-gRW7OZkPbkp_GOG-BiQLZgVMtD8cvUHaPIHKvJbAW3zQ3igrWCxLDj01QgthEHeA/exec';
+
 const inputClasses =
   'w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 outline-none transition-all duration-300 focus:border-sky-400/60 focus:bg-white/[0.08] focus:shadow-[0_0_20px_rgba(56,189,248,0.15)] text-sm tracking-wide';
 
@@ -26,6 +30,8 @@ const Hero = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     unc: '',
@@ -39,15 +45,32 @@ const Hero = () => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Recruitment form submitted:', formData);
-    setSubmitted(true);
-    setTimeout(() => {
-      setShowForm(false);
-      setSubmitted(false);
-      setFormData({ name: '', unc: '', branch: '', email: '', subsystem: '', questions: '' });
-    }, 2200);
+    setIsSubmitting(true);
+    setSubmitError('');
+
+    try {
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      // no-cors returns opaque response, so we treat it as success
+      setSubmitted(true);
+      setTimeout(() => {
+        setShowForm(false);
+        setSubmitted(false);
+        setFormData({ name: '', unc: '', branch: '', email: '', subsystem: '', questions: '' });
+      }, 2200);
+    } catch (error) {
+      console.error('Submission error:', error);
+      setSubmitError('Failed to submit. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -63,7 +86,7 @@ const Hero = () => {
         <SplitText
           tag="h1"
           text="TEAM VINIDRA"
-          className={`font-thin tracking-[0.32em] text-white text-5xl md:text-6xl lg:text-7xl uppercase leading-tight mb-4 whitespace-nowrap transition-all duration-300 ${isHovered ? 'text-glowing-sparkle' : ''}`}
+          className={`font-thin tracking-[0.32em] text-white text-3xl sm:text-4xl md:text-6xl lg:text-7xl uppercase leading-tight mb-4 whitespace-nowrap transition-all duration-300 ${isHovered ? 'text-glowing-sparkle' : ''}`}
           startDelay={0}
           delay={80}
           duration={1.5}
@@ -129,13 +152,13 @@ const Hero = () => {
             >
               <Button
                 borderRadius="2rem"
-                className="bg-black/20 border-slate-800/40 backdrop-blur-sm px-8 py-3 font-thin tracking-[0.35em] text-white/80 text-[15px] md:text-base leading-relaxed cursor-pointer"
+                className="bg-black/20 border-slate-800/40 backdrop-blur-sm px-6 py-3 font-thin tracking-[0.15em] text-white/80 text-xs md:text-sm leading-relaxed cursor-pointer"
                 containerClassName="h-auto w-auto"
                 onClick={() => setShowForm(true)}
               >
-                <span className="flex items-center gap-2 font-semibold">
-                  <UserPlus size={18} strokeWidth={1.5} />
-                  Join the Mission
+                <span className="flex items-center gap-2 font-semibold text-center mt-1">
+                  <UserPlus size={18} strokeWidth={1.5} className="shrink-0" />
+                  <span className="uppercase">Recruitments are now open!<br className="md:hidden" /> Click here to register</span>
                 </span>
               </Button>
             </motion.div>
@@ -181,7 +204,7 @@ const Hero = () => {
 
             {/* Modal */}
             <motion.div
-              className="relative w-full max-w-lg rounded-3xl overflow-hidden"
+              className="relative w-full max-w-lg rounded-3xl overflow-hidden max-h-[90vh] overflow-y-auto"
               initial={{ scale: 0.8, opacity: 0, y: 60 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.85, opacity: 0, y: 40 }}
@@ -204,7 +227,7 @@ const Hero = () => {
                 <X size={18} />
               </button>
 
-              <div className="p-8 pt-7">
+              <div className="p-6 md:p-8 pt-7">
                 {/* Header */}
                 <div className="text-center mb-7">
                   <motion.div
@@ -235,7 +258,7 @@ const Hero = () => {
                     transition={{ delay: 0.15 }}
                   >
                     {/* Row: Name + UNC */}
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                       <div>
                         <label className={labelClasses}>Name</label>
                         <input
@@ -263,7 +286,7 @@ const Hero = () => {
                     </div>
 
                     {/* Row: Branch + Email */}
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                       <div>
                         <label className={labelClasses}>Branch</label>
                         <input
@@ -329,20 +352,45 @@ const Hero = () => {
                       />
                     </div>
 
+                    {/* Error message */}
+                    {submitError && (
+                      <motion.p
+                        initial={{ opacity: 0, y: -5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-red-400/90 text-xs tracking-wider text-center"
+                      >
+                        {submitError}
+                      </motion.p>
+                    )}
+
                     {/* Submit */}
                     <motion.button
                       type="submit"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.97 }}
-                      className="w-full mt-2 py-3.5 rounded-xl font-medium tracking-[0.2em] uppercase text-sm text-white cursor-pointer flex items-center justify-center gap-2 transition-all duration-300"
+                      disabled={isSubmitting}
+                      whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                      whileTap={{ scale: isSubmitting ? 1 : 0.97 }}
+                      className={`w-full mt-2 py-3.5 rounded-xl font-medium tracking-[0.2em] uppercase text-sm text-white flex items-center justify-center gap-2 transition-all duration-300 ${isSubmitting ? 'opacity-60 cursor-wait' : 'cursor-pointer'}`}
                       style={{
                         background: 'linear-gradient(135deg, rgba(56,189,248,0.25), rgba(99,102,241,0.25))',
                         border: '1px solid rgba(56,189,248,0.3)',
                         boxShadow: '0 0 30px rgba(56,189,248,0.15)',
                       }}
                     >
-                      <Send size={16} strokeWidth={1.5} />
-                      Submit Application
+                      {isSubmitting ? (
+                        <>
+                          <motion.div
+                            className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 0.8, repeat: Infinity, ease: 'linear' }}
+                          />
+                          Submitting...
+                        </>
+                      ) : (
+                        <>
+                          <Send size={16} strokeWidth={1.5} />
+                          Submit Application
+                        </>
+                      )}
                     </motion.button>
                   </motion.form>
                 ) : (

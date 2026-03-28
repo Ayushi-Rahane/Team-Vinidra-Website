@@ -4,7 +4,7 @@ import ShootingStars from "./ui/ShootingStars";
 export default function Footer() {
   return (
     <footer className="relative z-[30] mt-24 bg-black border-t border-gray-800 overflow-hidden">
-      
+
       {/* SHOOTING STARS */}
       <ShootingStars starCount={15} />
 
@@ -22,7 +22,7 @@ export default function Footer() {
             </h2>
 
             <p className="text-gray-400 leading-relaxed max-w-sm xl:max-w-md mb-4">
-              A premier women-led aerospace innovation lab at MKSSS’s Cummins College of Engineering for Women, Pune. 
+              A premier women-led aerospace innovation team at MKSSS’s Cummins College of Engineering for Women, Pune.
             </p>
             <p className="text-gray-400 leading-relaxed max-w-sm xl:max-w-md">
               We bridge the gap between theoretical academia and practical space engineering. From designing functional CubeSats to executing advanced Model Rocketry systems, our mission is to empower the next generation of female aerospace leaders.
@@ -90,7 +90,7 @@ export default function Footer() {
               <p className="flex items-start gap-3 leading-relaxed w-full">
                 <MapPin size={24} className="text-sky-400 shrink-0 mt-0.5" />
                 <span>
-                  MKSSS's Cummins College of Engineering for Women, <br/>
+                  MKSSS's Cummins College of Engineering for Women, <br />
                   Pune, Maharashtra 411052
                 </span>
               </p>
@@ -107,8 +107,8 @@ export default function Footer() {
               <div className="flex items-start gap-3">
                 <Phone size={18} className="text-sky-400 shrink-0 mt-0.5" />
                 <div className="flex flex-col gap-1.5">
-                  <span>Arshia Singh: <a href="tel:+911234567890" className="hover:text-white transition-colors">12345 67890</a></span>
-                  <span>Nandini Pathak: <a href="tel:+919876543210" className="hover:text-white transition-colors">98765 43210</a></span>
+                  <span>Arshia Singh: <a href="tel:+91 9594656463" className="hover:text-white transition-colors">+91 9594656463</a></span>
+                  <span>Nandini Pathak: <a href="tel:+91 7875743020" className="hover:text-white transition-colors">+91 7875743020</a></span>
                 </div>
               </div>
             </div>
