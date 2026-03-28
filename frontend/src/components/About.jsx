@@ -62,7 +62,7 @@ const About = () => {
               </div>
 
               <p className="text-white/80 leading-relaxed text-[15px]">
-                Team Vinidra is a student-driven aerospace innovation group
+                Team Vinidra is a student-driven aerospace innovation team
                 focused on CubeSat missions, rocket systems and applied space
                 research. Members gain real engineering exposure through
                 collaborative mission development.

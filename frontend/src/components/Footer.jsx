@@ -22,7 +22,7 @@ export default function Footer() {
             </h2>
 
             <p className="text-gray-400 leading-relaxed max-w-sm xl:max-w-md mb-4">
-              A premier women-led aerospace innovation lab at MKSSS’s Cummins College of Engineering for Women, Pune.
+              A premier women-led aerospace innovation team at MKSSS’s Cummins College of Engineering for Women, Pune.
             </p>
             <p className="text-gray-400 leading-relaxed max-w-sm xl:max-w-md">
               We bridge the gap between theoretical academia and practical space engineering. From designing functional CubeSats to executing advanced Model Rocketry systems, our mission is to empower the next generation of female aerospace leaders.

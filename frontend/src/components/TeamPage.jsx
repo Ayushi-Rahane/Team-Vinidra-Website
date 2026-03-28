@@ -29,9 +29,9 @@ import { SparklesCore } from './ui/SparklesCore';
 
 // --- DATA STRUCTURE ---
 const pmData = {
-  name: "Aditi Sant",
-  role: "Project Manager / Systems Engineer",
-  designation: "Lead"
+  name: "Arshia Singh & Nandini Pathak",
+  role: "Project Managers / Systems Engineers",
+  designation: "Leads"
 };
 
 const teamStructure = {

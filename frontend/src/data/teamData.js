@@ -1,10 +1,10 @@
 // Master team data sourced from the official team structure image
 
 export const projectManager = {
-  name: "Aditi Sant",
-  role: "Project Manager / Systems Engineer",
-  designation: "Lead",
-  classYear: "TY-COMP",
+  name: "Arshia Singh & Nandini Pathak",
+  role: "Project Managers / Systems Engineers",
+  designation: "Leads",
+  classYear: "SY-ENTC & SY-ENTC",
   image: null, // replace with actual image path
 };
 

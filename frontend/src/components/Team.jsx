@@ -163,8 +163,8 @@ export default function Team() {
             <div className="w-10 h-10 rounded-full border border-sky-300/50 bg-sky-900/20 flex items-center justify-center mx-auto mb-2">
               <Users className="w-5 h-5 text-sky-300" />
             </div>
-            <p className="text-white text-[10px] tracking-[0.15em] uppercase leading-tight">Aditi Sant</p>
-            <p className="text-sky-300/70 text-[8px] tracking-wider mt-1 uppercase">Project Manager</p>
+            <p className="text-white text-[10px] tracking-[0.15em] uppercase leading-tight">Arshia Singh <br/> & Nandini Pathak</p>
+            <p className="text-sky-300/70 text-[8px] tracking-wider mt-1 uppercase">Project Managers</p>
           </div>
         </div>
       </motion.div>
