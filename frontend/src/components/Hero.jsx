@@ -152,13 +152,13 @@ const Hero = () => {
             >
               <Button
                 borderRadius="2rem"
-                className="bg-black/20 border-slate-800/40 backdrop-blur-sm px-8 py-3 font-thin tracking-[0.35em] text-white/80 text-[15px] md:text-base leading-relaxed cursor-pointer"
+                className="bg-black/20 border-slate-800/40 backdrop-blur-sm px-6 py-3 font-thin tracking-[0.15em] text-white/80 text-xs md:text-sm leading-relaxed cursor-pointer"
                 containerClassName="h-auto w-auto"
                 onClick={() => setShowForm(true)}
               >
-                <span className="flex items-center gap-2 font-semibold">
-                  <UserPlus size={18} strokeWidth={1.5} />
-                  Join the Mission
+                <span className="flex items-center gap-2 font-semibold text-center mt-1">
+                  <UserPlus size={18} strokeWidth={1.5} className="shrink-0" />
+                  <span className="uppercase">Recruitments are now open!<br className="md:hidden" /> Click here to register</span>
                 </span>
               </Button>
             </motion.div>
