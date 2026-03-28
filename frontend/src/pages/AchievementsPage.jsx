@@ -75,7 +75,7 @@ export default function AchievementsPage() {
           <AchievementTimeline />
 
           {/* Stats */}
-          <AchievementStats />
+          {/* <AchievementStats /> */}
 
         </div>
       </main>
