@@ -72,7 +72,7 @@ export default function Footer() {
             <ul className="space-y-3 text-gray-400 relative z-20">
               <li><a href="/#home" className="hover:text-sky-400 transition-colors">Home</a></li>
               <li><a href="/#about" className="hover:text-sky-400 transition-colors">About Us</a></li>
-              <li><a href="/#team" className="hover:text-sky-400 transition-colors">Web Team</a></li>
+              <li><a href="/#team" className="hover:text-sky-400 transition-colors">Team</a></li>
               <li><a href="/#achievements" className="hover:text-sky-400 transition-colors">Achievements</a></li>
               <li><a href="/#gallery" className="hover:text-sky-400 transition-colors">Gallery</a></li>
               <li><a href="/#knowledge-hub" className="hover:text-sky-400 transition-colors">Knowledge Hub</a></li>
