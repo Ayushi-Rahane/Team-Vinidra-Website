@@ -34,36 +34,35 @@ const Navbar = () => {
     };
   }, [mobileMenuOpen]);
 
-
   useEffect(() => {
-  const handleScroll = () => {
-    // Navbar blur
-    setScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      // Navbar blur
+      setScrolled(window.scrollY > 50);
 
-    // Close mobile menu on scroll
-    if (mobileMenuOpen) setMobileMenuOpen(false);
+      // Close mobile menu on scroll
+      if (mobileMenuOpen) setMobileMenuOpen(false);
 
-    // Scroll spy on landing page
-    if (location.pathname === "/") {
-      const scrollY = window.scrollY + 120;
-      let current = "home";
+      // Scroll spy on landing page
+      if (location.pathname === "/") {
+        const scrollY = window.scrollY + 120;
+        let current = "home";
 
-      for (const link of navLinks) {
-        const el = document.getElementById(link.id);
-        if (el) {
-          const top = el.offsetTop;
-          const bottom = top + el.offsetHeight;
-          if (scrollY >= top && scrollY < bottom) current = link.id;
+        for (const link of navLinks) {
+          const el = document.getElementById(link.id);
+          if (el) {
+            const top = el.offsetTop;
+            const bottom = top + el.offsetHeight;
+            if (scrollY >= top && scrollY < bottom) current = link.id;
+          }
         }
+
+        setActiveSection(current);
       }
+    };
 
-      setActiveSection(current);
-    }
-  };
-
-  window.addEventListener("scroll", handleScroll, { passive: true });
-  return () => window.removeEventListener("scroll", handleScroll);
-}, [location.pathname, mobileMenuOpen]);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [location.pathname, mobileMenuOpen]);
 
   useEffect(() => {
     setMobileMenuOpen(false);
@@ -96,30 +95,32 @@ const Navbar = () => {
   // MAIN NAVIGATION LOGIC
   const handleNavClick = (id) => {
     setMobileMenuOpen(false);
+
+    // Only scroll if we are on the landing page
     if (location.pathname === "/") {
-      // On landing page: scroll to section, let scroll spy handle active state
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-        setActiveSection(id);
-      } else if (dedicatedPages[id]) {
-        // Section doesn't exist on landing page, navigate to dedicated page
-        navigate(dedicatedPages[id]);
-        setActiveSection(id);
-      }
-    } else {
-      // On any other page: navigate to dedicated page or back to landing
-      if (dedicatedPages[id]) {
-        navigate(dedicatedPages[id]);
-        setActiveSection(id);
-      } else {
-        navigate("/#" + id);
-        setTimeout(() => {
-          const el = document.getElementById(id);
-          if (el) el.scrollIntoView({ behavior: "smooth" });
+      const scrollToSection = () => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
           setActiveSection(id);
-        }, 100);
-      }
+        } else {
+          // Retry after a short delay if the section is not yet rendered (lazy-load)
+          setTimeout(scrollToSection, 50);
+        }
+      };
+
+      scrollToSection();
+    } else {
+      // On other pages, navigate to landing page first
+      navigate("/");
+
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+          setActiveSection(id);
+        }
+      }, 100); // give landing page time to mount
     }
   };
 
@@ -197,12 +198,12 @@ const Navbar = () => {
 
       {/* Mobile Menu Toggle Button */}
       <button
-  className="lg:hidden text-white/80 hover:text-white p-2 relative z-[60]"
-  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-  aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
->
-  {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-</button>
+        className="lg:hidden text-white/80 hover:text-white p-2 relative z-[60]"
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+      >
+        {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+      </button>
 
       {/* Mobile Full-Screen Overlay Nav */}
       <div
