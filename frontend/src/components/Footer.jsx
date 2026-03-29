@@ -72,7 +72,7 @@ export default function Footer() {
             <ul className="space-y-3 text-gray-400 relative z-20">
               <li><a href="/#home" className="hover:text-sky-400 transition-colors">Home</a></li>
               <li><a href="/#about" className="hover:text-sky-400 transition-colors">About Us</a></li>
-              <li><a href="/#team" className="hover:text-sky-400 transition-colors">Web Team</a></li>
+              <li><a href="/#team" className="hover:text-sky-400 transition-colors">Team</a></li>
               <li><a href="/#achievements" className="hover:text-sky-400 transition-colors">Achievements</a></li>
               <li><a href="/#gallery" className="hover:text-sky-400 transition-colors">Gallery</a></li>
               <li><a href="/#knowledge-hub" className="hover:text-sky-400 transition-colors">Knowledge Hub</a></li>
@@ -103,14 +103,7 @@ export default function Footer() {
                 </a>
               </p>
 
-              {/* Phone */}
-              <div className="flex items-start gap-3">
-                <Phone size={18} className="text-sky-400 shrink-0 mt-0.5" />
-                <div className="flex flex-col gap-1.5">
-                  <span>Arshia Singh: <a href="tel:+91 9594656463" className="hover:text-white transition-colors">+91 9594656463</a></span>
-                  <span>Nandini Pathak: <a href="tel:+91 7875743020" className="hover:text-white transition-colors">+91 7875743020</a></span>
-                </div>
-              </div>
+
             </div>
           </div>
 
