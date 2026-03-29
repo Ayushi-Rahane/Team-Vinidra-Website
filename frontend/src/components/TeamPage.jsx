@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import useIsMobile from '../utils/useMobile';
 import {
   ChevronLeft,
@@ -169,7 +170,9 @@ const ParticlesBackground = () => {
 };
 
 export default function TeamPage() {
-  const [path, setPath] = useState(['root']);
+  const location = useLocation();
+  const initialPath = location.state?.initialPath || ['root'];
+  const [path, setPath] = useState(initialPath);
   const [direction, setDirection] = useState(1); // 1 = forward, -1 = backward
   const isMobile = useIsMobile();
 

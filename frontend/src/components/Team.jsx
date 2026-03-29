@@ -101,24 +101,28 @@ const divisions = [
     label: 'KarveSat',
     desc: 'Avionics · Electrical · Mechanical · Payload · Software',
     count: '5 Subteams',
+    initialPath: ['root', 'tech', 'karvesat'],
   },
   {
     icon: Rocket,
     label: 'Rocketry',
     desc: 'Rocket Design · Avionics · Flight Software',
     count: '3 Subteams',
+    initialPath: ['root', 'tech', 'rocketry'],
   },
   {
     icon: Cpu,
     label: 'CanSat',
     desc: 'OBC · Payload · ADCS · Power · S&T',
     count: '5 Subteams',
+    initialPath: ['root', 'tech', 'cansat'],
   },
   {
     icon: Users,
     label: 'Operations',
     desc: 'Graphic Design · Finance · PR · Web · Events',
     count: '6 Departments',
+    initialPath: ['root', 'nontech'],
   },
 ];
 
@@ -213,7 +217,7 @@ export default function Team() {
                 hover:from-sky-400/30 hover:via-sky-400/10
                 transition-all duration-500 backdrop-blur-md p-5 text-center shadow-lg
                 cursor-pointer"
-              onClick={() => navigate('/team')}
+              onClick={() => navigate('/team', { state: { initialPath: div.initialPath } })}
             >
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100
                 transition duration-700
