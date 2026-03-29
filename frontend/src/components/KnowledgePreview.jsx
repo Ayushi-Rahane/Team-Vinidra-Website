@@ -148,7 +148,7 @@ const KnowledgePreview = () => {
               className="absolute cursor-pointer"
               style={getPositionStyle(idx)}
             >
-              <div className="relative w-62 md:w-80 h-[75vw] md:h-[24rem] rounded-3xl overflow-hidden shadow-xl hover:scale-105 transition-transform duration-500">
+              <div className="relative w-58 md:w-80 h-[75vw] md:h-[24rem] rounded-3xl overflow-hidden shadow-xl hover:scale-105 transition-transform duration-500">
                 {/* Background Image */}
                 <div
                   className="absolute inset-0 bg-cover bg-center"
