@@ -16,8 +16,7 @@ const subsystems = [
 
 // ── Google Apps Script Web App URL ──
 // Replace this with your deployed Apps Script URL (see setup instructions)
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyBW-gRW7OZkPbkp_GOG-BiQLZgVMtD8cvUHaPIHKvJbAW3zQ3igrWCxLDj01QgthEHeA/exec';
-
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxj__Z1-G3tUgWctsiR6dwkqCEeAIEwj7PZ520BPZHQQ5HCi5sCBgyF_8opE-b51IsOUg/exec';
 const inputClasses =
   'w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 outline-none transition-all duration-300 focus:border-sky-400/60 focus:bg-white/[0.08] focus:shadow-[0_0_20px_rgba(56,189,248,0.15)] text-sm tracking-wide';
 
@@ -36,6 +35,7 @@ const Hero = () => {
     unc: '',
     branch: '',
     email: '',
+    year: '',
     subsystem: '',
     questions: '',
   });
@@ -62,7 +62,7 @@ const Hero = () => {
       setTimeout(() => {
         setShowForm(false);
         setSubmitted(false);
-        setFormData({ name: '', unc: '', branch: '', email: '', subsystem: '', questions: '' });
+        setFormData({ name: '', unc: '', branch: '', email: '', year: '', subsystem: '', questions: '' });
       }, 2200);
     } catch (error) {
       console.error('Submission error:', error);
@@ -312,30 +312,54 @@ const Hero = () => {
                       </div>
                     </div>
 
-                    {/* Subsystem select */}
-                    <div>
-                      <label className={labelClasses}>Subsystem</label>
-                      <select
-                        name="subsystem"
-                        value={formData.subsystem}
-                        onChange={handleChange}
-                        required
-                        className={`${inputClasses} appearance-none cursor-pointer`}
-                        style={{
-                          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%2338bdf8' stroke-width='1.5' fill='none'/%3E%3C/svg%3E")`,
-                          backgroundRepeat: 'no-repeat',
-                          backgroundPosition: 'right 16px center',
-                        }}
-                      >
-                        <option value="" disabled className="bg-slate-900 text-white/40">
-                          Select a subsystem
-                        </option>
-                        {subsystems.map((s) => (
-                          <option key={s} value={s} className="bg-slate-900 text-white">
-                            {s}
+                    {/* Row: Year + Subsystem */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                      {/* Year of study */}
+                      <div>
+                        <label className={labelClasses}>Year of Study</label>
+                        <select
+                          name="year"
+                          value={formData.year}
+                          onChange={handleChange}
+                          required
+                          className={`${inputClasses} appearance-none cursor-pointer`}
+                          style={{
+                            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%2338bdf8' stroke-width='1.5' fill='none'/%3E%3C/svg%3E")`,
+                            backgroundRepeat: 'no-repeat',
+                            backgroundPosition: 'right 16px center',
+                          }}
+                        >
+                          <option value="" disabled className="bg-slate-900 text-white/40">Select year</option>
+                          <option value="FY" className="bg-slate-900 text-white">FY (First Year)</option>
+                          <option value="SY" className="bg-slate-900 text-white">SY (Second Year)</option>
+                        </select>
+                      </div>
+
+                      {/* Subsystem select */}
+                      <div>
+                        <label className={labelClasses}>Subsystem</label>
+                        <select
+                          name="subsystem"
+                          value={formData.subsystem}
+                          onChange={handleChange}
+                          required
+                          className={`${inputClasses} appearance-none cursor-pointer`}
+                          style={{
+                            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%2338bdf8' stroke-width='1.5' fill='none'/%3E%3C/svg%3E")`,
+                            backgroundRepeat: 'no-repeat',
+                            backgroundPosition: 'right 16px center',
+                          }}
+                        >
+                          <option value="" disabled className="bg-slate-900 text-white/40">
+                            Select a subsystem
                           </option>
-                        ))}
-                      </select>
+                          {subsystems.map((s) => (
+                            <option key={s} value={s} className="bg-slate-900 text-white">
+                              {s}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
                     </div>
 
                     {/* Questions */}
