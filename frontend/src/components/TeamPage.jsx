@@ -355,7 +355,7 @@ export default function TeamPage() {
   );
 
   return (
-    <div className="relative min-h-screen text-white overflow-x-hidden selection:bg-blue-500/30 font-[family-name:--font-body] bg-black">
+    <div className="relative min-h-screen text-white overflow-x-hidden selection:bg-blue-500/30 font-sans bg-black">
       {/* Navbar */}
       <Navbar />
 
