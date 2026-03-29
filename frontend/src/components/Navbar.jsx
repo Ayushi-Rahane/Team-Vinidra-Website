@@ -21,19 +21,31 @@ const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Navbar blur on scroll
+  // Lock scroll when mobile menu is open
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
 
-  // Scroll spy (ONLY on landing page)
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [mobileMenuOpen]);
+
+
   useEffect(() => {
-    if (location.pathname !== "/") return;
+  const handleScroll = () => {
+    // Navbar blur
+    setScrolled(window.scrollY > 50);
 
-    const handleScrollSpy = () => {
-      const scrollY = window.scrollY + 120; // offset for navbar height
+    // Close mobile menu on scroll
+    if (mobileMenuOpen) setMobileMenuOpen(false);
+
+    // Scroll spy on landing page
+    if (location.pathname === "/") {
+      const scrollY = window.scrollY + 120;
       let current = "home";
 
       for (const link of navLinks) {
@@ -41,19 +53,20 @@ const Navbar = () => {
         if (el) {
           const top = el.offsetTop;
           const bottom = top + el.offsetHeight;
-          if (scrollY >= top && scrollY < bottom) {
-            current = link.id;
-          }
+          if (scrollY >= top && scrollY < bottom) current = link.id;
         }
       }
 
       setActiveSection(current);
-    };
+    }
+  };
 
-    window.addEventListener("scroll", handleScrollSpy, { passive: true });
-    handleScrollSpy(); // run once on mount
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  return () => window.removeEventListener("scroll", handleScroll);
+}, [location.pathname, mobileMenuOpen]);
 
-    return () => window.removeEventListener("scroll", handleScrollSpy);
+  useEffect(() => {
+    setMobileMenuOpen(false);
   }, [location.pathname]);
 
   // Sync active state with route (for standalone pages)
@@ -112,7 +125,7 @@ const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full px-6 lg:px-10 py-4 flex justify-between items-center z-50 transition-all duration-400 ${
+      className={`fixed top-0 left-0 w-full px-6 lg:px-10 py-4 flex justify-between items-center z-50 transition-all duration-300 ${
         scrolled
           ? "bg-[rgba(3,5,20,0.85)] backdrop-blur-md border-b border-white/5 shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
           : "bg-transparent"
@@ -158,32 +171,52 @@ const Navbar = () => {
 
       {/* Social Icons (unchanged) */}
       <div className="hidden lg:flex items-center gap-6 shrink-0">
-        <a href="https://www.linkedin.com/in/vinidra-ccew?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-all duration-300 hover:scale-110">
+        <a
+          href="https://www.linkedin.com/in/vinidra-ccew?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-white/60 hover:text-white transition-all duration-300 hover:scale-110"
+        >
           <Linkedin size={20} strokeWidth={1.5} />
         </a>
-        <a href="https://www.instagram.com/teamvinidra?igsh=MXN4b2NvNWQ5NmtuZQ==" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-all duration-300 hover:scale-110">
+        <a
+          href="https://www.instagram.com/teamvinidra?igsh=MXN4b2NvNWQ5NmtuZQ=="
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-white/60 hover:text-white transition-all duration-300 hover:scale-110"
+        >
           <Instagram size={20} strokeWidth={1.5} />
         </a>
-        <a href="mailto:satellite@cumminscollege.in" className="text-white/60 hover:text-white transition-all duration-300 hover:scale-110">
+        <a
+          href="mailto:satellite@cumminscollege.in"
+          className="text-white/60 hover:text-white transition-all duration-300 hover:scale-110"
+        >
           <Mail size={20} strokeWidth={1.5} />
         </a>
       </div>
 
       {/* Mobile Menu Toggle Button */}
-      <button 
-        className="lg:hidden text-white/80 hover:text-white p-2 relative z-[60]"
-        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-      >
-        {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-      </button>
+      <button
+  className="lg:hidden text-white/80 hover:text-white p-2 relative z-[60]"
+  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+  aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+>
+  {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+</button>
 
       {/* Mobile Full-Screen Overlay Nav */}
-      <div 
-        className={`fixed inset-0 z-[55] bg-black/95 backdrop-blur-xl lg:hidden transition-all duration-500 flex flex-col items-center justify-center gap-8 ${
-          mobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full pointer-events-none"
+      <div
+        onClick={() => setMobileMenuOpen(false)}
+        className={`fixed top-0 left-0 w-full h-screen overflow-y-auto z-[55] bg-black/95 backdrop-blur-xl lg:hidden transition-all duration-500 flex flex-col items-center justify-center gap-8 ${
+          mobileMenuOpen
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-[-100%] pointer-events-none"
         }`}
       >
-        <nav className="flex flex-col items-center gap-6 mt-16">
+        <nav
+          onClick={(e) => e.stopPropagation()}
+          className="flex flex-col items-center gap-6 mt-16"
+        >
           {navLinks.map((link) => {
             const isActive = activeSection === link.id;
             return (
@@ -191,7 +224,9 @@ const Navbar = () => {
                 key={link.name}
                 onClick={() => handleNavClick(link.id)}
                 className={`text-2xl font-thin tracking-widest uppercase transition-colors duration-300 ${
-                  isActive ? "text-sky-400 drop-shadow-[0_0_10px_rgba(56,189,248,0.8)]" : "text-white/60 hover:text-white"
+                  isActive
+                    ? "text-sky-400 drop-shadow-[0_0_10px_rgba(56,189,248,0.8)]"
+                    : "text-white/60 hover:text-white"
                 }`}
               >
                 {link.name}
@@ -200,9 +235,28 @@ const Navbar = () => {
           })}
         </nav>
         <div className="flex items-center gap-8 mt-10">
-          <a href="https://www.linkedin.com/in/vinidra-ccew?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white hover:scale-110 transition-all"><Linkedin size={28} strokeWidth={1.5} /></a>
-          <a href="https://www.instagram.com/teamvinidra?igsh=MXN4b2NvNWQ5NmtuZQ==" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white hover:scale-110 transition-all"><Instagram size={28} strokeWidth={1.5} /></a>
-          <a href="mailto:satellite@cumminscollege.in" className="text-white/60 hover:text-white hover:scale-110 transition-all"><Mail size={28} strokeWidth={1.5} /></a>
+          <a
+            href="https://www.linkedin.com/in/vinidra-ccew?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white/60 hover:text-white hover:scale-110 transition-all"
+          >
+            <Linkedin size={28} strokeWidth={1.5} />
+          </a>
+          <a
+            href="https://www.instagram.com/teamvinidra?igsh=MXN4b2NvNWQ5NmtuZQ=="
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white/60 hover:text-white hover:scale-110 transition-all"
+          >
+            <Instagram size={28} strokeWidth={1.5} />
+          </a>
+          <a
+            href="mailto:satellite@cumminscollege.in"
+            className="text-white/60 hover:text-white hover:scale-110 transition-all"
+          >
+            <Mail size={28} strokeWidth={1.5} />
+          </a>
         </div>
       </div>
     </header>

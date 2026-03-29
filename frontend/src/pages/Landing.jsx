@@ -8,7 +8,6 @@ import useIsMobile from "../utils/useMobile";
 const About = lazy(() => import("../components/About"));
 const Team = lazy(() => import("../components/Team"));
 const Gallery = lazy(() => import("../components/Gallery"));
-// const KnowledgeHub = lazy(() => import("../components/KnowledgeHub"));
 const Contact = lazy(() => import("../components/Contact"));
 const AchievementsPreview = lazy(() => import("../components/AchievementsPreview"));
 const KnowledgePreview = lazy(() => import("../components/KnowledgePreview"));
