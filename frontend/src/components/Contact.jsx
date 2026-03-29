@@ -47,18 +47,6 @@ const Contact = () => {
             </a>
           </div>
 
-          {/* PHONE */}
-          <div className="flex flex-col mb-4">
-            <label className="font-sans text-[#a0a5b8] font-medium flex items-center gap-2">
-              <Phone className="w-5 h-5 text-sky-300" /> Phone
-            </label>
-            <span className="ml-7 mt-1 text-white/90">
-              Arshia Singh : +91 9594656463
-            </span>
-            <span className="ml-7 text-white/90">
-              Nandini Pathak : +91 7875743020
-            </span>
-          </div>
 
           {/* LOCATION */}
           <div className="flex flex-col mb-4">

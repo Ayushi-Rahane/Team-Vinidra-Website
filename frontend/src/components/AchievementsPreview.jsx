@@ -1,4 +1,3 @@
-
 import { achievements } from "./achievements/achievementData";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
@@ -64,7 +63,6 @@ function FeatureCard({ achieve }) {
         />
 
         <div className="relative">
-
           {/* 🔥 TOP ACCENT (replaces icon) */}
           <div className="w-10 h-[2px] bg-sky-300 mb-5 opacity-80" />
 
@@ -185,54 +183,52 @@ export default function AchievementPreview() {
 
       {/* BUTTON */}
       {/* 🔥 MOTION BUTTON */}
-<motion.div
-  variants={reveal(1)}
-  initial="hidden"
-  whileInView="show"
-  viewport={{ once: false, amount: 0.4 }}
-  className="flex justify-center mt-20 mb-6 w-full relative z-20"
->
-  <motion.button
-    onClick={() => navigate("/achievements")}
-    whileHover={{ y: -2, scale: 1.03 }}
-    whileTap={{ scale: 0.96 }}
-    className="relative px-8 py-4 rounded-full text-white 
+      <motion.div
+        variants={reveal(1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: false, amount: 0.4 }}
+        className="flex justify-center mt-20 mb-6 w-full relative z-20"
+      >
+        <motion.button
+          onClick={() => navigate("/achievements")}
+          whileHover={{ y: -2, scale: 1.03 }}
+          whileTap={{ scale: 0.96 }}
+          className="relative px-8 py-4 rounded-full text-white 
     font-thin tracking-[0.2em] uppercase text-sm 
     group flex items-center gap-3 cursor-pointer overflow-hidden"
-    style={{
-      border: "1px solid rgba(56,189,248,0.25)",
-      background: "rgba(2,6,23,0.55)",
-      backdropFilter: "blur(10px)",
-    }}
-  >
-    {/* glow */}
-    <span
-      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500"
-      style={{
-        background:
-          "radial-gradient(circle at 50% 50%, rgba(56,189,248,0.25), transparent 70%)",
-      }}
-    />
+          style={{
+            border: "1px solid rgba(56,189,248,0.25)",
+            background: "rgba(2,6,23,0.55)",
+            backdropFilter: "blur(10px)",
+          }}
+        >
+          {/* glow */}
+          <span
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500"
+            style={{
+              background:
+                "radial-gradient(circle at 50% 50%, rgba(56,189,248,0.25), transparent 70%)",
+            }}
+          />
 
-    <span className="relative z-10">
-      EXPLORE ALL ACHIEVEMENTS
-    </span>
+          <span className="relative z-10">EXPLORE ALL ACHIEVEMENTS</span>
 
-    <svg
-      className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 relative z-10"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={1.5}
-        d="M17 8l4 4m0 0l-4 4m4-4H3"
-      />
-    </svg>
-  </motion.button>
-</motion.div>
+          <svg
+            className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 relative z-10"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={1.5}
+              d="M17 8l4 4m0 0l-4 4m4-4H3"
+            />
+          </svg>
+        </motion.button>
+      </motion.div>
     </section>
   );
 }

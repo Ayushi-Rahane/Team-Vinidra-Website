@@ -68,9 +68,16 @@ const KnowledgePreview = () => {
     }
 
     const isActive = offset === 0;
-    const translateX = offset * 250; // Slightly more spacing for bigger cards
-    const scale = isActive ? 1 : 0.7; // Bigger inactive cards
-    const rotateY = offset * 20; // Subtle rotation
+    // RESPONSIVE translateX
+    const baseOffset =
+      window.innerWidth < 400 ? 120 : window.innerWidth < 768 ? 150 : 250; // 150px spacing on mobile
+    const translateX = offset * baseOffset;
+
+    // Responsive scale
+    const scale = isActive ? 1 : window.innerWidth < 768 ? 0.6 : 0.7;
+    const rotateY =
+      offset *
+      (window.innerWidth < 400 ? 5 : window.innerWidth < 768 ? 10 : 20); // Less rotation on mobile
     const opacity = isActive ? 1 : 0.6;
     const zIndex = isActive ? 20 : 10;
 
@@ -88,24 +95,23 @@ const KnowledgePreview = () => {
       ref={sectionRef}
       className="py-20 px-[8%] text-white perspective-1000"
     >
-
-
-
       <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: false, amount: 0.6 }}
-              className="text-center mb-20"
-            >
-              <h2 className="text-4xl md:text-5xl font-thin tracking-[0.32em]
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: false, amount: 0.6 }}
+        className="text-center mb-2 md:mb-20"
+      >
+        <h2
+          className="text-4xl md:text-5xl font-thin tracking-[0.32em]
               bg-gradient-to-r from-white via-sky-300 to-white 
-              text-transparent bg-clip-text">
-                KNOWLEDGE HUB
-              </h2>
-      
-              <div className="w-28 h-[1px] bg-gradient-to-r from-transparent via-sky-300 to-transparent mx-auto mt-4" />
-            </motion.div>
+              text-transparent bg-clip-text"
+        >
+          KNOWLEDGE HUB
+        </h2>
+
+        <div className="w-28 h-[1px] bg-gradient-to-r from-transparent via-sky-300 to-transparent mx-auto mt-4" />
+      </motion.div>
       <motion.div
         variants={reveal(1)}
         initial="hidden"
@@ -114,9 +120,8 @@ const KnowledgePreview = () => {
         whileHover={{ y: -6 }}
         className="will-change-transform"
       >
-
         {/* CARDS */}
-        <div className="relative flex justify-center items-center h-[28rem] md:h-[30rem]">
+        <div className="relative flex justify-center items-center h-[28rem] md:h-[30rem] overflow-hidden">
           {previewItems.map((item, idx) => (
             <motion.div
               key={item.slug}
@@ -124,7 +129,7 @@ const KnowledgePreview = () => {
               className="absolute cursor-pointer"
               style={getPositionStyle(idx)}
             >
-              <div className="relative w-64 md:w-80 h-80 md:h-[24rem] rounded-3xl overflow-hidden shadow-xl hover:scale-105 transition-transform duration-500">
+              <div className="relative w-64 md:w-80 h-[70vw] md:h-[24rem] rounded-3xl overflow-hidden shadow-xl hover:scale-105 transition-transform duration-500">
                 {/* Background Image */}
                 <div
                   className="absolute inset-0 bg-cover bg-center"
