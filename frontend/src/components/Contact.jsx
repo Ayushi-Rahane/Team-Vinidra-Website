@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   MapPin,
   Mail,
@@ -11,6 +11,53 @@ import useIsMobile from "../utils/useMobile";
 
 const Contact = () => {
   const isMobile = useIsMobile();
+  const [result, setResult] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setResult("Sending...");
+
+    const formData = new FormData(event.target);
+
+    // Use environment variable for the Web3Forms access key
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+    if (!accessKey) {
+      setResult("Configuration error: Please configure the Web3Forms access key.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    formData.append("access_key", accessKey);
+    formData.append("subject", "New Contact Form Submission - Team Vinidra Website");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setResult("Message sent successfully!");
+        event.target.reset();
+      } else {
+        console.log("Error", data);
+        setResult(data.message);
+      }
+    } catch (error) {
+       console.log("Error", error);
+       setResult("An error occurred. Please try again later.");
+    } finally {
+       setIsSubmitting(false);
+       // Clear success/error message after 5 seconds
+       setTimeout(() => {
+         setResult("");
+       }, 5000);
+    }
+  };
 
   return (
     <section className="relative py-28 md:py-32 px-[8%] text-white">
@@ -120,7 +167,7 @@ const Contact = () => {
           </h3>
           <form
             className="flex flex-col gap-4"
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={onSubmit}
           >
             <div className="flex flex-col gap-2">
               <label
@@ -132,6 +179,7 @@ const Contact = () => {
               <input
                 type="text"
                 id="name"
+                name="name"
                 placeholder="Your Name"
                 required
                 className="font-sans placeholder-white/60 bg-transparent border border-white/20 px-4 py-3 rounded-2xl text-white outline-none focus:border-sky-300 focus:shadow-[0_0_15px_rgba(0,242,254,0.5)] transition-all duration-300"
@@ -148,6 +196,7 @@ const Contact = () => {
               <input
                 type="email"
                 id="email"
+                name="email"
                 placeholder="Your Email"
                 required
                 className="font-sans placeholder-white/60 bg-transparent border border-white/20 px-4 py-3 rounded-2xl text-white outline-none focus:border-sky-300 focus:shadow-[0_0_15px_rgba(0,242,254,0.5)] transition-all duration-300"
@@ -163,6 +212,7 @@ const Contact = () => {
               </label>
               <textarea
                 id="message"
+                name="message"
                 rows="5"
                 placeholder="Your Message"
                 required
@@ -172,10 +222,16 @@ const Contact = () => {
 
             <button
               type="submit"
-              className="font-sans bg-gradient-to-r from-[#00f2fe] to-[#4facfe] text-black py-3 rounded-2xl font-bold uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-102 transition-all duration-300"
+              disabled={isSubmitting}
+              className={`font-sans bg-gradient-to-r from-[#00f2fe] to-[#4facfe] text-black py-3 rounded-2xl font-bold uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-102 transition-all duration-300 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
             >
-              Send Message
+              {isSubmitting ? 'Sending...' : 'Send Message'}
             </button>
+            {result && (
+              <div className={`text-center font-sans font-medium text-sm mt-2 ${result.includes("success") ? "text-green-400" : "text-sky-300"}`}>
+                {result}
+              </div>
+            )}
           </form>
         </div>
       </div>
