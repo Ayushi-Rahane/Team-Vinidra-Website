@@ -51,6 +51,14 @@ const KnowledgePreview = () => {
     [50, -50],
   );
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   // Card positioning logic
   const getPositionStyle = (idx) => {
     let offset = idx - activeIndex;
@@ -69,15 +77,26 @@ const KnowledgePreview = () => {
 
     const isActive = offset === 0;
     // RESPONSIVE translateX
-    const baseOffset =
-      window.innerWidth < 400 ? 120 : window.innerWidth < 768 ? 150 : 250; // 150px spacing on mobile
+    // RESPONSIVE translateX & scale
+    // RESPONSIVE translateX & scale for mobile
+    let baseOffset, scale, rotateY;
+
+    if (window.innerWidth < 400) {
+      baseOffset = 80; // smaller spacing on mobile
+      scale = isActive ? 1 : 0.75; // side cards slightly bigger
+      rotateY = offset * 5; // gentle rotation
+    } else if (window.innerWidth < 768) {
+      baseOffset = 150;
+      scale = isActive ? 1 : 0.7;
+      rotateY = offset * 10;
+    } else {
+      baseOffset = 250;
+      scale = isActive ? 1 : 0.7;
+      rotateY = offset * 20;
+    }
+
     const translateX = offset * baseOffset;
 
-    // Responsive scale
-    const scale = isActive ? 1 : window.innerWidth < 768 ? 0.6 : 0.7;
-    const rotateY =
-      offset *
-      (window.innerWidth < 400 ? 5 : window.innerWidth < 768 ? 10 : 20); // Less rotation on mobile
     const opacity = isActive ? 1 : 0.6;
     const zIndex = isActive ? 20 : 10;
 
@@ -112,14 +131,14 @@ const KnowledgePreview = () => {
 
         <div className="w-28 h-[1px] bg-gradient-to-r from-transparent via-sky-300 to-transparent mx-auto mt-4" />
       </motion.div>
-      <motion.div
+      {/* <motion.div
         variants={reveal(1)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: false, amount: 0.35 }}
         whileHover={{ y: -6 }}
         className="will-change-transform"
-      >
+      > */}
         {/* CARDS */}
         <div className="relative flex justify-center items-center h-[28rem] md:h-[30rem] overflow-hidden">
           {previewItems.map((item, idx) => (
@@ -129,7 +148,7 @@ const KnowledgePreview = () => {
               className="absolute cursor-pointer"
               style={getPositionStyle(idx)}
             >
-              <div className="relative w-64 md:w-80 h-[70vw] md:h-[24rem] rounded-3xl overflow-hidden shadow-xl hover:scale-105 transition-transform duration-500">
+              <div className="relative w-62 md:w-80 h-[75vw] md:h-[24rem] rounded-3xl overflow-hidden shadow-xl hover:scale-105 transition-transform duration-500">
                 {/* Background Image */}
                 <div
                   className="absolute inset-0 bg-cover bg-center"
@@ -161,7 +180,7 @@ const KnowledgePreview = () => {
             </motion.div>
           ))}
         </div>
-      </motion.div>
+      {/* </motion.div> */}
     </section>
   );
 };
