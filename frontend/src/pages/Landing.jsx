@@ -12,6 +12,8 @@ const Contact = lazy(() => import("../components/Contact"));
 const AchievementsPreview = lazy(() => import("../components/AchievementsPreview"));
 const KnowledgePreview = lazy(() => import("../components/KnowledgePreview"));
 const Footer = lazy(() => import("../components/Footer"));
+const FacultyCoordinator = lazy(() => import("../components/FacultyCoordinator"));
+
 
 import bg1 from "../assets/image.png";
 
@@ -66,6 +68,11 @@ export default function Landing() {
         </section>
         <Suspense fallback={<div className="min-h-screen" />}>
           <section id="about"><About /></section>
+
+          {/* Faculty Coordinator Section */}
+          <section id="faculty-coordinator"><FacultyCoordinator /></section>
+
+
           <section id="team"><Team /></section>
 
           {/* ⭐ ONLY PREVIEW HERE */}
