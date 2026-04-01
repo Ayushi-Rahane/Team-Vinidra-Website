@@ -166,16 +166,20 @@ const Hero = () => {
             >
               <Button
                 borderRadius="2rem"
-                className="bg-black/20 border-slate-800/40 backdrop-blur-sm px-6 py-3 font-thin tracking-[0.15em] text-white/80 text-xs md:text-sm leading-relaxed cursor-pointer"
+                className="bg-black/20 border-slate-800/40 backdrop-blur-sm px-6 py-3 font-thin tracking-[0.15em] text-white/50 text-xs md:text-sm leading-relaxed cursor-not-allowed"
                 containerClassName="h-auto w-auto"
-                onClick={() => setShowForm(true)}
+                onClick={() => {}}
               >
                 <span className="flex items-center gap-2 font-semibold text-center mt-1">
                   <UserPlus size={18} strokeWidth={1.5} className="shrink-0" />
+<<<<<<< Updated upstream
                   <span className="uppercase">
                     Recruitments are now open!
                     <br className="md:hidden" /> Click here to register
                   </span>
+=======
+                  <span className="uppercase">Recruitments are now closed.</span>
+>>>>>>> Stashed changes
                 </span>
               </Button>
             </motion.div>
