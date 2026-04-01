@@ -172,14 +172,7 @@ const Hero = () => {
               >
                 <span className="flex items-center gap-2 font-semibold text-center mt-1">
                   <UserPlus size={18} strokeWidth={1.5} className="shrink-0" />
-<<<<<<< Updated upstream
-                  <span className="uppercase">
-                    Recruitments are now open!
-                    <br className="md:hidden" /> Click here to register
-                  </span>
-=======
                   <span className="uppercase">Recruitments are now closed.</span>
->>>>>>> Stashed changes
                 </span>
               </Button>
             </motion.div>
